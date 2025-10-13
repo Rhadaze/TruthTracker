@@ -1,4 +1,4 @@
-# app_de_teste
+# TruthTracker
 
 A new Flutter project.
 
