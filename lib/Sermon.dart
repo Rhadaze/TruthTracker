@@ -1,20 +1,16 @@
-import 'package:app_de_teste/PreachedAt.dart';
+import 'package:TruthTracker/PreachedAt.dart';
+import 'package:TruthTracker/Preacher.dart';
 
 class Sermon {
-
-  String author;
+  Preacher author;
   String theme;
   List<PreachedAt>? history;
 
-  Sermon({
-    required this.author,
-    required this.theme
-  });
+  Sermon({required this.author, required this.theme});
 
   void show() {
     print(author);
   }
-  
-  //getHistory(){} 
 
+  //getHistory(){}
 }

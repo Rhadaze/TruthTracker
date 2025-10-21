@@ -1,12 +1,16 @@
-import 'package:app_de_teste/sermon.dart';
+import 'package:TruthTracker/Preacher.dart';
+import 'package:TruthTracker/Sermon.dart';
 
 class PreachedAt {
-
   String place;
   DateTime? date;
   Sermon sermon;
-  String preacher;
-  
-  PreachedAt({required this.place, this.date, required this.sermon, required this.preacher});
+  Preacher preacher;
 
+  PreachedAt({
+    required this.place,
+    this.date,
+    required this.sermon,
+    required this.preacher,
+  });
 }
