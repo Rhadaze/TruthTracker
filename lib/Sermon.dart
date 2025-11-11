@@ -8,9 +8,5 @@ class Sermon {
 
   Sermon({required this.author, required this.theme});
 
-  void show() {
-    print(author);
-  }
-
   //getHistory(){}
 }
