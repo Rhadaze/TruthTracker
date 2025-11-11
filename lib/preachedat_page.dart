@@ -1,5 +1,5 @@
-import 'package:TruthTracker/PreachedAt.dart';
-import 'package:TruthTracker/PreachedAtWidget.dart';
+import 'package:TruthTracker/preachedat.dart';
+import 'package:TruthTracker/preachedat_widget.dart';
 import 'package:TruthTracker/Preacher.dart';
 import 'package:TruthTracker/Sermon.dart';
 import 'package:TruthTracker/dummy_data.dart';
@@ -15,9 +15,31 @@ class PreachedAtPage extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Sermoes"),
+          title: Text("Preached At"),
           backgroundColor: Colors.blue[100],
-          leading: Icon(Icons.menu),
+          //leading: Icon(Icons.menu),
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(color: Colors.blue[100]),
+                child: Text("Menu", style: TextStyle(fontSize: 24)),
+              ),
+              ListTile(
+                title: Text("Sermons"),
+                onTap: () => Navigator.pushNamed(context, '/sermons'),
+              ),
+              ListTile(
+                title: Text("Preachers"),
+                onTap: () => Navigator.pushNamed(context, '/preachers'),
+              ),
+              ListTile(
+                title: Text("Preached At"),
+                onTap: () => Navigator.pushNamed(context, '/preachedAt'),
+              ),
+            ],
+          ),
         ),
         body: ListView(
           children: [
