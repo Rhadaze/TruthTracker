@@ -1,4 +1,5 @@
 import 'package:TruthTracker/preachedat_page.dart';
+import 'package:TruthTracker/preacher_page.dart';
 import 'package:TruthTracker/sermon_page.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class YourApp extends StatelessWidget {
       home: PreachedAtPage(),
       routes: {
         '/sermons': (context) => SermonPage(),
-        //'/preachers': (context) => PreacherPage(),
+        '/preachers': (context) => PreacherPage(),
         '/preachedAt': (context) => PreachedAtPage(),
       },
     ); // TODO: implement build
