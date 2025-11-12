@@ -1,3 +1,4 @@
+import 'package:TruthTracker/church.dart';
 import 'package:TruthTracker/preachedat.dart';
 import 'package:TruthTracker/preachedat_widget.dart';
 import 'package:TruthTracker/Preacher.dart';
@@ -8,11 +9,17 @@ import 'package:flutter/material.dart';
 class PreachedAtPage extends StatelessWidget {
   final List<Preacher> p;
   final List<Sermon> s;
+  final List<Church> c;
   final List<PreachedAt> pa;
 
-  PreachedAtPage() : p = DummyData.populatePreachers(), s = [], pa = [] {
+  PreachedAtPage()
+    : c = [],
+      p = DummyData.populatePreachers(),
+      s = [],
+      pa = [] {
+    c.addAll(DummyData.populateChurches());
     s.addAll(DummyData.populateSermons(p));
-    pa.addAll(DummyData.populateData(p, s));
+    pa.addAll(DummyData.populateData(p, s, c));
   }
 
   @override
@@ -44,6 +51,10 @@ class PreachedAtPage extends StatelessWidget {
               ListTile(
                 title: Text("Preached At"),
                 onTap: () => Navigator.pushNamed(context, '/preachedAt'),
+              ),
+              ListTile(
+                title: Text("Churches"),
+                onTap: () => Navigator.pushNamed(context, '/churches'),
               ),
             ],
           ),

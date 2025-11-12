@@ -25,7 +25,7 @@ class PreachedAtWidget extends StatelessWidget {
         ),
         title: Text(pa.sermon.theme),
         subtitle: Text(
-          "autor: ${pa.sermon.author.name}\npregador: ${pa.preacher.name}",
+          "pregador: ${pa.preacher.name}\nData: ${pa.date?.toLocal().toString().split(' ')[0]}",
         ),
         trailing: SizedBox(
           height: 88,

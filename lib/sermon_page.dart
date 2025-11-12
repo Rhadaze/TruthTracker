@@ -37,6 +37,10 @@ class SermonPage extends StatelessWidget {
               title: Text("Preached At"),
               onTap: () => Navigator.pushNamed(context, '/preachedAt'),
             ),
+            ListTile(
+              title: Text("Churches"),
+              onTap: () => Navigator.pushNamed(context, '/churches'),
+            ),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:TruthTracker/church_page.dart';
 import 'package:TruthTracker/preachedat_page.dart';
 import 'package:TruthTracker/preacher_page.dart';
 import 'package:TruthTracker/sermon_page.dart';
@@ -18,6 +19,7 @@ class YourApp extends StatelessWidget {
         '/sermons': (context) => SermonPage(),
         '/preachers': (context) => PreacherPage(),
         '/preachedAt': (context) => PreachedAtPage(),
+        '/churches': (context) => ChurchPage(),
       },
     ); // TODO: implement build
     throw UnimplementedError();

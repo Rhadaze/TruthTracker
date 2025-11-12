@@ -23,7 +23,7 @@ class PreacherWidget extends StatelessWidget {
           child: Center(child: Icon(Icons.person)),
         ),
         title: Text(preacher.name),
-        //subtitle: Text("Número de sermones: ${preacher.sermons.length}"),
+        subtitle: Text(preacher.denomination ?? ''),
         trailing: SizedBox(
           height: 88,
           width: 56,
