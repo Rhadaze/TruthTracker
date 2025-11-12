@@ -1,5 +1,5 @@
 class Preacher {
-  String? name;
+  String name;
   String? email;
   String? phone;
   String? languages;
