@@ -34,7 +34,7 @@ class SermonWidget extends StatelessWidget {
     throw UnimplementedError();
   }
 
-  List<SermonWidget> fromList(List<Sermon> sermons) {
-    return sermons.map((s) => SermonWidget(s)).toList();
+  static List<SermonWidget> fromList(List<Sermon> slist) {
+    return slist.map((s) => SermonWidget(s)).toList();
   }
 }

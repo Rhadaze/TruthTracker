@@ -4,10 +4,14 @@ import 'package:TruthTracker/preacher_widget.dart';
 import 'package:flutter/material.dart';
 
 class PreacherPage extends StatelessWidget {
-  final List<Preacher> preachers = DummyData.populatePreachers();
+  static final List<Preacher> preachers = DummyData.populatePreachers();
 
   @override
   Widget build(BuildContext context) {
+    final List<PreacherWidget> preacherWidgets = PreacherWidget.fromList(
+      preachers,
+    );
+
     return Scaffold(
       appBar: AppBar(title: Text("Preacher")),
       drawer: Drawer(
@@ -32,7 +36,7 @@ class PreacherPage extends StatelessWidget {
           ],
         ),
       ),
-      //body: ListView(children: preachers),
+      body: ListView(children: preacherWidgets),
     );
   }
 }

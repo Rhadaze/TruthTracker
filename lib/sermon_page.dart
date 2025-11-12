@@ -5,10 +5,16 @@ import 'package:TruthTracker/sermon_widget.dart';
 import 'package:flutter/material.dart';
 
 class SermonPage extends StatelessWidget {
+  List<Preacher> p;
+  List<Sermon> s;
+
+  SermonPage() : p = DummyData.populatePreachers(), s = [] {
+    s.addAll(DummyData.populateSermons(p));
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Preacher> p = DummyData.populatePreachers();
-    List<Sermon> s = DummyData.populateSermons(p);
+    final List<SermonWidget> sermonWidgets = SermonWidget.fromList(s);
 
     return Scaffold(
       appBar: AppBar(title: Text("Sermons")),
@@ -34,9 +40,7 @@ class SermonPage extends StatelessWidget {
           ],
         ),
       ),
-      body: ListView(
-        children: [SermonWidget(s[0]), SermonWidget(s[1]), SermonWidget(s[2])],
-      ),
+      body: ListView(children: sermonWidgets),
     );
   }
 }

@@ -6,11 +6,18 @@ import 'package:TruthTracker/dummy_data.dart';
 import 'package:flutter/material.dart';
 
 class PreachedAtPage extends StatelessWidget {
+  final List<Preacher> p;
+  final List<Sermon> s;
+  final List<PreachedAt> pa;
+
+  PreachedAtPage() : p = DummyData.populatePreachers(), s = [], pa = [] {
+    s.addAll(DummyData.populateSermons(p));
+    pa.addAll(DummyData.populateData(p, s));
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Preacher> p = DummyData.populatePreachers();
-    List<Sermon> s = DummyData.populateSermons(p);
-    List<PreachedAt> pa = DummyData.populateData(p, s);
+    final List<PreachedAtWidget> paWidgets = PreachedAtWidget.fromList(pa);
 
     return MaterialApp(
       home: Scaffold(
@@ -41,19 +48,7 @@ class PreachedAtPage extends StatelessWidget {
             ],
           ),
         ),
-        body: ListView(
-          children: [
-            PreachedAtWidget(pa[0]),
-            PreachedAtWidget(pa[1]),
-            PreachedAtWidget(pa[2]),
-            PreachedAtWidget(pa[0]),
-            PreachedAtWidget(pa[1]),
-            PreachedAtWidget(pa[2]),
-            PreachedAtWidget(pa[0]),
-            PreachedAtWidget(pa[1]),
-            PreachedAtWidget(pa[2]),
-          ],
-        ),
+        body: ListView(children: paWidgets),
       ),
     );
   }

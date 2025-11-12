@@ -33,7 +33,7 @@ class PreacherWidget extends StatelessWidget {
     );
   }
 
-  List<PreacherWidget> fromList(List<Preacher> p) {
-    return p.map((p) => PreacherWidget(p)).toList();
+  static List<PreacherWidget> fromList(List<Preacher> plist) {
+    return plist.map((p) => PreacherWidget(p)).toList();
   }
 }

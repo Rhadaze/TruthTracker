@@ -40,7 +40,7 @@ class PreachedAtWidget extends StatelessWidget {
     //throw UnimplementedError();
   }
 
-  List<PreachedAtWidget> fromList(List<PreachedAt> palist) {
+  static List<PreachedAtWidget> fromList(List<PreachedAt> palist) {
     return palist.map((pa) => PreachedAtWidget(pa)).toList();
   }
 }
