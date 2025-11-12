@@ -32,4 +32,8 @@ class PreacherWidget extends StatelessWidget {
       ),
     );
   }
+
+  List<PreacherWidget> fromList(List<Preacher> p) {
+    return p.map((p) => PreacherWidget(p)).toList();
+  }
 }
