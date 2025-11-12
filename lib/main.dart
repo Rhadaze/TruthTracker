@@ -14,7 +14,8 @@ class YourApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: PreachedAtPage(),
+      // home: PreachedAtPage(),
+      initialRoute: '/preachedAt',
       routes: {
         '/sermons': (context) => SermonPage(),
         '/preachers': (context) => PreacherPage(),
@@ -22,6 +23,5 @@ class YourApp extends StatelessWidget {
         '/churches': (context) => ChurchPage(),
       },
     ); // TODO: implement build
-    throw UnimplementedError();
   }
 }
