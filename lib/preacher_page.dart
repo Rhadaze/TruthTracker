@@ -8,6 +8,10 @@ class PreacherPage extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue[200]),
+              child: Text("Menu", style: TextStyle(fontSize: 24)),
+            ),
             ListTile(
               title: Text("Sermons"),
               onTap: () => Navigator.pushNamed(context, '/sermons'),

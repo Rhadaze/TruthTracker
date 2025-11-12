@@ -14,10 +14,10 @@ class PreachedAtWidget extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: ListTile(
         isThreeLine: false,
-        focusColor: Colors.blue[800],
         tileColor: Colors.blue[100],
-        hoverColor: Colors.green,
-        selectedColor: Colors.amber,
+        hoverColor: Colors.green[300],
+        focusColor: Colors.blue[800],
+        selectedColor: Colors.amber[800],
         leading: SizedBox(
           height: 88,
           width: 56,
