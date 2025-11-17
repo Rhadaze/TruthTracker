@@ -1,4 +1,5 @@
 import 'package:TruthTracker/Preacher.dart';
+import 'package:TruthTracker/basic_app_card.dart';
 import 'package:flutter/material.dart';
 
 class PreacherWidget extends StatelessWidget {
@@ -8,29 +9,16 @@ class PreacherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(),
-      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      child: ListTile(
-        tileColor: Colors.orange[100],
-        hoverColor: Colors.orange[300],
-        focusColor: Colors.orange[800],
-        selectedColor: Colors.amber[800],
-        leading: SizedBox(
-          height: 88,
-          width: 56,
-          child: Center(child: Icon(Icons.person)),
-        ),
-        title: Text(preacher.name),
-        subtitle: Text(preacher.denomination ?? ''),
-        trailing: SizedBox(
-          height: 88,
-          width: 56,
-          child: Center(child: Icon(Icons.menu)),
-        ),
-      ),
+    return BasicAppCard(
+      leadingIcon: Icons.person,
+      title: preacher.name,
+      subtitle: preacher.denomination ?? '',
+      trailingIcon: Icons.menu,
+      onTap: () {
+        print("hi");
+      },
     );
+    //throw UnimplementedError();
   }
 
   static List<PreacherWidget> fromList(List<Preacher> plist) {

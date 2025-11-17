@@ -1,19 +1,24 @@
+import 'package:TruthTracker/basic_app_card.dart';
 import 'package:TruthTracker/church.dart';
 import 'package:flutter/material.dart';
 
 class ChurchWidget extends StatelessWidget {
   final Church c;
 
-  ChurchWidget(this.c);
+  const ChurchWidget(this.c);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        title: Text(c.name),
-        subtitle: Text("Bairro ${c.bairro} em ${c.cidade}.\n${c.denominacao}"),
-      ),
+    return BasicAppCard(
+      leadingIcon: Icons.access_time,
+      title: c.name,
+      subtitle: "Bairro ${c.bairro} em ${c.cidade}.\n${c.denominacao}",
+      trailingIcon: Icons.menu,
+      onTap: () {
+        print("hi");
+      },
     );
+    //throw UnimplementedError();
   }
 
   static List<ChurchWidget> fromList(List<Church> churches) {
