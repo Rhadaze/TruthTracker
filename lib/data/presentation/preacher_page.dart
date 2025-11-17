@@ -1,7 +1,7 @@
 import 'package:TruthTracker/Preacher.dart';
-import 'package:TruthTracker/app_drawer.dart';
-import 'package:TruthTracker/dummy_data.dart';
-import 'package:TruthTracker/preacher_widget.dart';
+import 'package:TruthTracker/core/layout/app_drawer.dart';
+import 'package:TruthTracker/core/data/dummy_data.dart';
+import 'package:TruthTracker/data/presentation/preacher_widget.dart';
 import 'package:flutter/material.dart';
 
 class PreacherPage extends StatelessWidget {

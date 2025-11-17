@@ -1,7 +1,7 @@
-import 'package:TruthTracker/church_page.dart';
-import 'package:TruthTracker/preachedat_page.dart';
-import 'package:TruthTracker/preacher_page.dart';
-import 'package:TruthTracker/sermon_page.dart';
+import 'package:TruthTracker/features/church/presentation/church_page.dart';
+import 'package:TruthTracker/features/preached_at/presentation/preachedat_page.dart';
+import 'package:TruthTracker/features/preacher/presentation/preacher_page.dart';
+import 'package:TruthTracker/features/sermon/presentation/sermon_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

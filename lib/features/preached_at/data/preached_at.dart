@@ -1,6 +1,6 @@
 import 'package:TruthTracker/Preacher.dart';
 import 'package:TruthTracker/Sermon.dart';
-import 'package:TruthTracker/church.dart';
+import 'package:TruthTracker/features/church/data/church.dart';
 
 class PreachedAt {
   String place;

@@ -1,4 +1,4 @@
-import 'package:TruthTracker/church.dart';
+import 'package:TruthTracker/features/church/data/church.dart';
 import 'package:TruthTracker/preachedat.dart';
 import 'package:TruthTracker/Preacher.dart';
 import 'package:TruthTracker/Sermon.dart';

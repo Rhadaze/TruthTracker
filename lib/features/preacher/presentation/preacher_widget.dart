@@ -1,5 +1,5 @@
 import 'package:TruthTracker/Preacher.dart';
-import 'package:TruthTracker/basic_app_card.dart';
+import 'package:TruthTracker/core/widgets/basic_app_card.dart';
 import 'package:flutter/material.dart';
 
 class PreacherWidget extends StatelessWidget {
