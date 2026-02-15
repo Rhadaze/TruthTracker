@@ -1,7 +1,7 @@
 import 'package:TruthTracker/features/church/data/church.dart';
-import 'package:TruthTracker/preachedat.dart';
-import 'package:TruthTracker/Preacher.dart';
-import 'package:TruthTracker/Sermon.dart';
+import 'package:TruthTracker/features/preached_at/data/preached_at.dart';
+import 'package:TruthTracker/features/preacher/data/preacher.dart';
+import 'package:TruthTracker/features/sermon/data/sermon.dart';
 
 class DummyData {
   static List<Preacher> populatePreachers() {

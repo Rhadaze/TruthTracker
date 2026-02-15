@@ -1,4 +1,4 @@
-import 'package:TruthTracker/Sermon.dart';
+import 'package:TruthTracker/features/sermon/data/sermon.dart';
 import 'package:TruthTracker/core/widgets/basic_app_card.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class SermonWidget extends StatelessWidget {
     return BasicAppCard(
       leadingIcon: Icons.book,
       title: sermon.theme,
-      subtitle: sermon.author.name ?? "No name",
+      subtitle: sermon.author.name, //?? "No name",
       trailingIcon: Icons.menu,
       onTap: () {
         print("hi");

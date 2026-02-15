@@ -1,5 +1,5 @@
-import 'package:TruthTracker/Preacher.dart';
-import 'package:TruthTracker/Sermon.dart';
+import 'package:TruthTracker/features/preacher/data/preacher.dart';
+import 'package:TruthTracker/features/sermon/data/sermon.dart';
 import 'package:TruthTracker/features/church/data/church.dart';
 
 class PreachedAt {

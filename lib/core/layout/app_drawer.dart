@@ -44,6 +44,13 @@ class AppDrawer extends StatelessWidget {
             ).pushNamed('/churches'),
           ),
           Divider(),
+          ListTile(
+            title: Text("About"),
+            onTap: () => Navigator.of(
+              context,
+              rootNavigator: true,
+            ).pushNamed('/churches'),
+          ),
         ],
       ),
     );

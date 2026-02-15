@@ -1,5 +1,5 @@
-import 'package:TruthTracker/Preacher.dart';
-import 'package:TruthTracker/Sermon.dart';
+import 'package:TruthTracker/features/preacher/data/preacher.dart';
+import 'package:TruthTracker/features/sermon/data/sermon.dart';
 import 'package:TruthTracker/core/layout/app_drawer.dart';
 import 'package:TruthTracker/core/data/dummy_data.dart';
 import 'package:TruthTracker/features/sermon/presentation/sermon_widget.dart';
