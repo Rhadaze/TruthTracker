@@ -19,10 +19,45 @@ class _MyCalendarState extends State<MyCalendar> {
     return _events[DateTime.utc(day.year, day.month, day.day)] ?? [];
   }
 
+  void _addEvent(DateTime day, String event) {
+    final normalizedDay = DateTime.utc(day.year, day.month, day.day);
+
+    setState(() {
+      if (_events[normalizedDay] == null) {
+        _events[normalizedDay] = [];
+      }
+      _events[normalizedDay]!.add(event);
+    });
+  }
+
+  void _showAddEventDialog(DateTime day) {
+    final controller = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text("Novo Evento"),
+        content: TextField(
+          controller: controller,
+          decoration: InputDecoration(hintText: "Digite o evento"),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              _addEvent(day, controller.text);
+              Navigator.pop(context);
+            },
+            child: Text("Salvar"),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("My Calendar")),
+      appBar: AppBar(title: Text("Eventos")),
       body: Column(
         children: [
           TableCalendar(

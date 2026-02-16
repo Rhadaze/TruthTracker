@@ -17,7 +17,7 @@ class YourApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // home: PreachedAtPage(),
-      initialRoute: '/preachedAt',
+      initialRoute: '/home',
       routes: {
         '/home': (context) => Home(),
         '/preachedAt': (context) => PreachedAtPage(),

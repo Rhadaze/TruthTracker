@@ -19,7 +19,7 @@ class AppDrawer extends StatelessWidget {
             onTap: () => Navigator.of(
               context,
               rootNavigator: true,
-            ).pushNamed('/preachedAt'),
+            ).pushNamed('/home'),
           ),
           ListTile(
             title: Text("Preached At"),
