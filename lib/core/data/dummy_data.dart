@@ -1,5 +1,5 @@
 import 'package:TruthTracker/features/church/data/church.dart';
-import 'package:TruthTracker/features/preached_at/data/preached_at.dart';
+import 'package:TruthTracker/features/preached_at/domain/entities/preached_at.dart';
 import 'package:TruthTracker/features/preacher/data/preacher.dart';
 import 'package:TruthTracker/features/sermon/data/sermon.dart';
 
@@ -51,26 +51,26 @@ class DummyData {
     return [c1, c2, c3];
   }
 
-  static List<PreachedAt> populateData(
+  static List<Event> populateData(
     List<Preacher> p,
     List<Sermon> s,
     List<Church> c,
   ) {
-    PreachedAt pa1 = PreachedAt(
+    Event pa1 = Event(
       place: "Campo Grande",
       date: DateTime(2025, 12, 1),
       preacher: p[3],
       sermon: s[0],
       church: c[0],
     );
-    PreachedAt pa2 = PreachedAt(
+    Event pa2 = Event(
       place: "Cuiaba",
       date: DateTime(2026, 4, 6),
       preacher: p[1],
       sermon: s[1],
       church: c[1],
     );
-    PreachedAt pa3 = PreachedAt(
+    Event pa3 = Event(
       place: "Curitiba",
       date: DateTime(2027, 8, 23),
       preacher: p[2],

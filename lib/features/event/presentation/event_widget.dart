@@ -1,11 +1,11 @@
 import 'package:TruthTracker/core/widgets/basic_app_card.dart';
-import 'package:TruthTracker/features/preached_at/data/preached_at.dart';
+import 'package:TruthTracker/features/event/domain/entities/event.dart';
 import 'package:flutter/material.dart';
 
-class PreachedAtWidget extends StatelessWidget {
-  final PreachedAt pa;
+class EventWidget extends StatelessWidget {
+  final Event pa;
 
-  const PreachedAtWidget(this.pa);
+  const EventWidget(this.pa);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class PreachedAtWidget extends StatelessWidget {
     //throw UnimplementedError();
   }
 
-  static List<PreachedAtWidget> fromList(List<PreachedAt> palist) {
-    return palist.map((pa) => PreachedAtWidget(pa)).toList();
+  static List<EventWidget> fromList(List<Event> palist) {
+    return palist.map((pa) => EventWidget(pa)).toList();
   }
 }

@@ -20,7 +20,7 @@ class YourApp extends StatelessWidget {
       initialRoute: '/home',
       routes: {
         '/home': (context) => Home(),
-        '/preachedAt': (context) => PreachedAtPage(),
+        '/preachedAt': (context) => EventsPage(),
         '/sermons': (context) => SermonPage(),
         '/preachers': (context) => PreacherPage(),
         '/churches': (context) => ChurchPage(),
