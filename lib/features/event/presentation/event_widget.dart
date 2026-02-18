@@ -3,17 +3,17 @@ import 'package:TruthTracker/features/event/domain/entities/event.dart';
 import 'package:flutter/material.dart';
 
 class EventWidget extends StatelessWidget {
-  final Event pa;
+  final Event e;
 
-  const EventWidget(this.pa);
+  const EventWidget(this.e);
 
   @override
   Widget build(BuildContext context) {
     return BasicAppCard(
       leadingIcon: Icons.access_time,
-      title: pa.sermon.theme,
+      title: e.sermon?.theme ?? "sem título",
       subtitle:
-          "pregador: ${pa.preacher.name}\nData: ${pa.date?.toLocal().toString().split(' ')[0]}",
+          "pregador: ${e.preacher?.name}\nData: ${e.date.toLocal().toString().split(' ')[0]}",
       trailingIcon: Icons.menu,
       onTap: () {
         print("hi");
@@ -22,7 +22,7 @@ class EventWidget extends StatelessWidget {
     //throw UnimplementedError();
   }
 
-  static List<EventWidget> fromList(List<Event> palist) {
-    return palist.map((pa) => EventWidget(pa)).toList();
+  static List<EventWidget> fromList(List<Event> elist) {
+    return elist.map((e) => EventWidget(e)).toList();
   }
 }

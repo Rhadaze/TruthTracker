@@ -26,7 +26,7 @@ class AppDrawer extends StatelessWidget {
             onTap: () => Navigator.of(
               context,
               rootNavigator: true,
-            ).pushNamed('/preachedAt'),
+            ).pushNamed('/Events'),
           ),
           Divider(),
           ListTile(

@@ -1,12 +1,12 @@
-import 'package:TruthTracker/features/preached_at/domain/entities/preached_at.dart';
+import 'package:TruthTracker/features/event/domain/entities/event.dart';
 import 'package:TruthTracker/features/preacher/data/preacher.dart';
 
 class Sermon {
-  Preacher author;
+  Preacher? author;
   String theme;
   List<Event>? history;
 
-  Sermon({required this.author, required this.theme});
+  Sermon({this.author, required this.theme});
 
   //getHistory(){}
 }

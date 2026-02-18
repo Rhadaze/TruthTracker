@@ -1,7 +1,7 @@
 import 'package:TruthTracker/core/home/home.dart';
 import 'package:TruthTracker/features/about/about_page.dart';
 import 'package:TruthTracker/features/church/presentation/church_page.dart';
-import 'package:TruthTracker/features/preached_at/presentation/preachedat_page.dart';
+import 'package:TruthTracker/features/event/presentation/events_page.dart';
 import 'package:TruthTracker/features/preacher/presentation/preacher_page.dart';
 import 'package:TruthTracker/features/sermon/presentation/sermon_page.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +16,11 @@ class YourApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // home: PreachedAtPage(),
+      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.blue),
       initialRoute: '/home',
       routes: {
         '/home': (context) => Home(),
-        '/preachedAt': (context) => EventsPage(),
+        '/events': (context) => EventsPage(),
         '/sermons': (context) => SermonPage(),
         '/preachers': (context) => PreacherPage(),
         '/churches': (context) => ChurchPage(),

@@ -1,9 +1,17 @@
-import 'package:TruthTracker/features/church/data/church.dart';
-import 'package:TruthTracker/features/preached_at/domain/entities/preached_at.dart';
+import 'package:TruthTracker/features/church/domain/entities/church.dart';
+import 'package:TruthTracker/features/event/domain/entities/event.dart';
+import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
 import 'package:TruthTracker/features/preacher/data/preacher.dart';
 import 'package:TruthTracker/features/sermon/data/sermon.dart';
 
 class DummyData {
+  static List<Event> populateData() {
+    List<Church> c = populateChurches();
+    List<Preacher> p = populatePreachers();
+    List<Sermon> s = populateSermons(p);
+    return populateEvents(p, s, c);
+  }
+
   static List<Preacher> populatePreachers() {
     List<Preacher> plist = [];
     plist.add(Preacher(name: "Celio Ávila", denomination: "Adventist"));
@@ -51,26 +59,29 @@ class DummyData {
     return [c1, c2, c3];
   }
 
-  static List<Event> populateData(
+  static List<Event> populateEvents(
     List<Preacher> p,
     List<Sermon> s,
     List<Church> c,
   ) {
-    Event pa1 = Event(
+    Event e1 = Event(
+      type: EventType.saturdayMorning,
       place: "Campo Grande",
       date: DateTime(2025, 12, 1),
       preacher: p[3],
       sermon: s[0],
       church: c[0],
     );
-    Event pa2 = Event(
+    Event e2 = Event(
+      type: EventType.saturdayMorning,
       place: "Cuiaba",
       date: DateTime(2026, 4, 6),
       preacher: p[1],
       sermon: s[1],
       church: c[1],
     );
-    Event pa3 = Event(
+    Event e3 = Event(
+      type: EventType.saturdayMorning,
       place: "Curitiba",
       date: DateTime(2027, 8, 23),
       preacher: p[2],
@@ -78,6 +89,6 @@ class DummyData {
       church: c[2],
     );
 
-    return [pa1, pa2, pa3];
+    return [e1, e2, e3];
   }
 }

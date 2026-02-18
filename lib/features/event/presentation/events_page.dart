@@ -1,5 +1,5 @@
 import 'package:TruthTracker/core/layout/app_drawer.dart';
-import 'package:TruthTracker/features/church/data/church.dart';
+import 'package:TruthTracker/features/church/domain/entities/church.dart';
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
 import 'package:TruthTracker/features/event/presentation/event_widget.dart';
 import 'package:TruthTracker/features/preacher/data/preacher.dart';
@@ -11,22 +11,22 @@ class EventsPage extends StatelessWidget {
   final List<Preacher> p;
   final List<Sermon> s;
   final List<Church> c;
-  final List<Event> pa;
+  final List<Event> e;
 
-  EventsPage() : c = [], p = DummyData.populatePreachers(), s = [], pa = [] {
+  EventsPage() : c = [], p = DummyData.populatePreachers(), s = [], e = [] {
     c.addAll(DummyData.populateChurches());
     s.addAll(DummyData.populateSermons(p));
-    pa.addAll(DummyData.populateData(p, s, c));
+    e.addAll(DummyData.populateEvents(p, s, c));
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<EventWidget> paWidgets = EventWidget.fromList(pa);
+    final List<EventWidget> paWidgets = EventWidget.fromList(e);
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Preached At"),
+          title: Text("Events"),
           backgroundColor: Colors.blue[100],
           //leading: Icon(Icons.menu),
         ),

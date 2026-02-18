@@ -12,7 +12,7 @@ class SermonWidget extends StatelessWidget {
     return BasicAppCard(
       leadingIcon: Icons.book,
       title: sermon.theme,
-      subtitle: sermon.author.name, //?? "No name",
+      subtitle: sermon.author?.name ?? "Sem nome",
       trailingIcon: Icons.menu,
       onTap: () {
         print("hi");

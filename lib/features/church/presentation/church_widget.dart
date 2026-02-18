@@ -1,5 +1,5 @@
 import 'package:TruthTracker/core/widgets/basic_app_card.dart';
-import 'package:TruthTracker/features/church/data/church.dart';
+import 'package:TruthTracker/features/church/domain/entities/church.dart';
 import 'package:flutter/material.dart';
 
 class ChurchWidget extends StatelessWidget {
