@@ -1,5 +1,6 @@
 import 'package:TruthTracker/core/data/dummy_data.dart';
 import 'package:TruthTracker/core/extensions/event_type_extension.dart';
+import 'package:TruthTracker/features/calendar/addEventDialog.dart';
 import 'package:TruthTracker/features/church/domain/entities/church.dart';
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
 import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
@@ -33,73 +34,6 @@ class _MyCalendarState extends State<MyCalendar> {
       _events.putIfAbsent(normalizedDay, () => []);
       _events[normalizedDay]!.add(event);
     });
-  }
-
-  void _showAddEventDialog(DateTime day) {
-    final TextEditingController churchController = TextEditingController();
-    final TextEditingController sermonController = TextEditingController();
-    final TextEditingController preacherController = TextEditingController();
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-    EventType selectedType = EventType.saturdayMorning;
-    final formattedDate = DateFormat('dd/MM/yyyy').format(day);
-
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text("Novo Evento - $formattedDate"),
-        content: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ChurchField(churchController),
-              SizedBox(height: 12),
-              SermonField(sermonController),
-              SizedBox(height: 12),
-              PreacherField(preacherController),
-              SizedBox(height: 20),
-              EventTypeField(
-                value: selectedType,
-                onChanged: (newValue) {
-                  selectedType = newValue;
-                },
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("Cancelar"),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                //aqui salva o evento
-                _addEvent(
-                  day,
-                  Event(
-                    church: Church(name: churchController.text),
-                    date: day,
-                    preacher: Preacher(name: preacherController.text),
-                    sermon: Sermon(theme: sermonController.text),
-                    type: selectedType,
-                  ), //TODO tenho que por funcao pra buscar opcao criada, SENAO, criar uma nova.
-                );
-                churchController.clear();
-                sermonController.clear();
-                preacherController.clear();
-                Navigator.pop(context);
-              }
-            },
-            child: Text("Salvar"),
-          ),
-        ],
-      ),
-    );
   }
 
   @override
@@ -161,8 +95,18 @@ class _MyCalendarState extends State<MyCalendar> {
       floatingActionButton: FloatingActionButton(
         onPressed: _selectedDay == null
             ? null
-            : () => _showAddEventDialog(_selectedDay!),
-        child: Icon(Icons.add),
+            : () {
+                showDialog(
+                  context: context,
+                  builder: (_) => AddEventDialog(
+                    day: _selectedDay!,
+                    onSave: (event) {
+                      _addEvent(_selectedDay!, event);
+                    },
+                  ),
+                );
+              },
+        child: const Icon(Icons.add),
       ),
     );
   }
