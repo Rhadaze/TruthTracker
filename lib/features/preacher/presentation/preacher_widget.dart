@@ -1,4 +1,4 @@
-import 'package:TruthTracker/features/preacher/data/preacher.dart';
+import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
 import 'package:TruthTracker/core/widgets/basic_app_card.dart';
 import 'package:flutter/material.dart';
 

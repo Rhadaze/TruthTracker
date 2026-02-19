@@ -1,8 +1,8 @@
 import 'package:TruthTracker/features/church/domain/entities/church.dart';
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
 import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
-import 'package:TruthTracker/features/preacher/data/preacher.dart';
-import 'package:TruthTracker/features/sermon/data/sermon.dart';
+import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
+import 'package:TruthTracker/features/sermon/domain/entities/sermon.dart';
 
 class DummyData {
   static List<Event> populateData() {

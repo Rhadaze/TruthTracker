@@ -11,22 +11,22 @@ class EventsPage extends StatelessWidget {
   final List<Preacher> p;
   final List<Sermon> s;
   final List<Church> c;
-  final List<Event> e;
+  final List<Event> pa;
 
-  EventsPage() : c = [], p = DummyData.populatePreachers(), s = [], e = [] {
+  EventsPage() : c = [], p = DummyData.populatePreachers(), s = [], pa = [] {
     c.addAll(DummyData.populateChurches());
     s.addAll(DummyData.populateSermons(p));
-    e.addAll(DummyData.populateEvents(p, s, c));
+    pa.addAll(DummyData.populateEvents(p, s, c));
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<EventWidget> paWidgets = EventWidget.fromList(e);
+    final List<EventWidget> paWidgets = EventWidget.fromList(pa);
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Events"),
+          title: Text("Preached At"),
           backgroundColor: Colors.blue[100],
           //leading: Icon(Icons.menu),
         ),

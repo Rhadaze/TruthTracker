@@ -1,6 +1,6 @@
 import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
-import 'package:TruthTracker/features/preacher/data/preacher.dart';
-import 'package:TruthTracker/features/sermon/data/sermon.dart';
+import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
+import 'package:TruthTracker/features/sermon/domain/entities/sermon.dart';
 import 'package:TruthTracker/features/church/domain/entities/church.dart';
 
 class Event {

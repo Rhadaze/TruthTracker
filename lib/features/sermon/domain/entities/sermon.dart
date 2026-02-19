@@ -1,5 +1,5 @@
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
-import 'package:TruthTracker/features/preacher/data/preacher.dart';
+import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
 
 class Sermon {
   Preacher? author;

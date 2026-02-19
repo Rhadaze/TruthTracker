@@ -1,14 +1,10 @@
 import 'package:TruthTracker/core/data/dummy_data.dart';
 import 'package:TruthTracker/core/extensions/event_type_extension.dart';
-import 'package:TruthTracker/features/calendar/addEventDialog.dart';
-import 'package:TruthTracker/features/church/domain/entities/church.dart';
+import 'package:TruthTracker/features/event/presentation/add_event_dialog.dart';
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
 import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
-import 'package:TruthTracker/features/preacher/data/preacher.dart';
-import 'package:TruthTracker/features/sermon/data/sermon.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:intl/intl.dart';
 
 class MyCalendar extends StatefulWidget {
   @override
@@ -19,7 +15,8 @@ class _MyCalendarState extends State<MyCalendar> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
 
-  final List<Event> _de = DummyData.populateData();
+  final List<Event> _de =
+      DummyData.populateData(); //TODO eventualmente vou ter que tirar isso e popular isso com data de verdade.
 
   final Map<DateTime, List<Event>> _events = {};
 
@@ -27,12 +24,12 @@ class _MyCalendarState extends State<MyCalendar> {
     return _events[DateTime.utc(day.year, day.month, day.day)] ?? [];
   }
 
-  void _addEvent(DateTime day, Event event) {
+  void _addEvent(DateTime day, Event newEvent) {
     final normalizedDay = DateTime.utc(day.year, day.month, day.day);
 
     setState(() {
       _events.putIfAbsent(normalizedDay, () => []);
-      _events[normalizedDay]!.add(event);
+      _events[normalizedDay]!.add(newEvent);
     });
   }
 
@@ -41,6 +38,7 @@ class _MyCalendarState extends State<MyCalendar> {
     super.initState();
 
     for (var event in _de) {
+      //TODO isso aqui não é final né? _de é apenas dummyData
       final normalizedDay = DateTime.utc(
         event.date.year,
         event.date.month,
@@ -100,110 +98,14 @@ class _MyCalendarState extends State<MyCalendar> {
                   context: context,
                   builder: (_) => AddEventDialog(
                     day: _selectedDay!,
-                    onSave: (event) {
-                      _addEvent(_selectedDay!, event);
+                    onSave: (newEvent) {
+                      _addEvent(_selectedDay!, newEvent);
                     },
                   ),
                 );
               },
         child: const Icon(Icons.add),
       ),
-    );
-  }
-}
-
-class ChurchField extends StatelessWidget {
-  final TextEditingController controller;
-
-  const ChurchField(this.controller, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(labelText: "Igreja"),
-      validator: (value) {
-        if (value == null || value.trim().isEmpty) {
-          return "Informe a igreja";
-        }
-        if (value.length < 3) {
-          return "Mínimo 3 caracteres";
-        }
-        return null;
-      },
-    );
-  }
-}
-
-class SermonField extends StatelessWidget {
-  final TextEditingController controller;
-
-  const SermonField(this.controller, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(labelText: "Tema"),
-      validator: (value) {
-        if (value == null || value.trim().isEmpty) {
-          return "Informe o tema";
-        }
-        if (value.length < 3) {
-          return "Mínimo 3 caracteres";
-        }
-        return null;
-      },
-    );
-  }
-}
-
-class PreacherField extends StatelessWidget {
-  final TextEditingController controller;
-
-  const PreacherField(this.controller, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(labelText: "Pregador"),
-      validator: (value) {
-        if (value == null || value.trim().isEmpty) {
-          return "Informe o Pregador";
-        }
-        if (value.length < 3) {
-          return "Mínimo 3 caracteres";
-        }
-        return null;
-      },
-    );
-  }
-}
-
-class EventTypeField extends StatelessWidget {
-  final EventType value;
-  final ValueChanged<EventType> onChanged;
-
-  const EventTypeField({
-    super.key,
-    required this.value,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownMenu<EventType>(
-      initialSelection: value,
-      label: const Text("Tipo"),
-      dropdownMenuEntries: EventType.values.map((type) {
-        return DropdownMenuEntry<EventType>(value: type, label: type.label);
-      }).toList(),
-      onSelected: (value) {
-        if (value != null) {
-          onChanged(value);
-        }
-      },
     );
   }
 }

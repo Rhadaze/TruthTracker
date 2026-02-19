@@ -1,9 +1,13 @@
-import 'package:TruthTracker/features/calendar/mycalendar.dart';
+import 'package:TruthTracker/features/calendar/presentation/my_calendar.dart';
+import 'package:TruthTracker/features/event/presentation/widgets/church_field.dart';
+import 'package:TruthTracker/features/event/presentation/widgets/event_type_field.dart';
+import 'package:TruthTracker/features/event/presentation/widgets/preacher_Field.dart';
+import 'package:TruthTracker/features/event/presentation/widgets/sermon_field.dart';
 import 'package:TruthTracker/features/church/domain/entities/church.dart';
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
 import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
-import 'package:TruthTracker/features/preacher/data/preacher.dart';
-import 'package:TruthTracker/features/sermon/data/sermon.dart';
+import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
+import 'package:TruthTracker/features/sermon/domain/entities/sermon.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -25,6 +29,11 @@ class _AddEventDialogState extends State<AddEventDialog> {
 
   EventType selectedType = EventType.saturdayMorning;
 
+  final List<Preacher> _preachers = [
+    Preacher(name: "João"),
+    Preacher(name: "Carlos"),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final formattedDate = DateFormat('dd/MM/yyyy').format(widget.day);
@@ -37,9 +46,9 @@ class _AddEventDialogState extends State<AddEventDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ChurchField(churchController),
-            SizedBox(height: 12),
+            SizedBox(height: 16),
             SermonField(sermonController),
-            SizedBox(height: 12),
+            SizedBox(height: 16),
             PreacherField(preacherController),
             SizedBox(height: 20),
             EventTypeField(
@@ -62,7 +71,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               //aqui salva o evento
-              final event = Event(
+              final newEvent = Event(
                 church: Church(name: churchController.text),
                 date: widget.day,
                 preacher: Preacher(name: preacherController.text),
@@ -70,7 +79,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
                 type: selectedType,
               );
 
-              widget.onSave(event);
+              widget.onSave(newEvent);
               Navigator.pop(context);
             }
           },
