@@ -2,6 +2,7 @@ import 'package:TruthTracker/features/calendar/presentation/my_calendar.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/church_field.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/event_type_field.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/preacher_Field.dart';
+import 'package:TruthTracker/features/event/presentation/widgets/save_button.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/sermon_field.dart';
 import 'package:TruthTracker/features/church/domain/entities/church.dart';
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
@@ -67,6 +68,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
           },
           child: Text("Cancelar"),
         ),
+        SaveButton(onPressed: _handleSave),
         ElevatedButton(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
@@ -87,5 +89,23 @@ class _AddEventDialogState extends State<AddEventDialog> {
         ),
       ],
     );
+  }
+
+  Event createNewEvent() {
+    return Event(
+      church: Church(name: churchController.text),
+      date: widget.day,
+      preacher: Preacher(name: preacherController.text),
+      sermon: Sermon(theme: sermonController.text),
+      type: selectedType,
+    );
+  }
+
+  void _handleSave() {
+    if (_formKey.currentState!.validate()) {
+      final newEvent = createNewEvent();
+      widget.onSave(newEvent);
+      Navigator.pop(context);
+    }
   }
 }
