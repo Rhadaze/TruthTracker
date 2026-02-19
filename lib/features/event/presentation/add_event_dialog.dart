@@ -1,4 +1,5 @@
 import 'package:TruthTracker/features/calendar/presentation/my_calendar.dart';
+import 'package:TruthTracker/features/event/presentation/widgets/cancel_button.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/church_field.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/event_type_field.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/preacher_Field.dart';
@@ -62,31 +63,8 @@ class _AddEventDialogState extends State<AddEventDialog> {
         ),
       ),
       actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text("Cancelar"),
-        ),
+        CancelButton(),
         SaveButton(onPressed: _handleSave),
-        ElevatedButton(
-          onPressed: () {
-            if (_formKey.currentState!.validate()) {
-              //aqui salva o evento
-              final newEvent = Event(
-                church: Church(name: churchController.text),
-                date: widget.day,
-                preacher: Preacher(name: preacherController.text),
-                sermon: Sermon(theme: sermonController.text),
-                type: selectedType,
-              );
-
-              widget.onSave(newEvent);
-              Navigator.pop(context);
-            }
-          },
-          child: Text("Salvar"),
-        ),
       ],
     );
   }
