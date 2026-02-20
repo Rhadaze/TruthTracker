@@ -30,6 +30,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
 
   Preacher? selectedPreacher;
   Church? selectedChurch;
+  Sermon? selectedSermon;
 
   EventType selectedType = EventType.saturdayMorning;
 
@@ -51,6 +52,14 @@ class _AddEventDialogState extends State<AddEventDialog> {
     Church(name: "Central - Cuiabá"),
   ];
 
+  final List<Sermon> _sermons = [
+    Sermon(theme: "O Anjo do Senhor"),
+    Sermon(theme: "Ouvindo a voz de Deus"),
+    Sermon(theme: "Verdadeira educação"),
+    Sermon(theme: "A terceira mensagem angélica"),
+    Sermon(theme: "O Santuário e sua sombra"),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final formattedDate = DateFormat('dd/MM/yyyy').format(widget.day);
@@ -67,13 +76,14 @@ class _AddEventDialogState extends State<AddEventDialog> {
               onSelected: (church) => selectedChurch = church,
             ),
             SizedBox(height: 20),
-            SermonField(sermonController),
+            SermonField(
+              sermons: _sermons,
+              onSelected: (sermon) => selectedSermon = sermon,
+            ),
             SizedBox(height: 20),
             PreacherField(
               preachers: _preachers,
-              onSelected: (preacher) {
-                selectedPreacher = preacher;
-              },
+              onSelected: (preacher) => selectedPreacher = preacher,
             ),
             SizedBox(height: 20),
             EventTypeField(
@@ -94,7 +104,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
 
   Event createNewEvent() {
     return Event(
-      church: selectedChurch,
+      church: selectedChurch!,
       date: widget.day,
       preacher: selectedPreacher,
       sermon: Sermon(theme: sermonController.text),

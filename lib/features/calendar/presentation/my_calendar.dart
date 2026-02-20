@@ -1,8 +1,7 @@
 import 'package:TruthTracker/core/data/dummy_data.dart';
-import 'package:TruthTracker/core/extensions/event_type_extension.dart';
+import 'package:TruthTracker/core/widgets/basic_app_card.dart';
 import 'package:TruthTracker/features/event/presentation/add_event_dialog.dart';
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
-import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -85,8 +84,10 @@ class _MyCalendarState extends State<MyCalendar> {
           ),
           Divider(),
           ..._getEventsForDay(_selectedDay ?? _focusedDay).map(
-            (event) =>
-                ListTile(title: Text(event.preacher?.name ?? "sem pregador")),
+            (event) => BasicAppCard(
+              title: event.preacher?.name ?? "",
+              subtitle: event.church.name ?? "",
+            ), //TODO tenho que informar o pregador se for outro que nao o usuário.
           ),
         ],
       ),
