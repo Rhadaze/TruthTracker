@@ -1,4 +1,3 @@
-import 'package:TruthTracker/features/calendar/presentation/my_calendar.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/cancel_button.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/church_field.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/event_type_field.dart';
@@ -29,11 +28,18 @@ class _AddEventDialogState extends State<AddEventDialog> {
   final TextEditingController preacherController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  Preacher? selectedPreacher;
+
   EventType selectedType = EventType.saturdayMorning;
 
   final List<Preacher> _preachers = [
-    Preacher(name: "João"),
-    Preacher(name: "Carlos"),
+    Preacher(name: "Marlon"),
+    Preacher(name: "Christian"),
+    Preacher(name: "Kariston"),
+    Preacher(name: "Mateus"),
+    Preacher(name: "Célio"),
+    Preacher(name: "Bárbara"),
+    Preacher(name: "Arhessa"),
   ];
 
   @override
@@ -48,10 +54,15 @@ class _AddEventDialogState extends State<AddEventDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ChurchField(churchController),
-            SizedBox(height: 16),
+            SizedBox(height: 20),
             SermonField(sermonController),
-            SizedBox(height: 16),
-            PreacherField(preacherController),
+            SizedBox(height: 20),
+            PreacherField(
+              preachers: _preachers,
+              onSelected: (preacher) {
+                selectedPreacher = preacher;
+              },
+            ),
             SizedBox(height: 20),
             EventTypeField(
               value: selectedType,
@@ -73,7 +84,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
     return Event(
       church: Church(name: churchController.text),
       date: widget.day,
-      preacher: Preacher(name: preacherController.text),
+      preacher: selectedPreacher,
       sermon: Sermon(theme: sermonController.text),
       type: selectedType,
     );
