@@ -1,23 +1,38 @@
+import 'package:TruthTracker/features/church/domain/entities/church.dart';
 import 'package:flutter/material.dart';
 
 class ChurchField extends StatelessWidget {
-  final TextEditingController controller;
+  final List<Church> churches;
+  final void Function(Church) onSelected;
 
-  const ChurchField(this.controller, {super.key});
+  const ChurchField({
+    required this.churches,
+    required this.onSelected,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(labelText: "Igreja"),
-      validator: (value) {
-        if (value == null || value.trim().isEmpty) {
-          return "Informe a igreja";
+    return Autocomplete<Church>(
+      displayStringForOption: (option) => option.name,
+      optionsBuilder: (TextEditingValue textEditingValue) {
+        if (textEditingValue.text.isEmpty) {
+          return const Iterable<Church>.empty();
         }
-        if (value.length < 3) {
-          return "Mínimo 3 caracteres";
-        }
-        return null;
+
+        return churches.where(
+          (church) => church.name.toLowerCase().contains(
+            textEditingValue.text.toLowerCase(),
+          ),
+        );
+      },
+      onSelected: onSelected,
+      fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
+        return TextFormField(
+          controller: controller,
+          focusNode: focusNode,
+          decoration: const InputDecoration(labelText: "Church"),
+        );
       },
     );
   }

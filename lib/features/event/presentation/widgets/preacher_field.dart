@@ -2,8 +2,6 @@ import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
 import 'package:flutter/material.dart';
 
 class PreacherField extends StatelessWidget {
-  //final TextEditingController controller;
-
   final List<Preacher> preachers;
   final void Function(Preacher) onSelected;
 
@@ -12,7 +10,6 @@ class PreacherField extends StatelessWidget {
     required this.onSelected,
     super.key,
   });
-  //const PreacherField({required this.controller, super.key});
 
   @override
   Widget build(BuildContext context) {

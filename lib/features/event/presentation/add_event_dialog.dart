@@ -29,6 +29,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Preacher? selectedPreacher;
+  Church? selectedChurch;
 
   EventType selectedType = EventType.saturdayMorning;
 
@@ -42,6 +43,14 @@ class _AddEventDialogState extends State<AddEventDialog> {
     Preacher(name: "Arhessa"),
   ];
 
+  final List<Church> _churches = [
+    Church(name: "Central - Campo Grande"),
+    Church(name: "Amambaí"),
+    Church(name: "São Francisco"),
+    Church(name: "Central - Mogi Mirim"),
+    Church(name: "Central - Cuiabá"),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final formattedDate = DateFormat('dd/MM/yyyy').format(widget.day);
@@ -53,7 +62,10 @@ class _AddEventDialogState extends State<AddEventDialog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ChurchField(churchController),
+            ChurchField(
+              churches: _churches,
+              onSelected: (church) => selectedChurch = church,
+            ),
             SizedBox(height: 20),
             SermonField(sermonController),
             SizedBox(height: 20),
@@ -82,7 +94,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
 
   Event createNewEvent() {
     return Event(
-      church: Church(name: churchController.text),
+      church: selectedChurch,
       date: widget.day,
       preacher: selectedPreacher,
       sermon: Sermon(theme: sermonController.text),
@@ -91,10 +103,19 @@ class _AddEventDialogState extends State<AddEventDialog> {
   }
 
   void _handleSave() {
-    if (_formKey.currentState!.validate()) {
-      final newEvent = createNewEvent();
-      widget.onSave(newEvent);
-      Navigator.pop(context);
+    if (!_formKey.currentState!.validate()) {
+      return;
     }
+
+    if (selectedChurch == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Selecione uma igreja")));
+      return;
+    }
+
+    final newEvent = createNewEvent();
+    widget.onSave(newEvent);
+    Navigator.pop(context);
   }
 }
