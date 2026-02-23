@@ -8,7 +8,7 @@ enum EventType { service, talk, teaching, visit }
 //   adventistYouth,
 //   talk,
 //   congress,
-//   teachingClass,
+//   teaching,
 //   bibleStudy,
 //   visit,
 // }

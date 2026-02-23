@@ -93,7 +93,34 @@ class _MyCalendarState extends State<MyCalendar> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _selectedDay == null
-            ? null
+            ? () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: const Color.fromARGB(255, 202, 131, 32),
+                    margin: const EdgeInsets.all(16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    content: Row(
+                      children: const [
+                        Icon(Icons.warning_amber_rounded, color: Colors.white),
+                        SizedBox(width: 20),
+                        Expanded(
+                          child: Text(
+                            "Selecione uma data",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+                return;
+              }
             : () {
                 showDialog(
                   context: context,

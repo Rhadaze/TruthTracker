@@ -4,6 +4,7 @@ import 'package:TruthTracker/features/sermon/domain/entities/sermon.dart';
 import 'package:TruthTracker/features/church/domain/entities/church.dart';
 
 class Event {
+  EventType? categoria;
   EventType? type;
   String? place;
   DateTime date;
