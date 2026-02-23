@@ -1,3 +1,8 @@
+import 'package:TruthTracker/features/event/domain/enums/event_type_service.dart';
+import 'package:TruthTracker/features/event/domain/enums/event_type_talk.dart';
+import 'package:TruthTracker/features/event/domain/enums/event_type_teaching.dart';
+import 'package:TruthTracker/features/event/domain/enums/event_type_visit.dart';
+
 import '../../features/event/domain/enums/event_type.dart';
 
 extension EventTypeExtension on EventType {
@@ -11,6 +16,19 @@ extension EventTypeExtension on EventType {
         return "Aula";
       case EventType.visit:
         return "Visita";
+    }
+  }
+
+  List<Enum> get subtypes {
+    switch (this) {
+      case EventType.service:
+        return EventTypeService.values;
+      case EventType.talk:
+        return EventTypeTalk.values;
+      case EventType.teaching:
+        return EventTypeTeaching.values;
+      case EventType.visit:
+        return EventTypeVisit.values;
     }
   }
 }

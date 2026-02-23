@@ -4,16 +4,17 @@ import 'package:TruthTracker/features/sermon/domain/entities/sermon.dart';
 import 'package:TruthTracker/features/church/domain/entities/church.dart';
 
 class Event {
-  EventType? categoria;
-  EventType? type;
-  String? place;
-  DateTime date;
-  Sermon? sermon;
-  Preacher? preacher;
-  Church church;
+  final EventType? category;
+  final Enum? subtype;
+  final String? place;
+  final DateTime date;
+  final Sermon? sermon;
+  final Preacher? preacher;
+  final Church church;
 
   Event({
-    this.type,
+    this.category,
+    this.subtype,
     this.place,
     required this.date,
     this.sermon,

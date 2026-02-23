@@ -31,7 +31,7 @@ class ChurchField extends StatelessWidget {
         return TextFormField(
           controller: controller,
           focusNode: focusNode,
-          decoration: const InputDecoration(labelText: "Church"),
+          decoration: const InputDecoration(labelText: "Igreja"),
         );
       },
     );

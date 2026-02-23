@@ -65,13 +65,19 @@ class _AddEventDialogState extends State<AddEventDialog> {
     final formattedDate = DateFormat('dd/MM/yyyy').format(widget.day);
 
     return AlertDialog(
-      title: Text("Novo Evento - $formattedDate"),
+      title: Column(
+        children: [
+          SizedBox(height: 10),
+          Text("Novo Evento   $formattedDate"),
+          SizedBox(height: 20),
+        ],
+      ),
       content: Form(
         key: _formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: 30),
+            //SizedBox(height: 30),
             PreacherField(
               preachers: _preachers,
               onSelected: (preacher) => selectedPreacher = preacher,
@@ -97,7 +103,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
             SizedBox(height: 20),
             EventTypeField(
               //value: selectedType,
-              label: "Tipo de Evento",
+              label: "Tipo",
               onChanged: (newValue) {
                 selectedType = newValue;
               },
@@ -118,7 +124,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
       date: widget.day,
       preacher: selectedPreacher,
       sermon: selectedSermon,
-      type: selectedType,
+      subtype: selectedType,
     );
   }
 

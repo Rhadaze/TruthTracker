@@ -31,7 +31,7 @@ class SermonField extends StatelessWidget {
         return TextFormField(
           controller: controller,
           focusNode: focusNode,
-          decoration: const InputDecoration(labelText: "Sermon"),
+          decoration: const InputDecoration(labelText: "Tema"),
         );
       },
     );
