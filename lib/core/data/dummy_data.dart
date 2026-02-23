@@ -65,7 +65,7 @@ class DummyData {
     List<Church> c,
   ) {
     Event e1 = Event(
-      type: EventType.saturdayMorning,
+      type: EventType.service,
       place: "Campo Grande",
       date: DateTime(2025, 12, 1),
       preacher: p[3],
@@ -73,7 +73,7 @@ class DummyData {
       church: c[0],
     );
     Event e2 = Event(
-      type: EventType.saturdayMorning,
+      type: EventType.service,
       place: "Cuiaba",
       date: DateTime(2026, 4, 6),
       preacher: p[1],
@@ -81,7 +81,7 @@ class DummyData {
       church: c[1],
     );
     Event e3 = Event(
-      type: EventType.saturdayMorning,
+      type: EventType.service,
       place: "Curitiba",
       date: DateTime(2027, 8, 23),
       preacher: p[2],

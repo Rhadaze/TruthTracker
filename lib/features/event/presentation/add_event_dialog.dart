@@ -32,7 +32,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
   Church? selectedChurch;
   Sermon? selectedSermon;
 
-  EventType selectedType = EventType.saturdayMorning;
+  EventType selectedType = EventType.service;
 
   final List<Preacher> _preachers = [
     Preacher(name: "Marlon"),
@@ -71,6 +71,12 @@ class _AddEventDialogState extends State<AddEventDialog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            SizedBox(height: 30),
+            PreacherField(
+              preachers: _preachers,
+              onSelected: (preacher) => selectedPreacher = preacher,
+            ),
+            SizedBox(height: 20),
             ChurchField(
               churches: _churches,
               onSelected: (church) => selectedChurch = church,
@@ -81,13 +87,17 @@ class _AddEventDialogState extends State<AddEventDialog> {
               onSelected: (sermon) => selectedSermon = sermon,
             ),
             SizedBox(height: 20),
-            PreacherField(
-              preachers: _preachers,
-              onSelected: (preacher) => selectedPreacher = preacher,
+            EventTypeField(
+              //value: selectedType,
+              label: "Categoria",
+              onChanged: (newValue) {
+                selectedType = newValue;
+              },
             ),
             SizedBox(height: 20),
             EventTypeField(
-              value: selectedType,
+              //value: selectedType,
+              label: "Tipo de Evento",
               onChanged: (newValue) {
                 selectedType = newValue;
               },
@@ -107,7 +117,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
       church: selectedChurch!,
       date: widget.day,
       preacher: selectedPreacher,
-      sermon: Sermon(theme: sermonController.text),
+      sermon: selectedSermon,
       type: selectedType,
     );
   }

@@ -3,28 +3,39 @@ import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
 import 'package:flutter/material.dart';
 
 class EventTypeField extends StatelessWidget {
-  final EventType value;
+  final String? label;
+  final EventType? value;
   final ValueChanged<EventType> onChanged;
 
   const EventTypeField({
     super.key,
-    required this.value,
+    this.label,
+    this.value,
     required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return DropdownMenu<EventType>(
-      initialSelection: value,
-      label: const Text("Tipo"),
-      dropdownMenuEntries: EventType.values.map((type) {
-        return DropdownMenuEntry<EventType>(value: type, label: type.label);
-      }).toList(),
-      onSelected: (value) {
-        if (value != null) {
-          onChanged(value);
-        }
-      },
+    return SizedBox(
+      width: double.infinity,
+      child: DropdownMenu<EventType>(
+        inputDecorationTheme: const InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+          ),
+        ),
+        width: double.infinity,
+        //initialSelection: value,
+        label: Text(label ?? ""),
+        dropdownMenuEntries: EventType.values.map((type) {
+          return DropdownMenuEntry<EventType>(value: type, label: type.label);
+        }).toList(),
+        onSelected: (value) {
+          if (value != null) {
+            onChanged(value);
+          }
+        },
+      ),
     );
   }
 }

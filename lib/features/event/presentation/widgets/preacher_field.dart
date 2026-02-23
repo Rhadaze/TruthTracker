@@ -18,14 +18,15 @@ class PreacherField extends StatelessWidget {
       optionsBuilder: (TextEditingValue textEditingValue) {
         if (textEditingValue.text.isEmpty) {
           return const Iterable<Preacher>.empty();
+        } else {
+          return preachers.where(
+            (preacher) => preacher.name.toLowerCase().contains(
+              textEditingValue.text.toLowerCase(),
+            ),
+          );
         }
-
-        return preachers.where(
-          (preacher) => preacher.name.toLowerCase().contains(
-            textEditingValue.text.toLowerCase(),
-          ),
-        );
       },
+
       onSelected: onSelected,
       fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
         return TextFormField(
@@ -35,19 +36,5 @@ class PreacherField extends StatelessWidget {
         );
       },
     );
-
-    // return TextFormField(
-    //   controller: controller,
-    //   decoration: InputDecoration(labelText: "Pregador"),
-    //   validator: (value) {
-    //     if (value == null || value.trim().isEmpty) {
-    //       return "Informe o Pregador";
-    //     }
-    //     if (value.length < 3) {
-    //       return "Mínimo 3 caracteres";
-    //     }
-    //     return null;
-    //   },
-    // );
   }
 }
