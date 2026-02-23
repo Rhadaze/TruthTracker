@@ -1,17 +1,17 @@
 import 'package:TruthTracker/features/event/domain/enums/event_type_visit.dart';
 
-extension EventTypeExtension on EventTypeVisit {
+extension EventTypeVisitExtension on EventTypeVisit {
   String get label {
     switch (this) {
-      case EventTypeVisit.astray: //TODO fazer duas dropdowns mais simples?
-        return "Afastado";
-      case EventTypeVisit.routine: //TODO fazer duas dropdowns mais simples?
+      case EventTypeVisit.routine:
         return "Rotina";
-      case EventTypeVisit.sickness: //TODO fazer duas dropdowns mais simples?
-        return "Doença";
-      case EventTypeVisit.counseling: //TODO fazer duas dropdowns mais simples?
+      case EventTypeVisit.counseling:
         return "Aconselhamento";
-      case EventTypeVisit.mourning: //TODO fazer duas dropdowns mais simples?
+      case EventTypeVisit.astray:
+        return "Afastado";
+      case EventTypeVisit.sickness:
+        return "Doença";
+      case EventTypeVisit.mourning:
         return "Luto";
     }
   }

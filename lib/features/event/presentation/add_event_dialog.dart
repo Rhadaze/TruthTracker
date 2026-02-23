@@ -1,6 +1,7 @@
 import 'package:TruthTracker/features/event/presentation/widgets/cancel_button.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/church_field.dart';
-import 'package:TruthTracker/features/event/presentation/widgets/event_type_field.dart';
+import 'package:TruthTracker/features/event/presentation/widgets/event_category_field.dart';
+import 'package:TruthTracker/features/event/presentation/widgets/event_subtype_field.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/preacher_Field.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/save_button.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/sermon_field.dart';
@@ -31,8 +32,8 @@ class _AddEventDialogState extends State<AddEventDialog> {
   Preacher? selectedPreacher;
   Church? selectedChurch;
   Sermon? selectedSermon;
-
-  EventType selectedType = EventType.service;
+  EventType? selectedCategory;
+  Enum? selectedType; // = EventType.service;
 
   final List<Preacher> _preachers = [
     Preacher(name: "Marlon"),
@@ -72,43 +73,49 @@ class _AddEventDialogState extends State<AddEventDialog> {
           SizedBox(height: 20),
         ],
       ),
-      content: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            //SizedBox(height: 30),
-            PreacherField(
-              preachers: _preachers,
-              onSelected: (preacher) => selectedPreacher = preacher,
+      content: SizedBox(
+        width: double.maxFinite,
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                PreacherField(
+                  preachers: _preachers,
+                  onSelected: (preacher) => selectedPreacher = preacher,
+                ),
+                SizedBox(height: 20),
+                ChurchField(
+                  churches: _churches,
+                  onSelected: (church) => selectedChurch = church,
+                ),
+                SizedBox(height: 20),
+                SermonField(
+                  sermons: _sermons,
+                  onSelected: (sermon) => selectedSermon = sermon,
+                ),
+                SizedBox(height: 20),
+                EventCategoryField(
+                  value: selectedCategory,
+                  onChanged: (newValue) {
+                    setState(() {
+                      selectedCategory = newValue;
+                      selectedType = null;
+                    });
+                  },
+                ),
+                SizedBox(height: 20),
+                EventSubtypeField(
+                  category: selectedCategory,
+                  value: selectedType,
+                  onChanged: (newValue) {
+                    selectedType = newValue;
+                  },
+                ),
+              ],
             ),
-            SizedBox(height: 20),
-            ChurchField(
-              churches: _churches,
-              onSelected: (church) => selectedChurch = church,
-            ),
-            SizedBox(height: 20),
-            SermonField(
-              sermons: _sermons,
-              onSelected: (sermon) => selectedSermon = sermon,
-            ),
-            SizedBox(height: 20),
-            EventTypeField(
-              //value: selectedType,
-              label: "Categoria",
-              onChanged: (newValue) {
-                selectedType = newValue;
-              },
-            ),
-            SizedBox(height: 20),
-            EventTypeField(
-              //value: selectedType,
-              label: "Tipo",
-              onChanged: (newValue) {
-                selectedType = newValue;
-              },
-            ),
-          ],
+          ),
         ),
       ),
       actions: [

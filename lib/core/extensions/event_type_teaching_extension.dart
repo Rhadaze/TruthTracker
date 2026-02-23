@@ -1,6 +1,6 @@
 import 'package:TruthTracker/features/event/domain/enums/event_type_teaching.dart';
 
-extension EventTypeExtension on EventTypeTeaching {
+extension EventTypeTeachingExtension on EventTypeTeaching {
   String get label {
     switch (this) {
       case EventTypeTeaching.bibleStudy:

@@ -2,17 +2,11 @@ import 'package:TruthTracker/core/extensions/event_type_extension.dart';
 import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
 import 'package:flutter/material.dart';
 
-class EventTypeField extends StatelessWidget {
-  final String? label;
+class EventCategoryField extends StatelessWidget {
   final EventType? value;
   final ValueChanged<EventType> onChanged;
 
-  const EventTypeField({
-    super.key,
-    this.label,
-    this.value,
-    required this.onChanged,
-  });
+  const EventCategoryField({super.key, this.value, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +19,8 @@ class EventTypeField extends StatelessWidget {
           ),
         ),
         width: double.infinity,
-        //initialSelection: value,
-        label: Text(label ?? ""),
+        initialSelection: value,
+        label: Text("Category"),
         dropdownMenuEntries: EventType.values.map((type) {
           return DropdownMenuEntry<EventType>(value: type, label: type.label);
         }).toList(),

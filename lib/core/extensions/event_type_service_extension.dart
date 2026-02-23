@@ -1,6 +1,6 @@
 import 'package:TruthTracker/features/event/domain/enums/event_type_service.dart';
 
-extension EventTypeExtension on EventTypeService {
+extension EventTypeServiceExtension on EventTypeService {
   String get label {
     switch (this) {
       case EventTypeService.saturdayMorning:

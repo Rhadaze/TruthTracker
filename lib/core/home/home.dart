@@ -8,7 +8,5 @@ class Home extends StatelessWidget {
       appBar: AppBar(title: Text("Home")),
       body: Center(child: MyCalendar()),
     );
-    // TODO: implement build
-    //throw UnimplementedError();
   }
 }
