@@ -1,3 +1,4 @@
+import 'package:TruthTracker/core/ui/app_snackbar.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/cancel_button.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/church_field.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/event_category_field.dart';
@@ -140,10 +141,13 @@ class _AddEventDialogState extends State<AddEventDialog> {
       return;
     }
 
+    if (selectedPreacher == null) {
+      AppSnackbar.showPreacherFieldError(context);
+      return;
+    }
+
     if (selectedChurch == null) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("Selecione uma igreja")));
+      AppSnackbar.showChurchFieldError(context);
       return;
     }
 

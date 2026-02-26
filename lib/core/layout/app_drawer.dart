@@ -16,17 +16,13 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text("Home"),
-            onTap: () => Navigator.of(
-              context,
-              rootNavigator: true,
-            ).pushNamed('/home'),
+            onTap: () =>
+                Navigator.of(context, rootNavigator: true).pushNamed('/home'),
           ),
           ListTile(
-            title: Text("Preached At"),
-            onTap: () => Navigator.of(
-              context,
-              rootNavigator: true,
-            ).pushNamed('/Events'),
+            title: Text("Events"),
+            onTap: () =>
+                Navigator.of(context, rootNavigator: true).pushNamed('/events'),
           ),
           Divider(),
           ListTile(

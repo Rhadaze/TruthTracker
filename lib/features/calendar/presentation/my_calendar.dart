@@ -1,4 +1,5 @@
 import 'package:TruthTracker/core/data/dummy_data.dart';
+import 'package:TruthTracker/core/ui/app_snackbar.dart';
 import 'package:TruthTracker/core/widgets/basic_app_card.dart';
 import 'package:TruthTracker/features/event/presentation/add_event_dialog.dart';
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
@@ -94,32 +95,7 @@ class _MyCalendarState extends State<MyCalendar> {
       floatingActionButton: FloatingActionButton(
         onPressed: _selectedDay == null
             ? () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor: const Color.fromARGB(255, 202, 131, 32),
-                    margin: const EdgeInsets.all(16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    content: Row(
-                      children: const [
-                        Icon(Icons.warning_amber_rounded, color: Colors.white),
-                        SizedBox(width: 20),
-                        Expanded(
-                          child: Text(
-                            "Selecione uma data",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-                return;
+                AppSnackbar.showDateError(context);
               }
             : () {
                 showDialog(

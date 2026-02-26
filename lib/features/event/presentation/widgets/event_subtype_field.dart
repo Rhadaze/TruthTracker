@@ -1,4 +1,3 @@
-import 'package:TruthTracker/core/extensions/enum_label_extension.dart';
 import 'package:TruthTracker/core/extensions/event_type_extension.dart';
 import 'package:TruthTracker/core/extensions/event_type_service_extension.dart';
 import 'package:TruthTracker/core/extensions/event_type_talk_extension.dart';

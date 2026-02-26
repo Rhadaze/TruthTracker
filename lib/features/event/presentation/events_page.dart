@@ -21,7 +21,7 @@ class EventsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<EventWidget> paWidgets = EventWidget.fromList(e);
+    final List<EventWidget> eventWidgets = EventWidget.fromList(e);
 
     return MaterialApp(
       home: Scaffold(
@@ -31,7 +31,7 @@ class EventsPage extends StatelessWidget {
           //leading: Icon(Icons.menu),
         ),
         drawer: AppDrawer(),
-        body: ListView(children: paWidgets),
+        body: ListView(children: eventWidgets),
       ),
     );
   }
