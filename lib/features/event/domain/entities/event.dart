@@ -1,11 +1,12 @@
-import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
+import 'package:TruthTracker/features/event/domain/enums/event_category.dart';
+import 'package:TruthTracker/features/event/domain/value_objects/event_type.dart';
 import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
 import 'package:TruthTracker/features/sermon/domain/entities/sermon.dart';
 import 'package:TruthTracker/features/venue/domain/entities/venue.dart';
 
 class Event {
   final EventCategory? category;
-  final Enum? type;
+  final EventType? type;
   final String? place;
   final DateTime date;
   final Sermon? sermon;

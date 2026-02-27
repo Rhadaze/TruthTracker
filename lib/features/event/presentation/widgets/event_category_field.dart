@@ -1,5 +1,4 @@
-import 'package:TruthTracker/core/extensions/event_type_extension.dart';
-import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
+import 'package:TruthTracker/features/event/domain/enums/event_category.dart';
 import 'package:flutter/material.dart';
 
 class EventCategoryField extends StatelessWidget {

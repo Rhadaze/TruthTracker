@@ -1,4 +1,6 @@
-enum EventTypeVisit {
+import 'package:TruthTracker/features/event/domain/value_objects/event_type.dart';
+
+enum EventTypeVisit implements EventType {
   astray,
   sickness,
   routine,

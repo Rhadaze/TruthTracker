@@ -1,4 +1,6 @@
-enum EventTypeTeaching {
+import 'package:TruthTracker/features/event/domain/value_objects/event_type.dart';
+
+enum EventTypeTeaching implements EventType {
   churchClass,
   bibleStudy,
   university;

@@ -1,4 +1,5 @@
 import 'package:TruthTracker/core/ui/app_snackbar.dart';
+import 'package:TruthTracker/features/event/domain/value_objects/event_type.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/cancel_button.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/church_field.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/event_category_field.dart';
@@ -8,7 +9,7 @@ import 'package:TruthTracker/features/event/presentation/widgets/save_button.dar
 import 'package:TruthTracker/features/event/presentation/widgets/sermon_field.dart';
 import 'package:TruthTracker/features/venue/domain/entities/venue.dart';
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
-import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
+import 'package:TruthTracker/features/event/domain/enums/event_category.dart';
 import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
 import 'package:TruthTracker/features/sermon/domain/entities/sermon.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
   Venue? selectedVenue;
   Sermon? selectedSermon;
   EventCategory? selectedCategory;
-  Enum? selectedType; // = EventType.service;
+  EventType? selectedType; // = EventType.service;
 
   final List<Preacher> _preachers = [
     Preacher(name: "Marlon"),
@@ -132,7 +133,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
                   },
                 ),
                 SizedBox(height: 20),
-                EventSubtypeField(
+                EventTypeField(
                   category: selectedCategory,
                   value: selectedType,
                   onChanged: (newValue) {

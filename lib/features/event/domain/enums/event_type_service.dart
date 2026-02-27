@@ -6,8 +6,8 @@ enum EventTypeService implements EventType {
   sundayNight,
   prayerWeek,
   adventistYouth,
-  retreat,
-  
+  retreat;
+
   @override
   String get label => switch (this) {
     EventTypeService.saturdayMorning => "Culto Sábado de Manhã",
@@ -15,6 +15,6 @@ enum EventTypeService implements EventType {
     EventTypeService.sundayNight => "Culto Domingo à Noite",
     EventTypeService.prayerWeek => "Semana de Oração",
     EventTypeService.adventistYouth => "Jovens Adventistas",
-    EventTypeService.retreat => "Retiro", 
+    EventTypeService.retreat => "Retiro",
   };
 }

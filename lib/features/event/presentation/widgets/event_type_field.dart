@@ -1,21 +1,17 @@
-import 'package:TruthTracker/core/extensions/event_type_extension.dart';
-import 'package:TruthTracker/core/extensions/event_type_service_extension.dart';
-import 'package:TruthTracker/core/extensions/event_type_talk_extension.dart';
-import 'package:TruthTracker/core/extensions/event_type_teaching_extension.dart';
-import 'package:TruthTracker/core/extensions/event_type_visit_extension.dart';
-import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
+import 'package:TruthTracker/features/event/domain/enums/event_category.dart';
 import 'package:TruthTracker/features/event/domain/enums/event_type_service.dart';
 import 'package:TruthTracker/features/event/domain/enums/event_type_talk.dart';
 import 'package:TruthTracker/features/event/domain/enums/event_type_teaching.dart';
 import 'package:TruthTracker/features/event/domain/enums/event_type_visit.dart';
+import 'package:TruthTracker/features/event/domain/value_objects/event_type.dart';
 import 'package:flutter/material.dart';
 
-class EventSubtypeField extends StatelessWidget {
+class EventTypeField extends StatelessWidget {
   final EventCategory? category;
-  final Enum? value;
-  final ValueChanged<Enum> onChanged;
+  final EventType? value;
+  final ValueChanged<EventType> onChanged;
 
-  const EventSubtypeField({
+  const EventTypeField({
     super.key,
     required this.category,
     this.value,
@@ -24,11 +20,11 @@ class EventSubtypeField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final subtypes = category?.types ?? [];
+    final types = category?.types ?? <EventType>[];
 
     return SizedBox(
       width: double.infinity,
-      child: DropdownMenu<Enum>(
+      child: DropdownMenu<EventType>(
         enabled: category != null,
         inputDecorationTheme: const InputDecorationTheme(
           border: OutlineInputBorder(
@@ -38,10 +34,10 @@ class EventSubtypeField extends StatelessWidget {
         width: double.infinity,
         initialSelection: value,
         label: Text("Tipo"),
-        dropdownMenuEntries: subtypes.map((subtype) {
-          return DropdownMenuEntry<Enum>(
-            value: subtype,
-            label: switch (subtype) {
+        dropdownMenuEntries: types.map((type) {
+          return DropdownMenuEntry<EventType>(
+            value: type,
+            label: switch (type) {
               EventTypeService s => s.label,
               EventTypeTalk t => t.label,
               EventTypeTeaching t => t.label,
