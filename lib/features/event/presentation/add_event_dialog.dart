@@ -6,7 +6,7 @@ import 'package:TruthTracker/features/event/presentation/widgets/event_subtype_f
 import 'package:TruthTracker/features/event/presentation/widgets/preacher_Field.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/save_button.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/sermon_field.dart';
-import 'package:TruthTracker/features/church/domain/entities/church.dart';
+import 'package:TruthTracker/features/venue/domain/entities/venue.dart';
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
 import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
 import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
@@ -25,15 +25,15 @@ class AddEventDialog extends StatefulWidget {
 }
 
 class _AddEventDialogState extends State<AddEventDialog> {
-  final TextEditingController churchController = TextEditingController();
+  final TextEditingController venueController = TextEditingController();
   final TextEditingController sermonController = TextEditingController();
   final TextEditingController preacherController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Preacher? selectedPreacher;
-  Church? selectedChurch;
+  Venue? selectedVenue;
   Sermon? selectedSermon;
-  EventType? selectedCategory;
+  EventCategory? selectedCategory;
   Enum? selectedType; // = EventType.service;
 
   final List<Preacher> _preachers = [
@@ -46,12 +46,37 @@ class _AddEventDialogState extends State<AddEventDialog> {
     Preacher(name: "Arhessa"),
   ];
 
-  final List<Church> _churches = [
-    Church(name: "Central - Campo Grande"),
-    Church(name: "Amambaí"),
-    Church(name: "São Francisco"),
-    Church(name: "Central - Mogi Mirim"),
-    Church(name: "Central - Cuiabá"),
+  final List<Venue> _venues = [
+    Venue(
+      name: "Central - Campo Grande",
+      cidade: 'Campo Grande',
+      estado: 'MS',
+      denominacao: 'Adventista',
+    ),
+    Venue(
+      name: "Amambaí",
+      cidade: 'Campo Grande',
+      estado: 'MS',
+      denominacao: 'Adventista',
+    ),
+    Venue(
+      name: "São Francisco",
+      cidade: 'Campo Grande',
+      estado: 'MS',
+      denominacao: 'Adventista',
+    ),
+    Venue(
+      name: "Central - Mogi Mirim",
+      cidade: 'Campo Grande',
+      estado: 'MS',
+      denominacao: 'Adventista',
+    ),
+    Venue(
+      name: "Central - Cuiabá",
+      cidade: 'Campo Grande',
+      estado: 'MS',
+      denominacao: 'Adventista',
+    ),
   ];
 
   final List<Sermon> _sermons = [
@@ -87,9 +112,9 @@ class _AddEventDialogState extends State<AddEventDialog> {
                   onSelected: (preacher) => selectedPreacher = preacher,
                 ),
                 SizedBox(height: 20),
-                ChurchField(
-                  churches: _churches,
-                  onSelected: (church) => selectedChurch = church,
+                VenueField(
+                  venues: _venues,
+                  onSelected: (venue) => selectedVenue = venue,
                 ),
                 SizedBox(height: 20),
                 SermonField(
@@ -128,11 +153,11 @@ class _AddEventDialogState extends State<AddEventDialog> {
 
   Event createNewEvent() {
     return Event(
-      church: selectedChurch!,
+      venue: selectedVenue!,
       date: widget.day,
-      preacher: selectedPreacher,
+      preacher: selectedPreacher!,
       sermon: selectedSermon,
-      subtype: selectedType,
+      type: selectedType,
     );
   }
 
@@ -146,8 +171,8 @@ class _AddEventDialogState extends State<AddEventDialog> {
       return;
     }
 
-    if (selectedChurch == null) {
-      AppSnackbar.showChurchFieldError(context);
+    if (selectedVenue == null) {
+      AppSnackbar.showVenueFieldError(context);
       return;
     }
 

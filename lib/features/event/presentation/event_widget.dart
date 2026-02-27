@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class EventWidget extends StatelessWidget {
   final Event e;
 
-  const EventWidget(this.e);
+  const EventWidget(this.e, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class EventWidget extends StatelessWidget {
       leadingIcon: Icons.access_time,
       title: e.sermon?.theme ?? "sem título",
       subtitle:
-          "pregador: ${e.preacher?.name}\nData: ${e.date.toLocal().toString().split(' ')[0]}",
+          "pregador: ${e.preacher.name}\nData: ${e.date.toLocal().toString().split(' ')[0]}",
       trailingIcon: Icons.menu,
       onTap: () {
         print("hi");

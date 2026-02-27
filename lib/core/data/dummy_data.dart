@@ -1,4 +1,4 @@
-import 'package:TruthTracker/features/church/domain/entities/church.dart';
+import 'package:TruthTracker/features/venue/domain/entities/venue.dart';
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
 import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
 import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
@@ -6,7 +6,7 @@ import 'package:TruthTracker/features/sermon/domain/entities/sermon.dart';
 
 class DummyData {
   static List<Event> populateData() {
-    List<Church> c = populateChurches();
+    List<Venue> c = populateVenues();
     List<Preacher> p = populatePreachers();
     List<Sermon> s = populateSermons(p);
     return populateEvents(p, s, c);
@@ -33,22 +33,22 @@ class DummyData {
     return [s1, s2, s3];
   }
 
-  static List<Church> populateChurches() {
-    Church c1 = Church(
+  static List<Venue> populateVenues() {
+    Venue c1 = Venue(
       name: "Igreja Central",
       bairro: "Centro",
       cidade: "Campo Grande",
       estado: "MS",
       denominacao: "Adventista",
     );
-    Church c2 = Church(
+    Venue c2 = Venue(
       name: "Sede do Bairro Amambaí",
       bairro: "Amambaí",
       cidade: "Campo Grande",
       estado: "MS",
       denominacao: "Adventista",
     );
-    Church c3 = Church(
+    Venue c3 = Venue(
       name: "Igreja São Francisco",
       bairro: "São Francisco",
       cidade: "Campo Grande",
@@ -62,31 +62,31 @@ class DummyData {
   static List<Event> populateEvents(
     List<Preacher> p,
     List<Sermon> s,
-    List<Church> c,
+    List<Venue> c,
   ) {
     Event e1 = Event(
-      subtype: EventType.service,
+      type: EventCategory.service,
       place: "Campo Grande",
       date: DateTime(2025, 12, 1),
       preacher: p[3],
       sermon: s[0],
-      church: c[0],
+      venue: c[0],
     );
     Event e2 = Event(
-      subtype: EventType.service,
+      type: EventCategory.service,
       place: "Cuiaba",
       date: DateTime(2026, 4, 6),
       preacher: p[1],
       sermon: s[1],
-      church: c[1],
+      venue: c[1],
     );
     Event e3 = Event(
-      subtype: EventType.service,
+      type: EventCategory.service,
       place: "Curitiba",
       date: DateTime(2027, 8, 23),
       preacher: p[2],
       sermon: s[2],
-      church: c[2],
+      venue: c[2],
     );
 
     return [e1, e2, e3];

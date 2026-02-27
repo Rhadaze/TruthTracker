@@ -1,5 +1,5 @@
 import 'package:TruthTracker/core/layout/app_drawer.dart';
-import 'package:TruthTracker/features/church/domain/entities/church.dart';
+import 'package:TruthTracker/features/venue/domain/entities/venue.dart';
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
 import 'package:TruthTracker/features/event/presentation/event_widget.dart';
 import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
@@ -10,13 +10,17 @@ import 'package:flutter/material.dart';
 class EventsPage extends StatelessWidget {
   final List<Preacher> p;
   final List<Sermon> s;
-  final List<Church> c;
+  final List<Venue> v;
   final List<Event> e;
 
-  EventsPage() : c = [], p = DummyData.populatePreachers(), s = [], e = [] {
-    c.addAll(DummyData.populateChurches());
+  EventsPage({super.key})
+    : v = [],
+      p = DummyData.populatePreachers(),
+      s = [],
+      e = [] {
+    v.addAll(DummyData.populateVenues());
     s.addAll(DummyData.populateSermons(p));
-    e.addAll(DummyData.populateEvents(p, s, c));
+    e.addAll(DummyData.populateEvents(p, s, v));
   }
 
   @override

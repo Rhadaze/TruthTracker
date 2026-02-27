@@ -1,6 +1,6 @@
 import 'package:TruthTracker/core/home/home.dart';
 import 'package:TruthTracker/features/about/about_page.dart';
-import 'package:TruthTracker/features/church/presentation/church_page.dart';
+import 'package:TruthTracker/features/venue/presentation/church_page.dart';
 import 'package:TruthTracker/features/event/presentation/events_page.dart';
 import 'package:TruthTracker/features/preacher/presentation/preacher_page.dart';
 import 'package:TruthTracker/features/sermon/presentation/sermon_page.dart';

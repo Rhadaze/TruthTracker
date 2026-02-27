@@ -3,8 +3,8 @@ import 'package:TruthTracker/features/event/domain/enums/event_type.dart';
 import 'package:flutter/material.dart';
 
 class EventCategoryField extends StatelessWidget {
-  final EventType? value;
-  final ValueChanged<EventType> onChanged;
+  final EventCategory? value;
+  final ValueChanged<EventCategory> onChanged;
 
   const EventCategoryField({super.key, this.value, required this.onChanged});
 
@@ -12,7 +12,7 @@ class EventCategoryField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: DropdownMenu<EventType>(
+      child: DropdownMenu<EventCategory>(
         inputDecorationTheme: const InputDecorationTheme(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -21,8 +21,11 @@ class EventCategoryField extends StatelessWidget {
         width: double.infinity,
         initialSelection: value,
         label: Text("Category"),
-        dropdownMenuEntries: EventType.values.map((type) {
-          return DropdownMenuEntry<EventType>(value: type, label: type.label);
+        dropdownMenuEntries: EventCategory.values.map((type) {
+          return DropdownMenuEntry<EventCategory>(
+            value: type,
+            label: type.label,
+          );
         }).toList(),
         onSelected: (value) {
           if (value != null) {

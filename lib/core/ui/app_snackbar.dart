@@ -1,4 +1,3 @@
-import 'package:TruthTracker/features/calendar/presentation/my_calendar.dart';
 import 'package:flutter/material.dart';
 
 class AppSnackbar {
@@ -25,7 +24,7 @@ class AppSnackbar {
     );
   }
 
-  static void showChurchFieldError(BuildContext context) {
+  static void showVenueFieldError(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         behavior: SnackBarBehavior.floating,
@@ -38,7 +37,7 @@ class AppSnackbar {
             SizedBox(width: 20),
             Expanded(
               child: Text(
-                "Selecione uma igreja",
+                "Selecione um local",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
             ),

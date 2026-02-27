@@ -1,11 +1,11 @@
 import 'package:TruthTracker/core/widgets/basic_app_card.dart';
-import 'package:TruthTracker/features/church/domain/entities/church.dart';
+import 'package:TruthTracker/features/venue/domain/entities/venue.dart';
 import 'package:flutter/material.dart';
 
 class ChurchWidget extends StatelessWidget {
-  final Church c;
+  final Venue c;
 
-  const ChurchWidget(this.c);
+  const ChurchWidget(this.c, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +18,9 @@ class ChurchWidget extends StatelessWidget {
         print("hi");
       },
     );
-    //throw UnimplementedError();
   }
 
-  static List<ChurchWidget> fromList(List<Church> churches) {
+  static List<ChurchWidget> fromList(List<Venue> churches) {
     return churches.map((c) => ChurchWidget(c)).toList();
   }
 }

@@ -1,26 +1,22 @@
-import 'package:TruthTracker/features/church/domain/entities/church.dart';
+import 'package:TruthTracker/features/venue/domain/entities/venue.dart';
 import 'package:flutter/material.dart';
 
-class ChurchField extends StatelessWidget {
-  final List<Church> churches;
-  final void Function(Church) onSelected;
+class VenueField extends StatelessWidget {
+  final List<Venue> venues;
+  final void Function(Venue) onSelected;
 
-  const ChurchField({
-    required this.churches,
-    required this.onSelected,
-    super.key,
-  });
+  const VenueField({required this.venues, required this.onSelected, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Autocomplete<Church>(
+    return Autocomplete<Venue>(
       displayStringForOption: (option) => option.name,
       optionsBuilder: (TextEditingValue textEditingValue) {
         if (textEditingValue.text.isEmpty) {
-          return const Iterable<Church>.empty();
+          return const Iterable<Venue>.empty();
         }
 
-        return churches.where(
+        return venues.where(
           (church) => church.name.toLowerCase().contains(
             textEditingValue.text.toLowerCase(),
           ),

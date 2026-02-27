@@ -87,7 +87,7 @@ class _MyCalendarState extends State<MyCalendar> {
           ..._getEventsForDay(_selectedDay ?? _focusedDay).map(
             (event) => BasicAppCard(
               title: event.sermon?.theme ?? "",
-              subtitle: event.church.name ?? "",
+              subtitle: event.venue.name,
             ), //TODO tenho que informar o pregador se for outro que nao o usuário.
           ),
         ],

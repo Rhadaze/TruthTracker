@@ -11,7 +11,7 @@ import 'package:TruthTracker/features/event/domain/enums/event_type_visit.dart';
 import 'package:flutter/material.dart';
 
 class EventSubtypeField extends StatelessWidget {
-  final EventType? category;
+  final EventCategory? category;
   final Enum? value;
   final ValueChanged<Enum> onChanged;
 
@@ -24,7 +24,7 @@ class EventSubtypeField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final subtypes = category?.subtypes ?? [];
+    final subtypes = category?.types ?? [];
 
     return SizedBox(
       width: double.infinity,

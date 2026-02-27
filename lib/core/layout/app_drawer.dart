@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppDrawer extends StatelessWidget {
-  AppDrawer();
+  const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +16,9 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text("Home"),
-            onTap: () =>
-                Navigator.of(context, rootNavigator: true).pushNamed('/home'),
+            onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(
+              '/home',
+            ), //TODO trocar pushNamed por outra coisa que nao empilhe as telas infinitamente.
           ),
           ListTile(
             title: Text("Events"),

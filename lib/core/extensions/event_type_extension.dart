@@ -5,29 +5,29 @@ import 'package:TruthTracker/features/event/domain/enums/event_type_visit.dart';
 
 import '../../features/event/domain/enums/event_type.dart';
 
-extension EventTypeExtension on EventType {
+extension EventTypeExtension on EventCategory {
   String get label {
     switch (this) {
-      case EventType.service:
+      case EventCategory.service:
         return "Culto";
-      case EventType.talk:
+      case EventCategory.talk:
         return "Palestra";
-      case EventType.teaching:
+      case EventCategory.teaching:
         return "Aula";
-      case EventType.visit:
+      case EventCategory.visit:
         return "Visita";
     }
   }
 
-  List<Enum> get subtypes {
+  List<Enum> get types {
     switch (this) {
-      case EventType.service:
+      case EventCategory.service:
         return EventTypeService.values;
-      case EventType.talk:
+      case EventCategory.talk:
         return EventTypeTalk.values;
-      case EventType.teaching:
+      case EventCategory.teaching:
         return EventTypeTeaching.values;
-      case EventType.visit:
+      case EventCategory.visit:
         return EventTypeVisit.values;
     }
   }
