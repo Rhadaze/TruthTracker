@@ -1,11 +1,13 @@
 class Preacher {
-  String name;
-  String? email;
-  String? phone;
-  String? languages;
-  String? denomination;
+  final int id;
+  final String name;
+  final String? email;
+  final String? phone;
+  final String? languages;
+  final String? denomination;
 
   Preacher({
+    required this.id,
     required this.name,
     this.email,
     this.phone,

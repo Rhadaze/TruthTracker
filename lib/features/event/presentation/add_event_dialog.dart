@@ -1,9 +1,10 @@
+import 'package:TruthTracker/core/data/dummy_data.dart';
 import 'package:TruthTracker/core/ui/app_snackbar.dart';
 import 'package:TruthTracker/features/event/domain/value_objects/event_type.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/cancel_button.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/church_field.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/event_category_field.dart';
-import 'package:TruthTracker/features/event/presentation/widgets/event_subtype_field.dart';
+import 'package:TruthTracker/features/event/presentation/widgets/event_type_field.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/preacher_Field.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/save_button.dart';
 import 'package:TruthTracker/features/event/presentation/widgets/sermon_field.dart';
@@ -37,56 +38,9 @@ class _AddEventDialogState extends State<AddEventDialog> {
   EventCategory? selectedCategory;
   EventType? selectedType; // = EventType.service;
 
-  final List<Preacher> _preachers = [
-    Preacher(name: "Marlon"),
-    Preacher(name: "Christian"),
-    Preacher(name: "Kariston"),
-    Preacher(name: "Mateus"),
-    Preacher(name: "Célio"),
-    Preacher(name: "Bárbara"),
-    Preacher(name: "Arhessa"),
-  ];
-
-  final List<Venue> _venues = [
-    Venue(
-      name: "Central - Campo Grande",
-      cidade: 'Campo Grande',
-      estado: 'MS',
-      denominacao: 'Adventista',
-    ),
-    Venue(
-      name: "Amambaí",
-      cidade: 'Campo Grande',
-      estado: 'MS',
-      denominacao: 'Adventista',
-    ),
-    Venue(
-      name: "São Francisco",
-      cidade: 'Campo Grande',
-      estado: 'MS',
-      denominacao: 'Adventista',
-    ),
-    Venue(
-      name: "Central - Mogi Mirim",
-      cidade: 'Campo Grande',
-      estado: 'MS',
-      denominacao: 'Adventista',
-    ),
-    Venue(
-      name: "Central - Cuiabá",
-      cidade: 'Campo Grande',
-      estado: 'MS',
-      denominacao: 'Adventista',
-    ),
-  ];
-
-  final List<Sermon> _sermons = [
-    Sermon(theme: "O Anjo do Senhor"),
-    Sermon(theme: "Ouvindo a voz de Deus"),
-    Sermon(theme: "Verdadeira educação"),
-    Sermon(theme: "A terceira mensagem angélica"),
-    Sermon(theme: "O Santuário e sua sombra"),
-  ];
+  final List<Preacher> _preachers = DummyData.populatePreachers();
+  final List<Venue> _venues = DummyData.populateVenues();
+  final List<Sermon> _sermons = DummyData.populateSermons();
 
   @override
   Widget build(BuildContext context) {
@@ -154,6 +108,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
 
   Event createNewEvent() {
     return Event(
+      id: 1,
       venue: selectedVenue!,
       date: widget.day,
       preacher: selectedPreacher!,

@@ -14,14 +14,14 @@ class SermonField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Autocomplete<Sermon>(
-      displayStringForOption: (option) => option.theme,
+      displayStringForOption: (option) => option.title,
       optionsBuilder: (TextEditingValue textEditingValue) {
         if (textEditingValue.text.isEmpty) {
           return const Iterable<Sermon>.empty();
         }
 
         return sermons.where(
-          (church) => church.theme.toLowerCase().contains(
+          (venue) => venue.title.toLowerCase().contains(
             textEditingValue.text.toLowerCase(),
           ),
         );

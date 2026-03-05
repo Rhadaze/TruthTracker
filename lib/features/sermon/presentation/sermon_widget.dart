@@ -11,8 +11,8 @@ class SermonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BasicAppCard(
       leadingIcon: Icons.book,
-      title: sermon.theme,
-      subtitle: sermon.author?.name ?? "Sem nome",
+      title: sermon.title,
+      //subtitle: sermon.author?.name ?? "Sem nome", //TODO set persistência and fix this line
       trailingIcon: Icons.menu,
       onTap: () {
         print("hi");

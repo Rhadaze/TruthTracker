@@ -5,18 +5,18 @@ import 'package:TruthTracker/features/sermon/domain/entities/sermon.dart';
 import 'package:TruthTracker/features/venue/domain/entities/venue.dart';
 
 class Event {
+  final int id;
   final EventCategory? category;
   final EventType? type;
-  final String? place;
+  final Venue venue;
   final DateTime date;
   final Sermon? sermon;
   final Preacher preacher;
-  final Venue venue;
 
   Event({
+    this.id,
     this.category,
     this.type,
-    this.place,
     required this.date,
     this.sermon,
     required this.preacher,

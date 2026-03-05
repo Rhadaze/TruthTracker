@@ -10,7 +10,7 @@ class SermonPage extends StatelessWidget {
   final List<Sermon> s;
 
   SermonPage() : p = DummyData.populatePreachers(), s = [] {
-    s.addAll(DummyData.populateSermons(p));
+    s.addAll(DummyData.populateSermons());
   }
 
   @override

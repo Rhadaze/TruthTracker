@@ -1,6 +1,6 @@
 import 'package:TruthTracker/core/home/home.dart';
 import 'package:TruthTracker/features/about/about_page.dart';
-import 'package:TruthTracker/features/venue/presentation/church_page.dart';
+import 'package:TruthTracker/features/venue/presentation/venue_page.dart';
 import 'package:TruthTracker/features/event/presentation/events_page.dart';
 import 'package:TruthTracker/features/preacher/presentation/preacher_page.dart';
 import 'package:TruthTracker/features/sermon/presentation/sermon_page.dart';
@@ -32,7 +32,7 @@ class YourApp extends StatelessWidget {
         '/events': (context) => EventsPage(),
         '/sermons': (context) => SermonPage(),
         '/preachers': (context) => PreacherPage(),
-        '/churches': (context) => ChurchPage(),
+        '/churches': (context) => VenuePage(),
         '/about': (context) => AboutPage(),
       },
     ); // TODO: implement build

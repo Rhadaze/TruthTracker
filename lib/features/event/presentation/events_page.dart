@@ -19,7 +19,7 @@ class EventsPage extends StatelessWidget {
       s = [],
       e = [] {
     v.addAll(DummyData.populateVenues());
-    s.addAll(DummyData.populateSermons(p));
+    s.addAll(DummyData.populateSermons());
     e.addAll(DummyData.populateEvents(p, s, v));
   }
 
