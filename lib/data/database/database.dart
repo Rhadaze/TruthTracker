@@ -29,37 +29,7 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 
-  // Inserir pregador
-  Future<int> insertPreacher(PreacherTableCompanion preacher) =>
-      into(preacherTable).insert(preacher);
-
   // Inserir evento
   Future<int> insertEvent(EventTableCompanion event) =>
       into(eventTable).insert(event);
-
-  // Buscar eventos com JOIN
-  // Future<List<EventWithPreacher>> getEventsWithPreacher() async {
-  //   final query = select(eventTable).join([
-  //     innerJoin(
-  //       preacherTable,
-  //       preacherTable.id.equalsExp(eventTable.preacherId),
-  //     ),
-  //   ]);
-
-  // final rows = await query.get();
-
-  // return rows.map((row) {
-  //   return EventWithPreacher(
-  //     event: row.readTable(eventTable),
-  //     preacher: row.readTable(preacherTable),
-  //   );
-  // }).toList();
-  //}
 }
-
-// class EventWithPreacher {
-//   final EventTableData event;
-//   final PreacherTableData preacher;
-
-//   EventWithPreacher(this.event, this.preacher);
-// }
