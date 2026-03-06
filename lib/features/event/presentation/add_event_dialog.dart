@@ -108,7 +108,7 @@ class _AddEventDialogState extends State<AddEventDialog> {
 
   Event createNewEvent() {
     return Event(
-      id: 1,
+      id: 1, //dummy do dummy esse id aqui
       venue: selectedVenue!,
       date: widget.day,
       preacher: selectedPreacher!,

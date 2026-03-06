@@ -9,14 +9,13 @@ class Sermon {
   final String? mainText;
   final String? notes;
 
-  final DateTime?
-  createdAt; //TODO colocar nonnullable e required depois de implementar a persistência
+  //TODO colocar nonnullable e required depois de implementar a persistência
+  final DateTime createdAt;
   final DateTime? updatedAt;
 
   final bool isPublished;
 
-  final List<String>
-  tags; // TODO pesquisar se é melhor manter como string ou haver uma classe tags
+  final List<String> tags;
 
   const Sermon({
     required this.id,
@@ -25,7 +24,7 @@ class Sermon {
     this.theme,
     this.mainText,
     this.notes,
-    this.createdAt,
+    required this.createdAt,
     this.updatedAt,
     this.isPublished = false,
     this.tags = const [],

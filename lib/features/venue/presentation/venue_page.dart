@@ -12,7 +12,7 @@ class VenuePage extends StatelessWidget {
     final List<VenueWidget> cWidgets = VenueWidget.fromList(c);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Chuches'), backgroundColor: Colors.blue[100]),
+      appBar: AppBar(title: Text('Locais'), backgroundColor: Colors.blue[100]),
       drawer: AppDrawer(),
       body: ListView(children: cWidgets),
     );

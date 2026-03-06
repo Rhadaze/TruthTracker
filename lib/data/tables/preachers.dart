@@ -1,8 +1,8 @@
 import 'package:drift/drift.dart';
 
-class PreacherTable extends Table {
-  @override
-  String get tableName => 'preachers';
+class Preachers extends Table {
+  // @override
+  // String get tableName => 'preachers';
 
   IntColumn get id => integer().autoIncrement()();
 

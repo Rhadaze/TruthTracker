@@ -3,12 +3,12 @@
 part of 'database.dart';
 
 // ignore_for_file: type=lint
-class $PreacherTableTable extends PreacherTable
-    with TableInfo<$PreacherTableTable, PreacherTableData> {
+class $PreachersTable extends Preachers
+    with TableInfo<$PreachersTable, Preacher> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $PreacherTableTable(this.attachedDatabase, [this._alias]);
+  $PreachersTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -87,7 +87,7 @@ class $PreacherTableTable extends PreacherTable
   static const String $name = 'preachers';
   @override
   VerificationContext validateIntegrity(
-    Insertable<PreacherTableData> instance, {
+    Insertable<Preacher> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -136,9 +136,9 @@ class $PreacherTableTable extends PreacherTable
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  PreacherTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Preacher map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return PreacherTableData(
+    return Preacher(
       id: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}id'],
@@ -167,20 +167,19 @@ class $PreacherTableTable extends PreacherTable
   }
 
   @override
-  $PreacherTableTable createAlias(String alias) {
-    return $PreacherTableTable(attachedDatabase, alias);
+  $PreachersTable createAlias(String alias) {
+    return $PreachersTable(attachedDatabase, alias);
   }
 }
 
-class PreacherTableData extends DataClass
-    implements Insertable<PreacherTableData> {
+class Preacher extends DataClass implements Insertable<Preacher> {
   final int id;
   final String name;
   final String? email;
   final String? phone;
   final String? languages;
   final String? denomination;
-  const PreacherTableData({
+  const Preacher({
     required this.id,
     required this.name,
     this.email,
@@ -208,8 +207,8 @@ class PreacherTableData extends DataClass
     return map;
   }
 
-  PreacherTableCompanion toCompanion(bool nullToAbsent) {
-    return PreacherTableCompanion(
+  PreachersCompanion toCompanion(bool nullToAbsent) {
+    return PreachersCompanion(
       id: Value(id),
       name: Value(name),
       email: email == null && nullToAbsent
@@ -227,12 +226,12 @@ class PreacherTableData extends DataClass
     );
   }
 
-  factory PreacherTableData.fromJson(
+  factory Preacher.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return PreacherTableData(
+    return Preacher(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       email: serializer.fromJson<String?>(json['email']),
@@ -254,14 +253,14 @@ class PreacherTableData extends DataClass
     };
   }
 
-  PreacherTableData copyWith({
+  Preacher copyWith({
     int? id,
     String? name,
     Value<String?> email = const Value.absent(),
     Value<String?> phone = const Value.absent(),
     Value<String?> languages = const Value.absent(),
     Value<String?> denomination = const Value.absent(),
-  }) => PreacherTableData(
+  }) => Preacher(
     id: id ?? this.id,
     name: name ?? this.name,
     email: email.present ? email.value : this.email,
@@ -269,8 +268,8 @@ class PreacherTableData extends DataClass
     languages: languages.present ? languages.value : this.languages,
     denomination: denomination.present ? denomination.value : this.denomination,
   );
-  PreacherTableData copyWithCompanion(PreacherTableCompanion data) {
-    return PreacherTableData(
+  Preacher copyWithCompanion(PreachersCompanion data) {
+    return Preacher(
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
       email: data.email.present ? data.email.value : this.email,
@@ -284,7 +283,7 @@ class PreacherTableData extends DataClass
 
   @override
   String toString() {
-    return (StringBuffer('PreacherTableData(')
+    return (StringBuffer('Preacher(')
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('email: $email, ')
@@ -301,7 +300,7 @@ class PreacherTableData extends DataClass
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is PreacherTableData &&
+      (other is Preacher &&
           other.id == this.id &&
           other.name == this.name &&
           other.email == this.email &&
@@ -310,14 +309,14 @@ class PreacherTableData extends DataClass
           other.denomination == this.denomination);
 }
 
-class PreacherTableCompanion extends UpdateCompanion<PreacherTableData> {
+class PreachersCompanion extends UpdateCompanion<Preacher> {
   final Value<int> id;
   final Value<String> name;
   final Value<String?> email;
   final Value<String?> phone;
   final Value<String?> languages;
   final Value<String?> denomination;
-  const PreacherTableCompanion({
+  const PreachersCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.email = const Value.absent(),
@@ -325,7 +324,7 @@ class PreacherTableCompanion extends UpdateCompanion<PreacherTableData> {
     this.languages = const Value.absent(),
     this.denomination = const Value.absent(),
   });
-  PreacherTableCompanion.insert({
+  PreachersCompanion.insert({
     this.id = const Value.absent(),
     required String name,
     this.email = const Value.absent(),
@@ -333,7 +332,7 @@ class PreacherTableCompanion extends UpdateCompanion<PreacherTableData> {
     this.languages = const Value.absent(),
     this.denomination = const Value.absent(),
   }) : name = Value(name);
-  static Insertable<PreacherTableData> custom({
+  static Insertable<Preacher> custom({
     Expression<int>? id,
     Expression<String>? name,
     Expression<String>? email,
@@ -351,7 +350,7 @@ class PreacherTableCompanion extends UpdateCompanion<PreacherTableData> {
     });
   }
 
-  PreacherTableCompanion copyWith({
+  PreachersCompanion copyWith({
     Value<int>? id,
     Value<String>? name,
     Value<String?>? email,
@@ -359,7 +358,7 @@ class PreacherTableCompanion extends UpdateCompanion<PreacherTableData> {
     Value<String?>? languages,
     Value<String?>? denomination,
   }) {
-    return PreacherTableCompanion(
+    return PreachersCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
       email: email ?? this.email,
@@ -395,7 +394,7 @@ class PreacherTableCompanion extends UpdateCompanion<PreacherTableData> {
 
   @override
   String toString() {
-    return (StringBuffer('PreacherTableCompanion(')
+    return (StringBuffer('PreachersCompanion(')
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('email: $email, ')
@@ -407,12 +406,11 @@ class PreacherTableCompanion extends UpdateCompanion<PreacherTableData> {
   }
 }
 
-class $SermonTableTable extends SermonTable
-    with TableInfo<$SermonTableTable, SermonTableData> {
+class $SermonsTable extends Sermons with TableInfo<$SermonsTable, Sermon> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $SermonTableTable(this.attachedDatabase, [this._alias]);
+  $SermonsTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -426,8 +424,108 @@ class $SermonTableTable extends SermonTable
       'PRIMARY KEY AUTOINCREMENT',
     ),
   );
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
-  List<GeneratedColumn> get $columns => [id];
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+    'title',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _themeMeta = const VerificationMeta('theme');
+  @override
+  late final GeneratedColumn<String> theme = GeneratedColumn<String>(
+    'theme',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _mainTextMeta = const VerificationMeta(
+    'mainText',
+  );
+  @override
+  late final GeneratedColumn<String> mainText = GeneratedColumn<String>(
+    'main_text',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _notesMeta = const VerificationMeta('notes');
+  @override
+  late final GeneratedColumn<String> notes = GeneratedColumn<String>(
+    'notes',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: currentDateAndTime,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _isPublishedMeta = const VerificationMeta(
+    'isPublished',
+  );
+  @override
+  late final GeneratedColumn<bool> isPublished = GeneratedColumn<bool>(
+    'is_published',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_published" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _authorIdMeta = const VerificationMeta(
+    'authorId',
+  );
+  @override
+  late final GeneratedColumn<int> authorId = GeneratedColumn<int>(
+    'author_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES preachers (id)',
+    ),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    title,
+    theme,
+    mainText,
+    notes,
+    createdAt,
+    updatedAt,
+    isPublished,
+    authorId,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -435,7 +533,7 @@ class $SermonTableTable extends SermonTable
   static const String $name = 'sermons';
   @override
   VerificationContext validateIntegrity(
-    Insertable<SermonTableData> instance, {
+    Insertable<Sermon> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -443,86 +541,374 @@ class $SermonTableTable extends SermonTable
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
+    if (data.containsKey('title')) {
+      context.handle(
+        _titleMeta,
+        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_titleMeta);
+    }
+    if (data.containsKey('theme')) {
+      context.handle(
+        _themeMeta,
+        theme.isAcceptableOrUnknown(data['theme']!, _themeMeta),
+      );
+    }
+    if (data.containsKey('main_text')) {
+      context.handle(
+        _mainTextMeta,
+        mainText.isAcceptableOrUnknown(data['main_text']!, _mainTextMeta),
+      );
+    }
+    if (data.containsKey('notes')) {
+      context.handle(
+        _notesMeta,
+        notes.isAcceptableOrUnknown(data['notes']!, _notesMeta),
+      );
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('is_published')) {
+      context.handle(
+        _isPublishedMeta,
+        isPublished.isAcceptableOrUnknown(
+          data['is_published']!,
+          _isPublishedMeta,
+        ),
+      );
+    }
+    if (data.containsKey('author_id')) {
+      context.handle(
+        _authorIdMeta,
+        authorId.isAcceptableOrUnknown(data['author_id']!, _authorIdMeta),
+      );
+    }
     return context;
   }
 
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  SermonTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Sermon map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return SermonTableData(
+    return Sermon(
       id: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}id'],
       )!,
+      title: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title'],
+      )!,
+      theme: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}theme'],
+      ),
+      mainText: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}main_text'],
+      ),
+      notes: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}notes'],
+      ),
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      ),
+      isPublished: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_published'],
+      )!,
+      authorId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}author_id'],
+      ),
     );
   }
 
   @override
-  $SermonTableTable createAlias(String alias) {
-    return $SermonTableTable(attachedDatabase, alias);
+  $SermonsTable createAlias(String alias) {
+    return $SermonsTable(attachedDatabase, alias);
   }
 }
 
-class SermonTableData extends DataClass implements Insertable<SermonTableData> {
+class Sermon extends DataClass implements Insertable<Sermon> {
   final int id;
-  const SermonTableData({required this.id});
+  final String title;
+  final String? theme;
+  final String? mainText;
+  final String? notes;
+  final DateTime createdAt;
+  final DateTime? updatedAt;
+  final bool isPublished;
+  final int? authorId;
+  const Sermon({
+    required this.id,
+    required this.title,
+    this.theme,
+    this.mainText,
+    this.notes,
+    required this.createdAt,
+    this.updatedAt,
+    required this.isPublished,
+    this.authorId,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
+    map['title'] = Variable<String>(title);
+    if (!nullToAbsent || theme != null) {
+      map['theme'] = Variable<String>(theme);
+    }
+    if (!nullToAbsent || mainText != null) {
+      map['main_text'] = Variable<String>(mainText);
+    }
+    if (!nullToAbsent || notes != null) {
+      map['notes'] = Variable<String>(notes);
+    }
+    map['created_at'] = Variable<DateTime>(createdAt);
+    if (!nullToAbsent || updatedAt != null) {
+      map['updated_at'] = Variable<DateTime>(updatedAt);
+    }
+    map['is_published'] = Variable<bool>(isPublished);
+    if (!nullToAbsent || authorId != null) {
+      map['author_id'] = Variable<int>(authorId);
+    }
     return map;
   }
 
-  SermonTableCompanion toCompanion(bool nullToAbsent) {
-    return SermonTableCompanion(id: Value(id));
+  SermonsCompanion toCompanion(bool nullToAbsent) {
+    return SermonsCompanion(
+      id: Value(id),
+      title: Value(title),
+      theme: theme == null && nullToAbsent
+          ? const Value.absent()
+          : Value(theme),
+      mainText: mainText == null && nullToAbsent
+          ? const Value.absent()
+          : Value(mainText),
+      notes: notes == null && nullToAbsent
+          ? const Value.absent()
+          : Value(notes),
+      createdAt: Value(createdAt),
+      updatedAt: updatedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(updatedAt),
+      isPublished: Value(isPublished),
+      authorId: authorId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(authorId),
+    );
   }
 
-  factory SermonTableData.fromJson(
+  factory Sermon.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return SermonTableData(id: serializer.fromJson<int>(json['id']));
+    return Sermon(
+      id: serializer.fromJson<int>(json['id']),
+      title: serializer.fromJson<String>(json['title']),
+      theme: serializer.fromJson<String?>(json['theme']),
+      mainText: serializer.fromJson<String?>(json['mainText']),
+      notes: serializer.fromJson<String?>(json['notes']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime?>(json['updatedAt']),
+      isPublished: serializer.fromJson<bool>(json['isPublished']),
+      authorId: serializer.fromJson<int?>(json['authorId']),
+    );
   }
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{'id': serializer.toJson<int>(id)};
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'title': serializer.toJson<String>(title),
+      'theme': serializer.toJson<String?>(theme),
+      'mainText': serializer.toJson<String?>(mainText),
+      'notes': serializer.toJson<String?>(notes),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime?>(updatedAt),
+      'isPublished': serializer.toJson<bool>(isPublished),
+      'authorId': serializer.toJson<int?>(authorId),
+    };
   }
 
-  SermonTableData copyWith({int? id}) => SermonTableData(id: id ?? this.id);
-  SermonTableData copyWithCompanion(SermonTableCompanion data) {
-    return SermonTableData(id: data.id.present ? data.id.value : this.id);
+  Sermon copyWith({
+    int? id,
+    String? title,
+    Value<String?> theme = const Value.absent(),
+    Value<String?> mainText = const Value.absent(),
+    Value<String?> notes = const Value.absent(),
+    DateTime? createdAt,
+    Value<DateTime?> updatedAt = const Value.absent(),
+    bool? isPublished,
+    Value<int?> authorId = const Value.absent(),
+  }) => Sermon(
+    id: id ?? this.id,
+    title: title ?? this.title,
+    theme: theme.present ? theme.value : this.theme,
+    mainText: mainText.present ? mainText.value : this.mainText,
+    notes: notes.present ? notes.value : this.notes,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt.present ? updatedAt.value : this.updatedAt,
+    isPublished: isPublished ?? this.isPublished,
+    authorId: authorId.present ? authorId.value : this.authorId,
+  );
+  Sermon copyWithCompanion(SermonsCompanion data) {
+    return Sermon(
+      id: data.id.present ? data.id.value : this.id,
+      title: data.title.present ? data.title.value : this.title,
+      theme: data.theme.present ? data.theme.value : this.theme,
+      mainText: data.mainText.present ? data.mainText.value : this.mainText,
+      notes: data.notes.present ? data.notes.value : this.notes,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      isPublished: data.isPublished.present
+          ? data.isPublished.value
+          : this.isPublished,
+      authorId: data.authorId.present ? data.authorId.value : this.authorId,
+    );
   }
 
   @override
   String toString() {
-    return (StringBuffer('SermonTableData(')
-          ..write('id: $id')
+    return (StringBuffer('Sermon(')
+          ..write('id: $id, ')
+          ..write('title: $title, ')
+          ..write('theme: $theme, ')
+          ..write('mainText: $mainText, ')
+          ..write('notes: $notes, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('isPublished: $isPublished, ')
+          ..write('authorId: $authorId')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => id.hashCode;
+  int get hashCode => Object.hash(
+    id,
+    title,
+    theme,
+    mainText,
+    notes,
+    createdAt,
+    updatedAt,
+    isPublished,
+    authorId,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is SermonTableData && other.id == this.id);
+      (other is Sermon &&
+          other.id == this.id &&
+          other.title == this.title &&
+          other.theme == this.theme &&
+          other.mainText == this.mainText &&
+          other.notes == this.notes &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.isPublished == this.isPublished &&
+          other.authorId == this.authorId);
 }
 
-class SermonTableCompanion extends UpdateCompanion<SermonTableData> {
+class SermonsCompanion extends UpdateCompanion<Sermon> {
   final Value<int> id;
-  const SermonTableCompanion({this.id = const Value.absent()});
-  SermonTableCompanion.insert({this.id = const Value.absent()});
-  static Insertable<SermonTableData> custom({Expression<int>? id}) {
-    return RawValuesInsertable({if (id != null) 'id': id});
+  final Value<String> title;
+  final Value<String?> theme;
+  final Value<String?> mainText;
+  final Value<String?> notes;
+  final Value<DateTime> createdAt;
+  final Value<DateTime?> updatedAt;
+  final Value<bool> isPublished;
+  final Value<int?> authorId;
+  const SermonsCompanion({
+    this.id = const Value.absent(),
+    this.title = const Value.absent(),
+    this.theme = const Value.absent(),
+    this.mainText = const Value.absent(),
+    this.notes = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.isPublished = const Value.absent(),
+    this.authorId = const Value.absent(),
+  });
+  SermonsCompanion.insert({
+    this.id = const Value.absent(),
+    required String title,
+    this.theme = const Value.absent(),
+    this.mainText = const Value.absent(),
+    this.notes = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.isPublished = const Value.absent(),
+    this.authorId = const Value.absent(),
+  }) : title = Value(title);
+  static Insertable<Sermon> custom({
+    Expression<int>? id,
+    Expression<String>? title,
+    Expression<String>? theme,
+    Expression<String>? mainText,
+    Expression<String>? notes,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<bool>? isPublished,
+    Expression<int>? authorId,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (title != null) 'title': title,
+      if (theme != null) 'theme': theme,
+      if (mainText != null) 'main_text': mainText,
+      if (notes != null) 'notes': notes,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (isPublished != null) 'is_published': isPublished,
+      if (authorId != null) 'author_id': authorId,
+    });
   }
 
-  SermonTableCompanion copyWith({Value<int>? id}) {
-    return SermonTableCompanion(id: id ?? this.id);
+  SermonsCompanion copyWith({
+    Value<int>? id,
+    Value<String>? title,
+    Value<String?>? theme,
+    Value<String?>? mainText,
+    Value<String?>? notes,
+    Value<DateTime>? createdAt,
+    Value<DateTime?>? updatedAt,
+    Value<bool>? isPublished,
+    Value<int?>? authorId,
+  }) {
+    return SermonsCompanion(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      theme: theme ?? this.theme,
+      mainText: mainText ?? this.mainText,
+      notes: notes ?? this.notes,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      isPublished: isPublished ?? this.isPublished,
+      authorId: authorId ?? this.authorId,
+    );
   }
 
   @override
@@ -531,24 +917,55 @@ class SermonTableCompanion extends UpdateCompanion<SermonTableData> {
     if (id.present) {
       map['id'] = Variable<int>(id.value);
     }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (theme.present) {
+      map['theme'] = Variable<String>(theme.value);
+    }
+    if (mainText.present) {
+      map['main_text'] = Variable<String>(mainText.value);
+    }
+    if (notes.present) {
+      map['notes'] = Variable<String>(notes.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (isPublished.present) {
+      map['is_published'] = Variable<bool>(isPublished.value);
+    }
+    if (authorId.present) {
+      map['author_id'] = Variable<int>(authorId.value);
+    }
     return map;
   }
 
   @override
   String toString() {
-    return (StringBuffer('SermonTableCompanion(')
-          ..write('id: $id')
+    return (StringBuffer('SermonsCompanion(')
+          ..write('id: $id, ')
+          ..write('title: $title, ')
+          ..write('theme: $theme, ')
+          ..write('mainText: $mainText, ')
+          ..write('notes: $notes, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('isPublished: $isPublished, ')
+          ..write('authorId: $authorId')
           ..write(')'))
         .toString();
   }
 }
 
-class $VenueTableTable extends VenueTable
-    with TableInfo<$VenueTableTable, VenueTableData> {
+class $VenuesTable extends Venues with TableInfo<$VenuesTable, Venue> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $VenueTableTable(this.attachedDatabase, [this._alias]);
+  $VenuesTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -571,7 +988,7 @@ class $VenueTableTable extends VenueTable
   static const String $name = 'venues';
   @override
   VerificationContext validateIntegrity(
-    Insertable<VenueTableData> instance, {
+    Insertable<Venue> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -585,9 +1002,9 @@ class $VenueTableTable extends VenueTable
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  VenueTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Venue map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return VenueTableData(
+    return Venue(
       id: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}id'],
@@ -596,14 +1013,14 @@ class $VenueTableTable extends VenueTable
   }
 
   @override
-  $VenueTableTable createAlias(String alias) {
-    return $VenueTableTable(attachedDatabase, alias);
+  $VenuesTable createAlias(String alias) {
+    return $VenuesTable(attachedDatabase, alias);
   }
 }
 
-class VenueTableData extends DataClass implements Insertable<VenueTableData> {
+class Venue extends DataClass implements Insertable<Venue> {
   final int id;
-  const VenueTableData({required this.id});
+  const Venue({required this.id});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -611,16 +1028,16 @@ class VenueTableData extends DataClass implements Insertable<VenueTableData> {
     return map;
   }
 
-  VenueTableCompanion toCompanion(bool nullToAbsent) {
-    return VenueTableCompanion(id: Value(id));
+  VenuesCompanion toCompanion(bool nullToAbsent) {
+    return VenuesCompanion(id: Value(id));
   }
 
-  factory VenueTableData.fromJson(
+  factory Venue.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return VenueTableData(id: serializer.fromJson<int>(json['id']));
+    return Venue(id: serializer.fromJson<int>(json['id']));
   }
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
@@ -628,14 +1045,14 @@ class VenueTableData extends DataClass implements Insertable<VenueTableData> {
     return <String, dynamic>{'id': serializer.toJson<int>(id)};
   }
 
-  VenueTableData copyWith({int? id}) => VenueTableData(id: id ?? this.id);
-  VenueTableData copyWithCompanion(VenueTableCompanion data) {
-    return VenueTableData(id: data.id.present ? data.id.value : this.id);
+  Venue copyWith({int? id}) => Venue(id: id ?? this.id);
+  Venue copyWithCompanion(VenuesCompanion data) {
+    return Venue(id: data.id.present ? data.id.value : this.id);
   }
 
   @override
   String toString() {
-    return (StringBuffer('VenueTableData(')
+    return (StringBuffer('Venue(')
           ..write('id: $id')
           ..write(')'))
         .toString();
@@ -645,20 +1062,19 @@ class VenueTableData extends DataClass implements Insertable<VenueTableData> {
   int get hashCode => id.hashCode;
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is VenueTableData && other.id == this.id);
+      identical(this, other) || (other is Venue && other.id == this.id);
 }
 
-class VenueTableCompanion extends UpdateCompanion<VenueTableData> {
+class VenuesCompanion extends UpdateCompanion<Venue> {
   final Value<int> id;
-  const VenueTableCompanion({this.id = const Value.absent()});
-  VenueTableCompanion.insert({this.id = const Value.absent()});
-  static Insertable<VenueTableData> custom({Expression<int>? id}) {
+  const VenuesCompanion({this.id = const Value.absent()});
+  VenuesCompanion.insert({this.id = const Value.absent()});
+  static Insertable<Venue> custom({Expression<int>? id}) {
     return RawValuesInsertable({if (id != null) 'id': id});
   }
 
-  VenueTableCompanion copyWith({Value<int>? id}) {
-    return VenueTableCompanion(id: id ?? this.id);
+  VenuesCompanion copyWith({Value<int>? id}) {
+    return VenuesCompanion(id: id ?? this.id);
   }
 
   @override
@@ -672,19 +1088,18 @@ class VenueTableCompanion extends UpdateCompanion<VenueTableData> {
 
   @override
   String toString() {
-    return (StringBuffer('VenueTableCompanion(')
+    return (StringBuffer('VenuesCompanion(')
           ..write('id: $id')
           ..write(')'))
         .toString();
   }
 }
 
-class $EventTableTable extends EventTable
-    with TableInfo<$EventTableTable, EventTableData> {
+class $EventsTable extends Events with TableInfo<$EventsTable, Event> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $EventTableTable(this.attachedDatabase, [this._alias]);
+  $EventsTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -786,7 +1201,7 @@ class $EventTableTable extends EventTable
   static const String $name = 'events';
   @override
   VerificationContext validateIntegrity(
-    Insertable<EventTableData> instance, {
+    Insertable<Event> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -844,9 +1259,9 @@ class $EventTableTable extends EventTable
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  EventTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Event map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return EventTableData(
+    return Event(
       id: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}id'],
@@ -879,12 +1294,12 @@ class $EventTableTable extends EventTable
   }
 
   @override
-  $EventTableTable createAlias(String alias) {
-    return $EventTableTable(attachedDatabase, alias);
+  $EventsTable createAlias(String alias) {
+    return $EventsTable(attachedDatabase, alias);
   }
 }
 
-class EventTableData extends DataClass implements Insertable<EventTableData> {
+class Event extends DataClass implements Insertable<Event> {
   final int id;
   final DateTime date;
   final String? category;
@@ -892,7 +1307,7 @@ class EventTableData extends DataClass implements Insertable<EventTableData> {
   final int sermonId;
   final int venueId;
   final int preacherId;
-  const EventTableData({
+  const Event({
     required this.id,
     required this.date,
     this.category,
@@ -918,8 +1333,8 @@ class EventTableData extends DataClass implements Insertable<EventTableData> {
     return map;
   }
 
-  EventTableCompanion toCompanion(bool nullToAbsent) {
-    return EventTableCompanion(
+  EventsCompanion toCompanion(bool nullToAbsent) {
+    return EventsCompanion(
       id: Value(id),
       date: Value(date),
       category: category == null && nullToAbsent
@@ -932,12 +1347,12 @@ class EventTableData extends DataClass implements Insertable<EventTableData> {
     );
   }
 
-  factory EventTableData.fromJson(
+  factory Event.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return EventTableData(
+    return Event(
       id: serializer.fromJson<int>(json['id']),
       date: serializer.fromJson<DateTime>(json['date']),
       category: serializer.fromJson<String?>(json['category']),
@@ -961,7 +1376,7 @@ class EventTableData extends DataClass implements Insertable<EventTableData> {
     };
   }
 
-  EventTableData copyWith({
+  Event copyWith({
     int? id,
     DateTime? date,
     Value<String?> category = const Value.absent(),
@@ -969,7 +1384,7 @@ class EventTableData extends DataClass implements Insertable<EventTableData> {
     int? sermonId,
     int? venueId,
     int? preacherId,
-  }) => EventTableData(
+  }) => Event(
     id: id ?? this.id,
     date: date ?? this.date,
     category: category.present ? category.value : this.category,
@@ -978,8 +1393,8 @@ class EventTableData extends DataClass implements Insertable<EventTableData> {
     venueId: venueId ?? this.venueId,
     preacherId: preacherId ?? this.preacherId,
   );
-  EventTableData copyWithCompanion(EventTableCompanion data) {
-    return EventTableData(
+  Event copyWithCompanion(EventsCompanion data) {
+    return Event(
       id: data.id.present ? data.id.value : this.id,
       date: data.date.present ? data.date.value : this.date,
       category: data.category.present ? data.category.value : this.category,
@@ -994,7 +1409,7 @@ class EventTableData extends DataClass implements Insertable<EventTableData> {
 
   @override
   String toString() {
-    return (StringBuffer('EventTableData(')
+    return (StringBuffer('Event(')
           ..write('id: $id, ')
           ..write('date: $date, ')
           ..write('category: $category, ')
@@ -1012,7 +1427,7 @@ class EventTableData extends DataClass implements Insertable<EventTableData> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is EventTableData &&
+      (other is Event &&
           other.id == this.id &&
           other.date == this.date &&
           other.category == this.category &&
@@ -1022,7 +1437,7 @@ class EventTableData extends DataClass implements Insertable<EventTableData> {
           other.preacherId == this.preacherId);
 }
 
-class EventTableCompanion extends UpdateCompanion<EventTableData> {
+class EventsCompanion extends UpdateCompanion<Event> {
   final Value<int> id;
   final Value<DateTime> date;
   final Value<String?> category;
@@ -1030,7 +1445,7 @@ class EventTableCompanion extends UpdateCompanion<EventTableData> {
   final Value<int> sermonId;
   final Value<int> venueId;
   final Value<int> preacherId;
-  const EventTableCompanion({
+  const EventsCompanion({
     this.id = const Value.absent(),
     this.date = const Value.absent(),
     this.category = const Value.absent(),
@@ -1039,7 +1454,7 @@ class EventTableCompanion extends UpdateCompanion<EventTableData> {
     this.venueId = const Value.absent(),
     this.preacherId = const Value.absent(),
   });
-  EventTableCompanion.insert({
+  EventsCompanion.insert({
     this.id = const Value.absent(),
     required DateTime date,
     this.category = const Value.absent(),
@@ -1051,7 +1466,7 @@ class EventTableCompanion extends UpdateCompanion<EventTableData> {
        sermonId = Value(sermonId),
        venueId = Value(venueId),
        preacherId = Value(preacherId);
-  static Insertable<EventTableData> custom({
+  static Insertable<Event> custom({
     Expression<int>? id,
     Expression<DateTime>? date,
     Expression<String>? category,
@@ -1071,7 +1486,7 @@ class EventTableCompanion extends UpdateCompanion<EventTableData> {
     });
   }
 
-  EventTableCompanion copyWith({
+  EventsCompanion copyWith({
     Value<int>? id,
     Value<DateTime>? date,
     Value<String?>? category,
@@ -1080,7 +1495,7 @@ class EventTableCompanion extends UpdateCompanion<EventTableData> {
     Value<int>? venueId,
     Value<int>? preacherId,
   }) {
-    return EventTableCompanion(
+    return EventsCompanion(
       id: id ?? this.id,
       date: date ?? this.date,
       category: category ?? this.category,
@@ -1120,7 +1535,7 @@ class EventTableCompanion extends UpdateCompanion<EventTableData> {
 
   @override
   String toString() {
-    return (StringBuffer('EventTableCompanion(')
+    return (StringBuffer('EventsCompanion(')
           ..write('id: $id, ')
           ..write('date: $date, ')
           ..write('category: $category, ')
@@ -1136,25 +1551,28 @@ class EventTableCompanion extends UpdateCompanion<EventTableData> {
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
-  late final $PreacherTableTable preacherTable = $PreacherTableTable(this);
-  late final $SermonTableTable sermonTable = $SermonTableTable(this);
-  late final $VenueTableTable venueTable = $VenueTableTable(this);
-  late final $EventTableTable eventTable = $EventTableTable(this);
+  late final $PreachersTable preachers = $PreachersTable(this);
+  late final $SermonsTable sermons = $SermonsTable(this);
+  late final $VenuesTable venues = $VenuesTable(this);
+  late final $EventsTable events = $EventsTable(this);
   late final PreacherDao preacherDao = PreacherDao(this as AppDatabase);
+  late final EventDao eventDao = EventDao(this as AppDatabase);
+  late final SermonDao sermonDao = SermonDao(this as AppDatabase);
+  late final VenueDao venueDao = VenueDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
-    preacherTable,
-    sermonTable,
-    venueTable,
-    eventTable,
+    preachers,
+    sermons,
+    venues,
+    events,
   ];
 }
 
-typedef $$PreacherTableTableCreateCompanionBuilder =
-    PreacherTableCompanion Function({
+typedef $$PreachersTableCreateCompanionBuilder =
+    PreachersCompanion Function({
       Value<int> id,
       required String name,
       Value<String?> email,
@@ -1162,8 +1580,8 @@ typedef $$PreacherTableTableCreateCompanionBuilder =
       Value<String?> languages,
       Value<String?> denomination,
     });
-typedef $$PreacherTableTableUpdateCompanionBuilder =
-    PreacherTableCompanion Function({
+typedef $$PreachersTableUpdateCompanionBuilder =
+    PreachersCompanion Function({
       Value<int> id,
       Value<String> name,
       Value<String?> email,
@@ -1172,40 +1590,52 @@ typedef $$PreacherTableTableUpdateCompanionBuilder =
       Value<String?> denomination,
     });
 
-final class $$PreacherTableTableReferences
-    extends
-        BaseReferences<_$AppDatabase, $PreacherTableTable, PreacherTableData> {
-  $$PreacherTableTableReferences(
-    super.$_db,
-    super.$_table,
-    super.$_typedResult,
+final class $$PreachersTableReferences
+    extends BaseReferences<_$AppDatabase, $PreachersTable, Preacher> {
+  $$PreachersTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$SermonsTable, List<Sermon>> _sermonsRefsTable(
+    _$AppDatabase db,
+  ) => MultiTypedResultKey.fromTable(
+    db.sermons,
+    aliasName: $_aliasNameGenerator(db.preachers.id, db.sermons.authorId),
   );
 
-  static MultiTypedResultKey<$EventTableTable, List<EventTableData>>
-  _eventTableRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
-    db.eventTable,
-    aliasName: $_aliasNameGenerator(
-      db.preacherTable.id,
-      db.eventTable.preacherId,
-    ),
-  );
-
-  $$EventTableTableProcessedTableManager get eventTableRefs {
-    final manager = $$EventTableTableTableManager(
+  $$SermonsTableProcessedTableManager get sermonsRefs {
+    final manager = $$SermonsTableTableManager(
       $_db,
-      $_db.eventTable,
+      $_db.sermons,
+    ).filter((f) => f.authorId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_sermonsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$EventsTable, List<Event>> _eventsRefsTable(
+    _$AppDatabase db,
+  ) => MultiTypedResultKey.fromTable(
+    db.events,
+    aliasName: $_aliasNameGenerator(db.preachers.id, db.events.preacherId),
+  );
+
+  $$EventsTableProcessedTableManager get eventsRefs {
+    final manager = $$EventsTableTableManager(
+      $_db,
+      $_db.events,
     ).filter((f) => f.preacherId.id.sqlEquals($_itemColumn<int>('id')!));
 
-    final cache = $_typedResult.readTableOrNull(_eventTableRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(_eventsRefsTable($_db));
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
 }
 
-class $$PreacherTableTableFilterComposer
-    extends Composer<_$AppDatabase, $PreacherTableTable> {
-  $$PreacherTableTableFilterComposer({
+class $$PreachersTableFilterComposer
+    extends Composer<_$AppDatabase, $PreachersTable> {
+  $$PreachersTableFilterComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -1242,22 +1672,47 @@ class $$PreacherTableTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  Expression<bool> eventTableRefs(
-    Expression<bool> Function($$EventTableTableFilterComposer f) f,
+  Expression<bool> sermonsRefs(
+    Expression<bool> Function($$SermonsTableFilterComposer f) f,
   ) {
-    final $$EventTableTableFilterComposer composer = $composerBuilder(
+    final $$SermonsTableFilterComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.id,
-      referencedTable: $db.eventTable,
+      referencedTable: $db.sermons,
+      getReferencedColumn: (t) => t.authorId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SermonsTableFilterComposer(
+            $db: $db,
+            $table: $db.sermons,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> eventsRefs(
+    Expression<bool> Function($$EventsTableFilterComposer f) f,
+  ) {
+    final $$EventsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.events,
       getReferencedColumn: (t) => t.preacherId,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$EventTableTableFilterComposer(
+          }) => $$EventsTableFilterComposer(
             $db: $db,
-            $table: $db.eventTable,
+            $table: $db.events,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -1268,9 +1723,9 @@ class $$PreacherTableTableFilterComposer
   }
 }
 
-class $$PreacherTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $PreacherTableTable> {
-  $$PreacherTableTableOrderingComposer({
+class $$PreachersTableOrderingComposer
+    extends Composer<_$AppDatabase, $PreachersTable> {
+  $$PreachersTableOrderingComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -1308,9 +1763,9 @@ class $$PreacherTableTableOrderingComposer
   );
 }
 
-class $$PreacherTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $PreacherTableTable> {
-  $$PreacherTableTableAnnotationComposer({
+class $$PreachersTableAnnotationComposer
+    extends Composer<_$AppDatabase, $PreachersTable> {
+  $$PreachersTableAnnotationComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -1337,22 +1792,47 @@ class $$PreacherTableTableAnnotationComposer
     builder: (column) => column,
   );
 
-  Expression<T> eventTableRefs<T extends Object>(
-    Expression<T> Function($$EventTableTableAnnotationComposer a) f,
+  Expression<T> sermonsRefs<T extends Object>(
+    Expression<T> Function($$SermonsTableAnnotationComposer a) f,
   ) {
-    final $$EventTableTableAnnotationComposer composer = $composerBuilder(
+    final $$SermonsTableAnnotationComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.id,
-      referencedTable: $db.eventTable,
+      referencedTable: $db.sermons,
+      getReferencedColumn: (t) => t.authorId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SermonsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.sermons,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<T> eventsRefs<T extends Object>(
+    Expression<T> Function($$EventsTableAnnotationComposer a) f,
+  ) {
+    final $$EventsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.events,
       getReferencedColumn: (t) => t.preacherId,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$EventTableTableAnnotationComposer(
+          }) => $$EventsTableAnnotationComposer(
             $db: $db,
-            $table: $db.eventTable,
+            $table: $db.events,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -1363,32 +1843,32 @@ class $$PreacherTableTableAnnotationComposer
   }
 }
 
-class $$PreacherTableTableTableManager
+class $$PreachersTableTableManager
     extends
         RootTableManager<
           _$AppDatabase,
-          $PreacherTableTable,
-          PreacherTableData,
-          $$PreacherTableTableFilterComposer,
-          $$PreacherTableTableOrderingComposer,
-          $$PreacherTableTableAnnotationComposer,
-          $$PreacherTableTableCreateCompanionBuilder,
-          $$PreacherTableTableUpdateCompanionBuilder,
-          (PreacherTableData, $$PreacherTableTableReferences),
-          PreacherTableData,
-          PrefetchHooks Function({bool eventTableRefs})
+          $PreachersTable,
+          Preacher,
+          $$PreachersTableFilterComposer,
+          $$PreachersTableOrderingComposer,
+          $$PreachersTableAnnotationComposer,
+          $$PreachersTableCreateCompanionBuilder,
+          $$PreachersTableUpdateCompanionBuilder,
+          (Preacher, $$PreachersTableReferences),
+          Preacher,
+          PrefetchHooks Function({bool sermonsRefs, bool eventsRefs})
         > {
-  $$PreacherTableTableTableManager(_$AppDatabase db, $PreacherTableTable table)
+  $$PreachersTableTableManager(_$AppDatabase db, $PreachersTable table)
     : super(
         TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
-              $$PreacherTableTableFilterComposer($db: db, $table: table),
+              $$PreachersTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
-              $$PreacherTableTableOrderingComposer($db: db, $table: table),
+              $$PreachersTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
-              $$PreacherTableTableAnnotationComposer($db: db, $table: table),
+              $$PreachersTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -1397,7 +1877,7 @@ class $$PreacherTableTableTableManager
                 Value<String?> phone = const Value.absent(),
                 Value<String?> languages = const Value.absent(),
                 Value<String?> denomination = const Value.absent(),
-              }) => PreacherTableCompanion(
+              }) => PreachersCompanion(
                 id: id,
                 name: name,
                 email: email,
@@ -1413,7 +1893,7 @@ class $$PreacherTableTableTableManager
                 Value<String?> phone = const Value.absent(),
                 Value<String?> languages = const Value.absent(),
                 Value<String?> denomination = const Value.absent(),
-              }) => PreacherTableCompanion.insert(
+              }) => PreachersCompanion.insert(
                 id: id,
                 name: name,
                 email: email,
@@ -1425,32 +1905,42 @@ class $$PreacherTableTableTableManager
               .map(
                 (e) => (
                   e.readTable(table),
-                  $$PreacherTableTableReferences(db, table, e),
+                  $$PreachersTableReferences(db, table, e),
                 ),
               )
               .toList(),
-          prefetchHooksCallback: ({eventTableRefs = false}) {
+          prefetchHooksCallback: ({sermonsRefs = false, eventsRefs = false}) {
             return PrefetchHooks(
               db: db,
-              explicitlyWatchedTables: [if (eventTableRefs) db.eventTable],
+              explicitlyWatchedTables: [
+                if (sermonsRefs) db.sermons,
+                if (eventsRefs) db.events,
+              ],
               addJoins: null,
               getPrefetchedDataCallback: (items) async {
                 return [
-                  if (eventTableRefs)
+                  if (sermonsRefs)
                     await $_getPrefetchedData<
-                      PreacherTableData,
-                      $PreacherTableTable,
-                      EventTableData
+                      Preacher,
+                      $PreachersTable,
+                      Sermon
                     >(
                       currentTable: table,
-                      referencedTable: $$PreacherTableTableReferences
-                          ._eventTableRefsTable(db),
+                      referencedTable: $$PreachersTableReferences
+                          ._sermonsRefsTable(db),
                       managerFromTypedResult: (p0) =>
-                          $$PreacherTableTableReferences(
-                            db,
-                            table,
-                            p0,
-                          ).eventTableRefs,
+                          $$PreachersTableReferences(db, table, p0).sermonsRefs,
+                      referencedItemsForCurrentItem: (item, referencedItems) =>
+                          referencedItems.where((e) => e.authorId == item.id),
+                      typedResults: items,
+                    ),
+                  if (eventsRefs)
+                    await $_getPrefetchedData<Preacher, $PreachersTable, Event>(
+                      currentTable: table,
+                      referencedTable: $$PreachersTableReferences
+                          ._eventsRefsTable(db),
+                      managerFromTypedResult: (p0) =>
+                          $$PreachersTableReferences(db, table, p0).eventsRefs,
                       referencedItemsForCurrentItem: (item, referencedItems) =>
                           referencedItems.where((e) => e.preacherId == item.id),
                       typedResults: items,
@@ -1463,51 +1953,89 @@ class $$PreacherTableTableTableManager
       );
 }
 
-typedef $$PreacherTableTableProcessedTableManager =
+typedef $$PreachersTableProcessedTableManager =
     ProcessedTableManager<
       _$AppDatabase,
-      $PreacherTableTable,
-      PreacherTableData,
-      $$PreacherTableTableFilterComposer,
-      $$PreacherTableTableOrderingComposer,
-      $$PreacherTableTableAnnotationComposer,
-      $$PreacherTableTableCreateCompanionBuilder,
-      $$PreacherTableTableUpdateCompanionBuilder,
-      (PreacherTableData, $$PreacherTableTableReferences),
-      PreacherTableData,
-      PrefetchHooks Function({bool eventTableRefs})
+      $PreachersTable,
+      Preacher,
+      $$PreachersTableFilterComposer,
+      $$PreachersTableOrderingComposer,
+      $$PreachersTableAnnotationComposer,
+      $$PreachersTableCreateCompanionBuilder,
+      $$PreachersTableUpdateCompanionBuilder,
+      (Preacher, $$PreachersTableReferences),
+      Preacher,
+      PrefetchHooks Function({bool sermonsRefs, bool eventsRefs})
     >;
-typedef $$SermonTableTableCreateCompanionBuilder =
-    SermonTableCompanion Function({Value<int> id});
-typedef $$SermonTableTableUpdateCompanionBuilder =
-    SermonTableCompanion Function({Value<int> id});
+typedef $$SermonsTableCreateCompanionBuilder =
+    SermonsCompanion Function({
+      Value<int> id,
+      required String title,
+      Value<String?> theme,
+      Value<String?> mainText,
+      Value<String?> notes,
+      Value<DateTime> createdAt,
+      Value<DateTime?> updatedAt,
+      Value<bool> isPublished,
+      Value<int?> authorId,
+    });
+typedef $$SermonsTableUpdateCompanionBuilder =
+    SermonsCompanion Function({
+      Value<int> id,
+      Value<String> title,
+      Value<String?> theme,
+      Value<String?> mainText,
+      Value<String?> notes,
+      Value<DateTime> createdAt,
+      Value<DateTime?> updatedAt,
+      Value<bool> isPublished,
+      Value<int?> authorId,
+    });
 
-final class $$SermonTableTableReferences
-    extends BaseReferences<_$AppDatabase, $SermonTableTable, SermonTableData> {
-  $$SermonTableTableReferences(super.$_db, super.$_table, super.$_typedResult);
+final class $$SermonsTableReferences
+    extends BaseReferences<_$AppDatabase, $SermonsTable, Sermon> {
+  $$SermonsTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static MultiTypedResultKey<$EventTableTable, List<EventTableData>>
-  _eventTableRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
-    db.eventTable,
-    aliasName: $_aliasNameGenerator(db.sermonTable.id, db.eventTable.sermonId),
+  static $PreachersTable _authorIdTable(_$AppDatabase db) => db.preachers
+      .createAlias($_aliasNameGenerator(db.sermons.authorId, db.preachers.id));
+
+  $$PreachersTableProcessedTableManager? get authorId {
+    final $_column = $_itemColumn<int>('author_id');
+    if ($_column == null) return null;
+    final manager = $$PreachersTableTableManager(
+      $_db,
+      $_db.preachers,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_authorIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static MultiTypedResultKey<$EventsTable, List<Event>> _eventsRefsTable(
+    _$AppDatabase db,
+  ) => MultiTypedResultKey.fromTable(
+    db.events,
+    aliasName: $_aliasNameGenerator(db.sermons.id, db.events.sermonId),
   );
 
-  $$EventTableTableProcessedTableManager get eventTableRefs {
-    final manager = $$EventTableTableTableManager(
+  $$EventsTableProcessedTableManager get eventsRefs {
+    final manager = $$EventsTableTableManager(
       $_db,
-      $_db.eventTable,
+      $_db.events,
     ).filter((f) => f.sermonId.id.sqlEquals($_itemColumn<int>('id')!));
 
-    final cache = $_typedResult.readTableOrNull(_eventTableRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(_eventsRefsTable($_db));
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
 }
 
-class $$SermonTableTableFilterComposer
-    extends Composer<_$AppDatabase, $SermonTableTable> {
-  $$SermonTableTableFilterComposer({
+class $$SermonsTableFilterComposer
+    extends Composer<_$AppDatabase, $SermonsTable> {
+  $$SermonsTableFilterComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -1519,22 +2047,80 @@ class $$SermonTableTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  Expression<bool> eventTableRefs(
-    Expression<bool> Function($$EventTableTableFilterComposer f) f,
+  ColumnFilters<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get theme => $composableBuilder(
+    column: $table.theme,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get mainText => $composableBuilder(
+    column: $table.mainText,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get notes => $composableBuilder(
+    column: $table.notes,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get isPublished => $composableBuilder(
+    column: $table.isPublished,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$PreachersTableFilterComposer get authorId {
+    final $$PreachersTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.authorId,
+      referencedTable: $db.preachers,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PreachersTableFilterComposer(
+            $db: $db,
+            $table: $db.preachers,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  Expression<bool> eventsRefs(
+    Expression<bool> Function($$EventsTableFilterComposer f) f,
   ) {
-    final $$EventTableTableFilterComposer composer = $composerBuilder(
+    final $$EventsTableFilterComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.id,
-      referencedTable: $db.eventTable,
+      referencedTable: $db.events,
       getReferencedColumn: (t) => t.sermonId,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$EventTableTableFilterComposer(
+          }) => $$EventsTableFilterComposer(
             $db: $db,
-            $table: $db.eventTable,
+            $table: $db.events,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -1545,9 +2131,9 @@ class $$SermonTableTableFilterComposer
   }
 }
 
-class $$SermonTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $SermonTableTable> {
-  $$SermonTableTableOrderingComposer({
+class $$SermonsTableOrderingComposer
+    extends Composer<_$AppDatabase, $SermonsTable> {
+  $$SermonsTableOrderingComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -1558,11 +2144,69 @@ class $$SermonTableTableOrderingComposer
     column: $table.id,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get theme => $composableBuilder(
+    column: $table.theme,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get mainText => $composableBuilder(
+    column: $table.mainText,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get notes => $composableBuilder(
+    column: $table.notes,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get isPublished => $composableBuilder(
+    column: $table.isPublished,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$PreachersTableOrderingComposer get authorId {
+    final $$PreachersTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.authorId,
+      referencedTable: $db.preachers,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PreachersTableOrderingComposer(
+            $db: $db,
+            $table: $db.preachers,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
 }
 
-class $$SermonTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $SermonTableTable> {
-  $$SermonTableTableAnnotationComposer({
+class $$SermonsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $SermonsTable> {
+  $$SermonsTableAnnotationComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -1572,22 +2216,68 @@ class $$SermonTableTableAnnotationComposer
   GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
 
-  Expression<T> eventTableRefs<T extends Object>(
-    Expression<T> Function($$EventTableTableAnnotationComposer a) f,
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<String> get theme =>
+      $composableBuilder(column: $table.theme, builder: (column) => column);
+
+  GeneratedColumn<String> get mainText =>
+      $composableBuilder(column: $table.mainText, builder: (column) => column);
+
+  GeneratedColumn<String> get notes =>
+      $composableBuilder(column: $table.notes, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+
+  GeneratedColumn<bool> get isPublished => $composableBuilder(
+    column: $table.isPublished,
+    builder: (column) => column,
+  );
+
+  $$PreachersTableAnnotationComposer get authorId {
+    final $$PreachersTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.authorId,
+      referencedTable: $db.preachers,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PreachersTableAnnotationComposer(
+            $db: $db,
+            $table: $db.preachers,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  Expression<T> eventsRefs<T extends Object>(
+    Expression<T> Function($$EventsTableAnnotationComposer a) f,
   ) {
-    final $$EventTableTableAnnotationComposer composer = $composerBuilder(
+    final $$EventsTableAnnotationComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.id,
-      referencedTable: $db.eventTable,
+      referencedTable: $db.events,
       getReferencedColumn: (t) => t.sermonId,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$EventTableTableAnnotationComposer(
+          }) => $$EventsTableAnnotationComposer(
             $db: $db,
-            $table: $db.eventTable,
+            $table: $db.events,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -1598,66 +2288,129 @@ class $$SermonTableTableAnnotationComposer
   }
 }
 
-class $$SermonTableTableTableManager
+class $$SermonsTableTableManager
     extends
         RootTableManager<
           _$AppDatabase,
-          $SermonTableTable,
-          SermonTableData,
-          $$SermonTableTableFilterComposer,
-          $$SermonTableTableOrderingComposer,
-          $$SermonTableTableAnnotationComposer,
-          $$SermonTableTableCreateCompanionBuilder,
-          $$SermonTableTableUpdateCompanionBuilder,
-          (SermonTableData, $$SermonTableTableReferences),
-          SermonTableData,
-          PrefetchHooks Function({bool eventTableRefs})
+          $SermonsTable,
+          Sermon,
+          $$SermonsTableFilterComposer,
+          $$SermonsTableOrderingComposer,
+          $$SermonsTableAnnotationComposer,
+          $$SermonsTableCreateCompanionBuilder,
+          $$SermonsTableUpdateCompanionBuilder,
+          (Sermon, $$SermonsTableReferences),
+          Sermon,
+          PrefetchHooks Function({bool authorId, bool eventsRefs})
         > {
-  $$SermonTableTableTableManager(_$AppDatabase db, $SermonTableTable table)
+  $$SermonsTableTableManager(_$AppDatabase db, $SermonsTable table)
     : super(
         TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
-              $$SermonTableTableFilterComposer($db: db, $table: table),
+              $$SermonsTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
-              $$SermonTableTableOrderingComposer($db: db, $table: table),
+              $$SermonsTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
-              $$SermonTableTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({Value<int> id = const Value.absent()}) =>
-              SermonTableCompanion(id: id),
-          createCompanionCallback: ({Value<int> id = const Value.absent()}) =>
-              SermonTableCompanion.insert(id: id),
+              $$SermonsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> title = const Value.absent(),
+                Value<String?> theme = const Value.absent(),
+                Value<String?> mainText = const Value.absent(),
+                Value<String?> notes = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime?> updatedAt = const Value.absent(),
+                Value<bool> isPublished = const Value.absent(),
+                Value<int?> authorId = const Value.absent(),
+              }) => SermonsCompanion(
+                id: id,
+                title: title,
+                theme: theme,
+                mainText: mainText,
+                notes: notes,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                isPublished: isPublished,
+                authorId: authorId,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String title,
+                Value<String?> theme = const Value.absent(),
+                Value<String?> mainText = const Value.absent(),
+                Value<String?> notes = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime?> updatedAt = const Value.absent(),
+                Value<bool> isPublished = const Value.absent(),
+                Value<int?> authorId = const Value.absent(),
+              }) => SermonsCompanion.insert(
+                id: id,
+                title: title,
+                theme: theme,
+                mainText: mainText,
+                notes: notes,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                isPublished: isPublished,
+                authorId: authorId,
+              ),
           withReferenceMapper: (p0) => p0
               .map(
                 (e) => (
                   e.readTable(table),
-                  $$SermonTableTableReferences(db, table, e),
+                  $$SermonsTableReferences(db, table, e),
                 ),
               )
               .toList(),
-          prefetchHooksCallback: ({eventTableRefs = false}) {
+          prefetchHooksCallback: ({authorId = false, eventsRefs = false}) {
             return PrefetchHooks(
               db: db,
-              explicitlyWatchedTables: [if (eventTableRefs) db.eventTable],
-              addJoins: null,
+              explicitlyWatchedTables: [if (eventsRefs) db.events],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (authorId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.authorId,
+                                referencedTable: $$SermonsTableReferences
+                                    ._authorIdTable(db),
+                                referencedColumn: $$SermonsTableReferences
+                                    ._authorIdTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
               getPrefetchedDataCallback: (items) async {
                 return [
-                  if (eventTableRefs)
-                    await $_getPrefetchedData<
-                      SermonTableData,
-                      $SermonTableTable,
-                      EventTableData
-                    >(
+                  if (eventsRefs)
+                    await $_getPrefetchedData<Sermon, $SermonsTable, Event>(
                       currentTable: table,
-                      referencedTable: $$SermonTableTableReferences
-                          ._eventTableRefsTable(db),
+                      referencedTable: $$SermonsTableReferences
+                          ._eventsRefsTable(db),
                       managerFromTypedResult: (p0) =>
-                          $$SermonTableTableReferences(
-                            db,
-                            table,
-                            p0,
-                          ).eventTableRefs,
+                          $$SermonsTableReferences(db, table, p0).eventsRefs,
                       referencedItemsForCurrentItem: (item, referencedItems) =>
                           referencedItems.where((e) => e.sermonId == item.id),
                       typedResults: items,
@@ -1670,51 +2423,52 @@ class $$SermonTableTableTableManager
       );
 }
 
-typedef $$SermonTableTableProcessedTableManager =
+typedef $$SermonsTableProcessedTableManager =
     ProcessedTableManager<
       _$AppDatabase,
-      $SermonTableTable,
-      SermonTableData,
-      $$SermonTableTableFilterComposer,
-      $$SermonTableTableOrderingComposer,
-      $$SermonTableTableAnnotationComposer,
-      $$SermonTableTableCreateCompanionBuilder,
-      $$SermonTableTableUpdateCompanionBuilder,
-      (SermonTableData, $$SermonTableTableReferences),
-      SermonTableData,
-      PrefetchHooks Function({bool eventTableRefs})
+      $SermonsTable,
+      Sermon,
+      $$SermonsTableFilterComposer,
+      $$SermonsTableOrderingComposer,
+      $$SermonsTableAnnotationComposer,
+      $$SermonsTableCreateCompanionBuilder,
+      $$SermonsTableUpdateCompanionBuilder,
+      (Sermon, $$SermonsTableReferences),
+      Sermon,
+      PrefetchHooks Function({bool authorId, bool eventsRefs})
     >;
-typedef $$VenueTableTableCreateCompanionBuilder =
-    VenueTableCompanion Function({Value<int> id});
-typedef $$VenueTableTableUpdateCompanionBuilder =
-    VenueTableCompanion Function({Value<int> id});
+typedef $$VenuesTableCreateCompanionBuilder =
+    VenuesCompanion Function({Value<int> id});
+typedef $$VenuesTableUpdateCompanionBuilder =
+    VenuesCompanion Function({Value<int> id});
 
-final class $$VenueTableTableReferences
-    extends BaseReferences<_$AppDatabase, $VenueTableTable, VenueTableData> {
-  $$VenueTableTableReferences(super.$_db, super.$_table, super.$_typedResult);
+final class $$VenuesTableReferences
+    extends BaseReferences<_$AppDatabase, $VenuesTable, Venue> {
+  $$VenuesTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static MultiTypedResultKey<$EventTableTable, List<EventTableData>>
-  _eventTableRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
-    db.eventTable,
-    aliasName: $_aliasNameGenerator(db.venueTable.id, db.eventTable.venueId),
+  static MultiTypedResultKey<$EventsTable, List<Event>> _eventsRefsTable(
+    _$AppDatabase db,
+  ) => MultiTypedResultKey.fromTable(
+    db.events,
+    aliasName: $_aliasNameGenerator(db.venues.id, db.events.venueId),
   );
 
-  $$EventTableTableProcessedTableManager get eventTableRefs {
-    final manager = $$EventTableTableTableManager(
+  $$EventsTableProcessedTableManager get eventsRefs {
+    final manager = $$EventsTableTableManager(
       $_db,
-      $_db.eventTable,
+      $_db.events,
     ).filter((f) => f.venueId.id.sqlEquals($_itemColumn<int>('id')!));
 
-    final cache = $_typedResult.readTableOrNull(_eventTableRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(_eventsRefsTable($_db));
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
 }
 
-class $$VenueTableTableFilterComposer
-    extends Composer<_$AppDatabase, $VenueTableTable> {
-  $$VenueTableTableFilterComposer({
+class $$VenuesTableFilterComposer
+    extends Composer<_$AppDatabase, $VenuesTable> {
+  $$VenuesTableFilterComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -1726,22 +2480,22 @@ class $$VenueTableTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  Expression<bool> eventTableRefs(
-    Expression<bool> Function($$EventTableTableFilterComposer f) f,
+  Expression<bool> eventsRefs(
+    Expression<bool> Function($$EventsTableFilterComposer f) f,
   ) {
-    final $$EventTableTableFilterComposer composer = $composerBuilder(
+    final $$EventsTableFilterComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.id,
-      referencedTable: $db.eventTable,
+      referencedTable: $db.events,
       getReferencedColumn: (t) => t.venueId,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$EventTableTableFilterComposer(
+          }) => $$EventsTableFilterComposer(
             $db: $db,
-            $table: $db.eventTable,
+            $table: $db.events,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -1752,9 +2506,9 @@ class $$VenueTableTableFilterComposer
   }
 }
 
-class $$VenueTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $VenueTableTable> {
-  $$VenueTableTableOrderingComposer({
+class $$VenuesTableOrderingComposer
+    extends Composer<_$AppDatabase, $VenuesTable> {
+  $$VenuesTableOrderingComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -1767,9 +2521,9 @@ class $$VenueTableTableOrderingComposer
   );
 }
 
-class $$VenueTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $VenueTableTable> {
-  $$VenueTableTableAnnotationComposer({
+class $$VenuesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $VenuesTable> {
+  $$VenuesTableAnnotationComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -1779,22 +2533,22 @@ class $$VenueTableTableAnnotationComposer
   GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
 
-  Expression<T> eventTableRefs<T extends Object>(
-    Expression<T> Function($$EventTableTableAnnotationComposer a) f,
+  Expression<T> eventsRefs<T extends Object>(
+    Expression<T> Function($$EventsTableAnnotationComposer a) f,
   ) {
-    final $$EventTableTableAnnotationComposer composer = $composerBuilder(
+    final $$EventsTableAnnotationComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.id,
-      referencedTable: $db.eventTable,
+      referencedTable: $db.events,
       getReferencedColumn: (t) => t.venueId,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$EventTableTableAnnotationComposer(
+          }) => $$EventsTableAnnotationComposer(
             $db: $db,
-            $table: $db.eventTable,
+            $table: $db.events,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -1805,66 +2559,57 @@ class $$VenueTableTableAnnotationComposer
   }
 }
 
-class $$VenueTableTableTableManager
+class $$VenuesTableTableManager
     extends
         RootTableManager<
           _$AppDatabase,
-          $VenueTableTable,
-          VenueTableData,
-          $$VenueTableTableFilterComposer,
-          $$VenueTableTableOrderingComposer,
-          $$VenueTableTableAnnotationComposer,
-          $$VenueTableTableCreateCompanionBuilder,
-          $$VenueTableTableUpdateCompanionBuilder,
-          (VenueTableData, $$VenueTableTableReferences),
-          VenueTableData,
-          PrefetchHooks Function({bool eventTableRefs})
+          $VenuesTable,
+          Venue,
+          $$VenuesTableFilterComposer,
+          $$VenuesTableOrderingComposer,
+          $$VenuesTableAnnotationComposer,
+          $$VenuesTableCreateCompanionBuilder,
+          $$VenuesTableUpdateCompanionBuilder,
+          (Venue, $$VenuesTableReferences),
+          Venue,
+          PrefetchHooks Function({bool eventsRefs})
         > {
-  $$VenueTableTableTableManager(_$AppDatabase db, $VenueTableTable table)
+  $$VenuesTableTableManager(_$AppDatabase db, $VenuesTable table)
     : super(
         TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
-              $$VenueTableTableFilterComposer($db: db, $table: table),
+              $$VenuesTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
-              $$VenueTableTableOrderingComposer($db: db, $table: table),
+              $$VenuesTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
-              $$VenueTableTableAnnotationComposer($db: db, $table: table),
+              $$VenuesTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({Value<int> id = const Value.absent()}) =>
-              VenueTableCompanion(id: id),
+              VenuesCompanion(id: id),
           createCompanionCallback: ({Value<int> id = const Value.absent()}) =>
-              VenueTableCompanion.insert(id: id),
+              VenuesCompanion.insert(id: id),
           withReferenceMapper: (p0) => p0
               .map(
-                (e) => (
-                  e.readTable(table),
-                  $$VenueTableTableReferences(db, table, e),
-                ),
+                (e) =>
+                    (e.readTable(table), $$VenuesTableReferences(db, table, e)),
               )
               .toList(),
-          prefetchHooksCallback: ({eventTableRefs = false}) {
+          prefetchHooksCallback: ({eventsRefs = false}) {
             return PrefetchHooks(
               db: db,
-              explicitlyWatchedTables: [if (eventTableRefs) db.eventTable],
+              explicitlyWatchedTables: [if (eventsRefs) db.events],
               addJoins: null,
               getPrefetchedDataCallback: (items) async {
                 return [
-                  if (eventTableRefs)
-                    await $_getPrefetchedData<
-                      VenueTableData,
-                      $VenueTableTable,
-                      EventTableData
-                    >(
+                  if (eventsRefs)
+                    await $_getPrefetchedData<Venue, $VenuesTable, Event>(
                       currentTable: table,
-                      referencedTable: $$VenueTableTableReferences
-                          ._eventTableRefsTable(db),
+                      referencedTable: $$VenuesTableReferences._eventsRefsTable(
+                        db,
+                      ),
                       managerFromTypedResult: (p0) =>
-                          $$VenueTableTableReferences(
-                            db,
-                            table,
-                            p0,
-                          ).eventTableRefs,
+                          $$VenuesTableReferences(db, table, p0).eventsRefs,
                       referencedItemsForCurrentItem: (item, referencedItems) =>
                           referencedItems.where((e) => e.venueId == item.id),
                       typedResults: items,
@@ -1877,22 +2622,22 @@ class $$VenueTableTableTableManager
       );
 }
 
-typedef $$VenueTableTableProcessedTableManager =
+typedef $$VenuesTableProcessedTableManager =
     ProcessedTableManager<
       _$AppDatabase,
-      $VenueTableTable,
-      VenueTableData,
-      $$VenueTableTableFilterComposer,
-      $$VenueTableTableOrderingComposer,
-      $$VenueTableTableAnnotationComposer,
-      $$VenueTableTableCreateCompanionBuilder,
-      $$VenueTableTableUpdateCompanionBuilder,
-      (VenueTableData, $$VenueTableTableReferences),
-      VenueTableData,
-      PrefetchHooks Function({bool eventTableRefs})
+      $VenuesTable,
+      Venue,
+      $$VenuesTableFilterComposer,
+      $$VenuesTableOrderingComposer,
+      $$VenuesTableAnnotationComposer,
+      $$VenuesTableCreateCompanionBuilder,
+      $$VenuesTableUpdateCompanionBuilder,
+      (Venue, $$VenuesTableReferences),
+      Venue,
+      PrefetchHooks Function({bool eventsRefs})
     >;
-typedef $$EventTableTableCreateCompanionBuilder =
-    EventTableCompanion Function({
+typedef $$EventsTableCreateCompanionBuilder =
+    EventsCompanion Function({
       Value<int> id,
       required DateTime date,
       Value<String?> category,
@@ -1901,8 +2646,8 @@ typedef $$EventTableTableCreateCompanionBuilder =
       required int venueId,
       required int preacherId,
     });
-typedef $$EventTableTableUpdateCompanionBuilder =
-    EventTableCompanion Function({
+typedef $$EventsTableUpdateCompanionBuilder =
+    EventsCompanion Function({
       Value<int> id,
       Value<DateTime> date,
       Value<String?> category,
@@ -1912,21 +2657,19 @@ typedef $$EventTableTableUpdateCompanionBuilder =
       Value<int> preacherId,
     });
 
-final class $$EventTableTableReferences
-    extends BaseReferences<_$AppDatabase, $EventTableTable, EventTableData> {
-  $$EventTableTableReferences(super.$_db, super.$_table, super.$_typedResult);
+final class $$EventsTableReferences
+    extends BaseReferences<_$AppDatabase, $EventsTable, Event> {
+  $$EventsTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static $SermonTableTable _sermonIdTable(_$AppDatabase db) =>
-      db.sermonTable.createAlias(
-        $_aliasNameGenerator(db.eventTable.sermonId, db.sermonTable.id),
-      );
+  static $SermonsTable _sermonIdTable(_$AppDatabase db) => db.sermons
+      .createAlias($_aliasNameGenerator(db.events.sermonId, db.sermons.id));
 
-  $$SermonTableTableProcessedTableManager get sermonId {
+  $$SermonsTableProcessedTableManager get sermonId {
     final $_column = $_itemColumn<int>('sermon_id')!;
 
-    final manager = $$SermonTableTableTableManager(
+    final manager = $$SermonsTableTableManager(
       $_db,
-      $_db.sermonTable,
+      $_db.sermons,
     ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_sermonIdTable($_db));
     if (item == null) return manager;
@@ -1935,17 +2678,16 @@ final class $$EventTableTableReferences
     );
   }
 
-  static $VenueTableTable _venueIdTable(_$AppDatabase db) =>
-      db.venueTable.createAlias(
-        $_aliasNameGenerator(db.eventTable.venueId, db.venueTable.id),
-      );
+  static $VenuesTable _venueIdTable(_$AppDatabase db) => db.venues.createAlias(
+    $_aliasNameGenerator(db.events.venueId, db.venues.id),
+  );
 
-  $$VenueTableTableProcessedTableManager get venueId {
+  $$VenuesTableProcessedTableManager get venueId {
     final $_column = $_itemColumn<int>('venue_id')!;
 
-    final manager = $$VenueTableTableTableManager(
+    final manager = $$VenuesTableTableManager(
       $_db,
-      $_db.venueTable,
+      $_db.venues,
     ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_venueIdTable($_db));
     if (item == null) return manager;
@@ -1954,17 +2696,15 @@ final class $$EventTableTableReferences
     );
   }
 
-  static $PreacherTableTable _preacherIdTable(_$AppDatabase db) =>
-      db.preacherTable.createAlias(
-        $_aliasNameGenerator(db.eventTable.preacherId, db.preacherTable.id),
-      );
+  static $PreachersTable _preacherIdTable(_$AppDatabase db) => db.preachers
+      .createAlias($_aliasNameGenerator(db.events.preacherId, db.preachers.id));
 
-  $$PreacherTableTableProcessedTableManager get preacherId {
+  $$PreachersTableProcessedTableManager get preacherId {
     final $_column = $_itemColumn<int>('preacher_id')!;
 
-    final manager = $$PreacherTableTableTableManager(
+    final manager = $$PreachersTableTableManager(
       $_db,
-      $_db.preacherTable,
+      $_db.preachers,
     ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_preacherIdTable($_db));
     if (item == null) return manager;
@@ -1974,9 +2714,9 @@ final class $$EventTableTableReferences
   }
 }
 
-class $$EventTableTableFilterComposer
-    extends Composer<_$AppDatabase, $EventTableTable> {
-  $$EventTableTableFilterComposer({
+class $$EventsTableFilterComposer
+    extends Composer<_$AppDatabase, $EventsTable> {
+  $$EventsTableFilterComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -2003,20 +2743,20 @@ class $$EventTableTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  $$SermonTableTableFilterComposer get sermonId {
-    final $$SermonTableTableFilterComposer composer = $composerBuilder(
+  $$SermonsTableFilterComposer get sermonId {
+    final $$SermonsTableFilterComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.sermonId,
-      referencedTable: $db.sermonTable,
+      referencedTable: $db.sermons,
       getReferencedColumn: (t) => t.id,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$SermonTableTableFilterComposer(
+          }) => $$SermonsTableFilterComposer(
             $db: $db,
-            $table: $db.sermonTable,
+            $table: $db.sermons,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -2026,20 +2766,20 @@ class $$EventTableTableFilterComposer
     return composer;
   }
 
-  $$VenueTableTableFilterComposer get venueId {
-    final $$VenueTableTableFilterComposer composer = $composerBuilder(
+  $$VenuesTableFilterComposer get venueId {
+    final $$VenuesTableFilterComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.venueId,
-      referencedTable: $db.venueTable,
+      referencedTable: $db.venues,
       getReferencedColumn: (t) => t.id,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$VenueTableTableFilterComposer(
+          }) => $$VenuesTableFilterComposer(
             $db: $db,
-            $table: $db.venueTable,
+            $table: $db.venues,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -2049,20 +2789,20 @@ class $$EventTableTableFilterComposer
     return composer;
   }
 
-  $$PreacherTableTableFilterComposer get preacherId {
-    final $$PreacherTableTableFilterComposer composer = $composerBuilder(
+  $$PreachersTableFilterComposer get preacherId {
+    final $$PreachersTableFilterComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.preacherId,
-      referencedTable: $db.preacherTable,
+      referencedTable: $db.preachers,
       getReferencedColumn: (t) => t.id,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$PreacherTableTableFilterComposer(
+          }) => $$PreachersTableFilterComposer(
             $db: $db,
-            $table: $db.preacherTable,
+            $table: $db.preachers,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -2073,9 +2813,9 @@ class $$EventTableTableFilterComposer
   }
 }
 
-class $$EventTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $EventTableTable> {
-  $$EventTableTableOrderingComposer({
+class $$EventsTableOrderingComposer
+    extends Composer<_$AppDatabase, $EventsTable> {
+  $$EventsTableOrderingComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -2102,20 +2842,20 @@ class $$EventTableTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  $$SermonTableTableOrderingComposer get sermonId {
-    final $$SermonTableTableOrderingComposer composer = $composerBuilder(
+  $$SermonsTableOrderingComposer get sermonId {
+    final $$SermonsTableOrderingComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.sermonId,
-      referencedTable: $db.sermonTable,
+      referencedTable: $db.sermons,
       getReferencedColumn: (t) => t.id,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$SermonTableTableOrderingComposer(
+          }) => $$SermonsTableOrderingComposer(
             $db: $db,
-            $table: $db.sermonTable,
+            $table: $db.sermons,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -2125,20 +2865,20 @@ class $$EventTableTableOrderingComposer
     return composer;
   }
 
-  $$VenueTableTableOrderingComposer get venueId {
-    final $$VenueTableTableOrderingComposer composer = $composerBuilder(
+  $$VenuesTableOrderingComposer get venueId {
+    final $$VenuesTableOrderingComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.venueId,
-      referencedTable: $db.venueTable,
+      referencedTable: $db.venues,
       getReferencedColumn: (t) => t.id,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$VenueTableTableOrderingComposer(
+          }) => $$VenuesTableOrderingComposer(
             $db: $db,
-            $table: $db.venueTable,
+            $table: $db.venues,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -2148,20 +2888,20 @@ class $$EventTableTableOrderingComposer
     return composer;
   }
 
-  $$PreacherTableTableOrderingComposer get preacherId {
-    final $$PreacherTableTableOrderingComposer composer = $composerBuilder(
+  $$PreachersTableOrderingComposer get preacherId {
+    final $$PreachersTableOrderingComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.preacherId,
-      referencedTable: $db.preacherTable,
+      referencedTable: $db.preachers,
       getReferencedColumn: (t) => t.id,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$PreacherTableTableOrderingComposer(
+          }) => $$PreachersTableOrderingComposer(
             $db: $db,
-            $table: $db.preacherTable,
+            $table: $db.preachers,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -2172,9 +2912,9 @@ class $$EventTableTableOrderingComposer
   }
 }
 
-class $$EventTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $EventTableTable> {
-  $$EventTableTableAnnotationComposer({
+class $$EventsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $EventsTable> {
+  $$EventsTableAnnotationComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -2193,20 +2933,20 @@ class $$EventTableTableAnnotationComposer
   GeneratedColumn<String> get type =>
       $composableBuilder(column: $table.type, builder: (column) => column);
 
-  $$SermonTableTableAnnotationComposer get sermonId {
-    final $$SermonTableTableAnnotationComposer composer = $composerBuilder(
+  $$SermonsTableAnnotationComposer get sermonId {
+    final $$SermonsTableAnnotationComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.sermonId,
-      referencedTable: $db.sermonTable,
+      referencedTable: $db.sermons,
       getReferencedColumn: (t) => t.id,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$SermonTableTableAnnotationComposer(
+          }) => $$SermonsTableAnnotationComposer(
             $db: $db,
-            $table: $db.sermonTable,
+            $table: $db.sermons,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -2216,20 +2956,20 @@ class $$EventTableTableAnnotationComposer
     return composer;
   }
 
-  $$VenueTableTableAnnotationComposer get venueId {
-    final $$VenueTableTableAnnotationComposer composer = $composerBuilder(
+  $$VenuesTableAnnotationComposer get venueId {
+    final $$VenuesTableAnnotationComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.venueId,
-      referencedTable: $db.venueTable,
+      referencedTable: $db.venues,
       getReferencedColumn: (t) => t.id,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$VenueTableTableAnnotationComposer(
+          }) => $$VenuesTableAnnotationComposer(
             $db: $db,
-            $table: $db.venueTable,
+            $table: $db.venues,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -2239,20 +2979,20 @@ class $$EventTableTableAnnotationComposer
     return composer;
   }
 
-  $$PreacherTableTableAnnotationComposer get preacherId {
-    final $$PreacherTableTableAnnotationComposer composer = $composerBuilder(
+  $$PreachersTableAnnotationComposer get preacherId {
+    final $$PreachersTableAnnotationComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.preacherId,
-      referencedTable: $db.preacherTable,
+      referencedTable: $db.preachers,
       getReferencedColumn: (t) => t.id,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$PreacherTableTableAnnotationComposer(
+          }) => $$PreachersTableAnnotationComposer(
             $db: $db,
-            $table: $db.preacherTable,
+            $table: $db.preachers,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -2263,32 +3003,32 @@ class $$EventTableTableAnnotationComposer
   }
 }
 
-class $$EventTableTableTableManager
+class $$EventsTableTableManager
     extends
         RootTableManager<
           _$AppDatabase,
-          $EventTableTable,
-          EventTableData,
-          $$EventTableTableFilterComposer,
-          $$EventTableTableOrderingComposer,
-          $$EventTableTableAnnotationComposer,
-          $$EventTableTableCreateCompanionBuilder,
-          $$EventTableTableUpdateCompanionBuilder,
-          (EventTableData, $$EventTableTableReferences),
-          EventTableData,
+          $EventsTable,
+          Event,
+          $$EventsTableFilterComposer,
+          $$EventsTableOrderingComposer,
+          $$EventsTableAnnotationComposer,
+          $$EventsTableCreateCompanionBuilder,
+          $$EventsTableUpdateCompanionBuilder,
+          (Event, $$EventsTableReferences),
+          Event,
           PrefetchHooks Function({bool sermonId, bool venueId, bool preacherId})
         > {
-  $$EventTableTableTableManager(_$AppDatabase db, $EventTableTable table)
+  $$EventsTableTableManager(_$AppDatabase db, $EventsTable table)
     : super(
         TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
-              $$EventTableTableFilterComposer($db: db, $table: table),
+              $$EventsTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
-              $$EventTableTableOrderingComposer($db: db, $table: table),
+              $$EventsTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
-              $$EventTableTableAnnotationComposer($db: db, $table: table),
+              $$EventsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -2298,7 +3038,7 @@ class $$EventTableTableTableManager
                 Value<int> sermonId = const Value.absent(),
                 Value<int> venueId = const Value.absent(),
                 Value<int> preacherId = const Value.absent(),
-              }) => EventTableCompanion(
+              }) => EventsCompanion(
                 id: id,
                 date: date,
                 category: category,
@@ -2316,7 +3056,7 @@ class $$EventTableTableTableManager
                 required int sermonId,
                 required int venueId,
                 required int preacherId,
-              }) => EventTableCompanion.insert(
+              }) => EventsCompanion.insert(
                 id: id,
                 date: date,
                 category: category,
@@ -2327,10 +3067,8 @@ class $$EventTableTableTableManager
               ),
           withReferenceMapper: (p0) => p0
               .map(
-                (e) => (
-                  e.readTable(table),
-                  $$EventTableTableReferences(db, table, e),
-                ),
+                (e) =>
+                    (e.readTable(table), $$EventsTableReferences(db, table, e)),
               )
               .toList(),
           prefetchHooksCallback:
@@ -2359,12 +3097,11 @@ class $$EventTableTableTableManager
                               state.withJoin(
                                     currentTable: table,
                                     currentColumn: table.sermonId,
-                                    referencedTable: $$EventTableTableReferences
+                                    referencedTable: $$EventsTableReferences
                                         ._sermonIdTable(db),
-                                    referencedColumn:
-                                        $$EventTableTableReferences
-                                            ._sermonIdTable(db)
-                                            .id,
+                                    referencedColumn: $$EventsTableReferences
+                                        ._sermonIdTable(db)
+                                        .id,
                                   )
                                   as T;
                         }
@@ -2373,12 +3110,11 @@ class $$EventTableTableTableManager
                               state.withJoin(
                                     currentTable: table,
                                     currentColumn: table.venueId,
-                                    referencedTable: $$EventTableTableReferences
+                                    referencedTable: $$EventsTableReferences
                                         ._venueIdTable(db),
-                                    referencedColumn:
-                                        $$EventTableTableReferences
-                                            ._venueIdTable(db)
-                                            .id,
+                                    referencedColumn: $$EventsTableReferences
+                                        ._venueIdTable(db)
+                                        .id,
                                   )
                                   as T;
                         }
@@ -2387,12 +3123,11 @@ class $$EventTableTableTableManager
                               state.withJoin(
                                     currentTable: table,
                                     currentColumn: table.preacherId,
-                                    referencedTable: $$EventTableTableReferences
+                                    referencedTable: $$EventsTableReferences
                                         ._preacherIdTable(db),
-                                    referencedColumn:
-                                        $$EventTableTableReferences
-                                            ._preacherIdTable(db)
-                                            .id,
+                                    referencedColumn: $$EventsTableReferences
+                                        ._preacherIdTable(db)
+                                        .id,
                                   )
                                   as T;
                         }
@@ -2408,30 +3143,30 @@ class $$EventTableTableTableManager
       );
 }
 
-typedef $$EventTableTableProcessedTableManager =
+typedef $$EventsTableProcessedTableManager =
     ProcessedTableManager<
       _$AppDatabase,
-      $EventTableTable,
-      EventTableData,
-      $$EventTableTableFilterComposer,
-      $$EventTableTableOrderingComposer,
-      $$EventTableTableAnnotationComposer,
-      $$EventTableTableCreateCompanionBuilder,
-      $$EventTableTableUpdateCompanionBuilder,
-      (EventTableData, $$EventTableTableReferences),
-      EventTableData,
+      $EventsTable,
+      Event,
+      $$EventsTableFilterComposer,
+      $$EventsTableOrderingComposer,
+      $$EventsTableAnnotationComposer,
+      $$EventsTableCreateCompanionBuilder,
+      $$EventsTableUpdateCompanionBuilder,
+      (Event, $$EventsTableReferences),
+      Event,
       PrefetchHooks Function({bool sermonId, bool venueId, bool preacherId})
     >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
   $AppDatabaseManager(this._db);
-  $$PreacherTableTableTableManager get preacherTable =>
-      $$PreacherTableTableTableManager(_db, _db.preacherTable);
-  $$SermonTableTableTableManager get sermonTable =>
-      $$SermonTableTableTableManager(_db, _db.sermonTable);
-  $$VenueTableTableTableManager get venueTable =>
-      $$VenueTableTableTableManager(_db, _db.venueTable);
-  $$EventTableTableTableManager get eventTable =>
-      $$EventTableTableTableManager(_db, _db.eventTable);
+  $$PreachersTableTableManager get preachers =>
+      $$PreachersTableTableManager(_db, _db.preachers);
+  $$SermonsTableTableManager get sermons =>
+      $$SermonsTableTableManager(_db, _db.sermons);
+  $$VenuesTableTableManager get venues =>
+      $$VenuesTableTableManager(_db, _db.venues);
+  $$EventsTableTableManager get events =>
+      $$EventsTableTableManager(_db, _db.events);
 }

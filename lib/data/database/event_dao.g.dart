@@ -4,22 +4,22 @@ part of 'event_dao.dart';
 
 // ignore_for_file: type=lint
 mixin _$EventDaoMixin on DatabaseAccessor<AppDatabase> {
-  $SermonTableTable get sermonTable => attachedDatabase.sermonTable;
-  $VenueTableTable get venueTable => attachedDatabase.venueTable;
-  $PreacherTableTable get preacherTable => attachedDatabase.preacherTable;
-  $EventTableTable get eventTable => attachedDatabase.eventTable;
+  $PreachersTable get preachers => attachedDatabase.preachers;
+  $SermonsTable get sermons => attachedDatabase.sermons;
+  $VenuesTable get venues => attachedDatabase.venues;
+  $EventsTable get events => attachedDatabase.events;
   EventDaoManager get managers => EventDaoManager(this);
 }
 
 class EventDaoManager {
   final _$EventDaoMixin _db;
   EventDaoManager(this._db);
-  $$SermonTableTableTableManager get sermonTable =>
-      $$SermonTableTableTableManager(_db.attachedDatabase, _db.sermonTable);
-  $$VenueTableTableTableManager get venueTable =>
-      $$VenueTableTableTableManager(_db.attachedDatabase, _db.venueTable);
-  $$PreacherTableTableTableManager get preacherTable =>
-      $$PreacherTableTableTableManager(_db.attachedDatabase, _db.preacherTable);
-  $$EventTableTableTableManager get eventTable =>
-      $$EventTableTableTableManager(_db.attachedDatabase, _db.eventTable);
+  $$PreachersTableTableManager get preachers =>
+      $$PreachersTableTableManager(_db.attachedDatabase, _db.preachers);
+  $$SermonsTableTableManager get sermons =>
+      $$SermonsTableTableManager(_db.attachedDatabase, _db.sermons);
+  $$VenuesTableTableManager get venues =>
+      $$VenuesTableTableManager(_db.attachedDatabase, _db.venues);
+  $$EventsTableTableManager get events =>
+      $$EventsTableTableManager(_db.attachedDatabase, _db.events);
 }

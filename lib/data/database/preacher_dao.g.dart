@@ -4,13 +4,13 @@ part of 'preacher_dao.dart';
 
 // ignore_for_file: type=lint
 mixin _$PreacherDaoMixin on DatabaseAccessor<AppDatabase> {
-  $PreacherTableTable get preacherTable => attachedDatabase.preacherTable;
+  $PreachersTable get preachers => attachedDatabase.preachers;
   PreacherDaoManager get managers => PreacherDaoManager(this);
 }
 
 class PreacherDaoManager {
   final _$PreacherDaoMixin _db;
   PreacherDaoManager(this._db);
-  $$PreacherTableTableTableManager get preacherTable =>
-      $$PreacherTableTableTableManager(_db.attachedDatabase, _db.preacherTable);
+  $$PreachersTableTableManager get preachers =>
+      $$PreachersTableTableManager(_db.attachedDatabase, _db.preachers);
 }

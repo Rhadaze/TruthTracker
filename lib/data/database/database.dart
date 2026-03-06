@@ -1,16 +1,19 @@
+import 'package:TruthTracker/data/database/event_dao.dart';
 import 'package:TruthTracker/data/database/preacher_dao.dart';
-import 'package:TruthTracker/data/tables/event_table.dart';
-import 'package:TruthTracker/data/tables/preacher_table.dart';
-import 'package:TruthTracker/data/tables/sermons_table.dart';
-import 'package:TruthTracker/data/tables/venue_table.dart';
+import 'package:TruthTracker/data/database/sermon_dao.dart';
+import 'package:TruthTracker/data/database/venue_dao.dart';
+import 'package:TruthTracker/data/tables/events.dart';
+import 'package:TruthTracker/data/tables/preachers.dart';
+import 'package:TruthTracker/data/tables/sermons.dart';
+import 'package:TruthTracker/data/tables/venues.dart';
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 
 part 'database.g.dart';
 
 @DriftDatabase(
-  tables: [PreacherTable, EventTable, SermonTable, VenueTable],
-  daos: [PreacherDao],
+  tables: [Preachers, Events, Sermons, Venues],
+  daos: [PreacherDao, EventDao, SermonDao, VenueDao],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
@@ -28,8 +31,4 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   int get schemaVersion => 1;
-
-  // Inserir evento
-  Future<int> insertEvent(EventTableCompanion event) =>
-      into(eventTable).insert(event);
 }

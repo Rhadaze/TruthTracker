@@ -14,7 +14,7 @@ class Event {
   final Preacher preacher;
 
   Event({
-    this.id,
+    required this.id,
     this.category,
     this.type,
     required this.date,
