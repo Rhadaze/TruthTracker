@@ -3,16 +3,16 @@ import 'package:TruthTracker/features/venue/domain/entities/venue.dart';
 import 'package:flutter/material.dart';
 
 class VenueWidget extends StatelessWidget {
-  final Venue c;
+  final Venue v;
 
-  const VenueWidget(this.c, {super.key});
+  const VenueWidget(this.v, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return BasicAppCard(
       leadingIcon: Icons.access_time,
-      title: c.name,
-      subtitle: "Bairro ${c.bairro} em ${c.cidade}.\n${c.denominacao}",
+      title: v.name,
+      subtitle: "Bairro ${v.neighborhood} em ${v.city}.\n${v.denomination}",
       trailingIcon: Icons.menu,
       onTap: () {
         print("hi");

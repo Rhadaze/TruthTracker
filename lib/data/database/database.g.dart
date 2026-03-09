@@ -979,8 +979,76 @@ class $VenuesTable extends Venues with TableInfo<$VenuesTable, Venue> {
       'PRIMARY KEY AUTOINCREMENT',
     ),
   );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
-  List<GeneratedColumn> get $columns => [id];
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _neighborhoodMeta = const VerificationMeta(
+    'neighborhood',
+  );
+  @override
+  late final GeneratedColumn<String> neighborhood = GeneratedColumn<String>(
+    'neighborhood',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _cityMeta = const VerificationMeta('city');
+  @override
+  late final GeneratedColumn<String> city = GeneratedColumn<String>(
+    'city',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _stateMeta = const VerificationMeta('state');
+  @override
+  late final GeneratedColumn<String> state = GeneratedColumn<String>(
+    'state',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _countryMeta = const VerificationMeta(
+    'country',
+  );
+  @override
+  late final GeneratedColumn<String> country = GeneratedColumn<String>(
+    'country',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _denominacaoMeta = const VerificationMeta(
+    'denominacao',
+  );
+  @override
+  late final GeneratedColumn<String> denominacao = GeneratedColumn<String>(
+    'denominacao',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    name,
+    neighborhood,
+    city,
+    state,
+    country,
+    denominacao,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -996,6 +1064,58 @@ class $VenuesTable extends Venues with TableInfo<$VenuesTable, Venue> {
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('neighborhood')) {
+      context.handle(
+        _neighborhoodMeta,
+        neighborhood.isAcceptableOrUnknown(
+          data['neighborhood']!,
+          _neighborhoodMeta,
+        ),
+      );
+    }
+    if (data.containsKey('city')) {
+      context.handle(
+        _cityMeta,
+        city.isAcceptableOrUnknown(data['city']!, _cityMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_cityMeta);
+    }
+    if (data.containsKey('state')) {
+      context.handle(
+        _stateMeta,
+        state.isAcceptableOrUnknown(data['state']!, _stateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_stateMeta);
+    }
+    if (data.containsKey('country')) {
+      context.handle(
+        _countryMeta,
+        country.isAcceptableOrUnknown(data['country']!, _countryMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_countryMeta);
+    }
+    if (data.containsKey('denominacao')) {
+      context.handle(
+        _denominacaoMeta,
+        denominacao.isAcceptableOrUnknown(
+          data['denominacao']!,
+          _denominacaoMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_denominacaoMeta);
+    }
     return context;
   }
 
@@ -1009,6 +1129,30 @@ class $VenuesTable extends Venues with TableInfo<$VenuesTable, Venue> {
         DriftSqlType.int,
         data['${effectivePrefix}id'],
       )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      neighborhood: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}neighborhood'],
+      ),
+      city: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}city'],
+      )!,
+      state: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}state'],
+      )!,
+      country: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}country'],
+      )!,
+      denominacao: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}denominacao'],
+      )!,
     );
   }
 
@@ -1020,16 +1164,48 @@ class $VenuesTable extends Venues with TableInfo<$VenuesTable, Venue> {
 
 class Venue extends DataClass implements Insertable<Venue> {
   final int id;
-  const Venue({required this.id});
+  final String name;
+  final String? neighborhood;
+  final String city;
+  final String state;
+  final String country;
+  final String denominacao;
+  const Venue({
+    required this.id,
+    required this.name,
+    this.neighborhood,
+    required this.city,
+    required this.state,
+    required this.country,
+    required this.denominacao,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    if (!nullToAbsent || neighborhood != null) {
+      map['neighborhood'] = Variable<String>(neighborhood);
+    }
+    map['city'] = Variable<String>(city);
+    map['state'] = Variable<String>(state);
+    map['country'] = Variable<String>(country);
+    map['denominacao'] = Variable<String>(denominacao);
     return map;
   }
 
   VenuesCompanion toCompanion(bool nullToAbsent) {
-    return VenuesCompanion(id: Value(id));
+    return VenuesCompanion(
+      id: Value(id),
+      name: Value(name),
+      neighborhood: neighborhood == null && nullToAbsent
+          ? const Value.absent()
+          : Value(neighborhood),
+      city: Value(city),
+      state: Value(state),
+      country: Value(country),
+      denominacao: Value(denominacao),
+    );
   }
 
   factory Venue.fromJson(
@@ -1037,44 +1213,161 @@ class Venue extends DataClass implements Insertable<Venue> {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Venue(id: serializer.fromJson<int>(json['id']));
+    return Venue(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      neighborhood: serializer.fromJson<String?>(json['neighborhood']),
+      city: serializer.fromJson<String>(json['city']),
+      state: serializer.fromJson<String>(json['state']),
+      country: serializer.fromJson<String>(json['country']),
+      denominacao: serializer.fromJson<String>(json['denominacao']),
+    );
   }
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{'id': serializer.toJson<int>(id)};
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+      'neighborhood': serializer.toJson<String?>(neighborhood),
+      'city': serializer.toJson<String>(city),
+      'state': serializer.toJson<String>(state),
+      'country': serializer.toJson<String>(country),
+      'denominacao': serializer.toJson<String>(denominacao),
+    };
   }
 
-  Venue copyWith({int? id}) => Venue(id: id ?? this.id);
+  Venue copyWith({
+    int? id,
+    String? name,
+    Value<String?> neighborhood = const Value.absent(),
+    String? city,
+    String? state,
+    String? country,
+    String? denominacao,
+  }) => Venue(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    neighborhood: neighborhood.present ? neighborhood.value : this.neighborhood,
+    city: city ?? this.city,
+    state: state ?? this.state,
+    country: country ?? this.country,
+    denominacao: denominacao ?? this.denominacao,
+  );
   Venue copyWithCompanion(VenuesCompanion data) {
-    return Venue(id: data.id.present ? data.id.value : this.id);
+    return Venue(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      neighborhood: data.neighborhood.present
+          ? data.neighborhood.value
+          : this.neighborhood,
+      city: data.city.present ? data.city.value : this.city,
+      state: data.state.present ? data.state.value : this.state,
+      country: data.country.present ? data.country.value : this.country,
+      denominacao: data.denominacao.present
+          ? data.denominacao.value
+          : this.denominacao,
+    );
   }
 
   @override
   String toString() {
     return (StringBuffer('Venue(')
-          ..write('id: $id')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('neighborhood: $neighborhood, ')
+          ..write('city: $city, ')
+          ..write('state: $state, ')
+          ..write('country: $country, ')
+          ..write('denominacao: $denominacao')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => id.hashCode;
+  int get hashCode =>
+      Object.hash(id, name, neighborhood, city, state, country, denominacao);
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || (other is Venue && other.id == this.id);
+      identical(this, other) ||
+      (other is Venue &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.neighborhood == this.neighborhood &&
+          other.city == this.city &&
+          other.state == this.state &&
+          other.country == this.country &&
+          other.denominacao == this.denominacao);
 }
 
 class VenuesCompanion extends UpdateCompanion<Venue> {
   final Value<int> id;
-  const VenuesCompanion({this.id = const Value.absent()});
-  VenuesCompanion.insert({this.id = const Value.absent()});
-  static Insertable<Venue> custom({Expression<int>? id}) {
-    return RawValuesInsertable({if (id != null) 'id': id});
+  final Value<String> name;
+  final Value<String?> neighborhood;
+  final Value<String> city;
+  final Value<String> state;
+  final Value<String> country;
+  final Value<String> denominacao;
+  const VenuesCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.neighborhood = const Value.absent(),
+    this.city = const Value.absent(),
+    this.state = const Value.absent(),
+    this.country = const Value.absent(),
+    this.denominacao = const Value.absent(),
+  });
+  VenuesCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+    this.neighborhood = const Value.absent(),
+    required String city,
+    required String state,
+    required String country,
+    required String denominacao,
+  }) : name = Value(name),
+       city = Value(city),
+       state = Value(state),
+       country = Value(country),
+       denominacao = Value(denominacao);
+  static Insertable<Venue> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<String>? neighborhood,
+    Expression<String>? city,
+    Expression<String>? state,
+    Expression<String>? country,
+    Expression<String>? denominacao,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (neighborhood != null) 'neighborhood': neighborhood,
+      if (city != null) 'city': city,
+      if (state != null) 'state': state,
+      if (country != null) 'country': country,
+      if (denominacao != null) 'denominacao': denominacao,
+    });
   }
 
-  VenuesCompanion copyWith({Value<int>? id}) {
-    return VenuesCompanion(id: id ?? this.id);
+  VenuesCompanion copyWith({
+    Value<int>? id,
+    Value<String>? name,
+    Value<String?>? neighborhood,
+    Value<String>? city,
+    Value<String>? state,
+    Value<String>? country,
+    Value<String>? denominacao,
+  }) {
+    return VenuesCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      neighborhood: neighborhood ?? this.neighborhood,
+      city: city ?? this.city,
+      state: state ?? this.state,
+      country: country ?? this.country,
+      denominacao: denominacao ?? this.denominacao,
+    );
   }
 
   @override
@@ -1083,13 +1376,37 @@ class VenuesCompanion extends UpdateCompanion<Venue> {
     if (id.present) {
       map['id'] = Variable<int>(id.value);
     }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (neighborhood.present) {
+      map['neighborhood'] = Variable<String>(neighborhood.value);
+    }
+    if (city.present) {
+      map['city'] = Variable<String>(city.value);
+    }
+    if (state.present) {
+      map['state'] = Variable<String>(state.value);
+    }
+    if (country.present) {
+      map['country'] = Variable<String>(country.value);
+    }
+    if (denominacao.present) {
+      map['denominacao'] = Variable<String>(denominacao.value);
+    }
     return map;
   }
 
   @override
   String toString() {
     return (StringBuffer('VenuesCompanion(')
-          ..write('id: $id')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('neighborhood: $neighborhood, ')
+          ..write('city: $city, ')
+          ..write('state: $state, ')
+          ..write('country: $country, ')
+          ..write('denominacao: $denominacao')
           ..write(')'))
         .toString();
   }
@@ -2438,9 +2755,25 @@ typedef $$SermonsTableProcessedTableManager =
       PrefetchHooks Function({bool authorId, bool eventsRefs})
     >;
 typedef $$VenuesTableCreateCompanionBuilder =
-    VenuesCompanion Function({Value<int> id});
+    VenuesCompanion Function({
+      Value<int> id,
+      required String name,
+      Value<String?> neighborhood,
+      required String city,
+      required String state,
+      required String country,
+      required String denominacao,
+    });
 typedef $$VenuesTableUpdateCompanionBuilder =
-    VenuesCompanion Function({Value<int> id});
+    VenuesCompanion Function({
+      Value<int> id,
+      Value<String> name,
+      Value<String?> neighborhood,
+      Value<String> city,
+      Value<String> state,
+      Value<String> country,
+      Value<String> denominacao,
+    });
 
 final class $$VenuesTableReferences
     extends BaseReferences<_$AppDatabase, $VenuesTable, Venue> {
@@ -2477,6 +2810,36 @@ class $$VenuesTableFilterComposer
   });
   ColumnFilters<int> get id => $composableBuilder(
     column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get neighborhood => $composableBuilder(
+    column: $table.neighborhood,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get city => $composableBuilder(
+    column: $table.city,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get state => $composableBuilder(
+    column: $table.state,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get country => $composableBuilder(
+    column: $table.country,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get denominacao => $composableBuilder(
+    column: $table.denominacao,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -2519,6 +2882,36 @@ class $$VenuesTableOrderingComposer
     column: $table.id,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get neighborhood => $composableBuilder(
+    column: $table.neighborhood,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get city => $composableBuilder(
+    column: $table.city,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get state => $composableBuilder(
+    column: $table.state,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get country => $composableBuilder(
+    column: $table.country,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get denominacao => $composableBuilder(
+    column: $table.denominacao,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$VenuesTableAnnotationComposer
@@ -2532,6 +2925,28 @@ class $$VenuesTableAnnotationComposer
   });
   GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get neighborhood => $composableBuilder(
+    column: $table.neighborhood,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get city =>
+      $composableBuilder(column: $table.city, builder: (column) => column);
+
+  GeneratedColumn<String> get state =>
+      $composableBuilder(column: $table.state, builder: (column) => column);
+
+  GeneratedColumn<String> get country =>
+      $composableBuilder(column: $table.country, builder: (column) => column);
+
+  GeneratedColumn<String> get denominacao => $composableBuilder(
+    column: $table.denominacao,
+    builder: (column) => column,
+  );
 
   Expression<T> eventsRefs<T extends Object>(
     Expression<T> Function($$EventsTableAnnotationComposer a) f,
@@ -2585,10 +3000,42 @@ class $$VenuesTableTableManager
               $$VenuesTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$VenuesTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({Value<int> id = const Value.absent()}) =>
-              VenuesCompanion(id: id),
-          createCompanionCallback: ({Value<int> id = const Value.absent()}) =>
-              VenuesCompanion.insert(id: id),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<String?> neighborhood = const Value.absent(),
+                Value<String> city = const Value.absent(),
+                Value<String> state = const Value.absent(),
+                Value<String> country = const Value.absent(),
+                Value<String> denominacao = const Value.absent(),
+              }) => VenuesCompanion(
+                id: id,
+                name: name,
+                neighborhood: neighborhood,
+                city: city,
+                state: state,
+                country: country,
+                denominacao: denominacao,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String name,
+                Value<String?> neighborhood = const Value.absent(),
+                required String city,
+                required String state,
+                required String country,
+                required String denominacao,
+              }) => VenuesCompanion.insert(
+                id: id,
+                name: name,
+                neighborhood: neighborhood,
+                city: city,
+                state: state,
+                country: country,
+                denominacao: denominacao,
+              ),
           withReferenceMapper: (p0) => p0
               .map(
                 (e) =>

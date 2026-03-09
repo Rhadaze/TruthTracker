@@ -19,3 +19,11 @@ class Events extends Table {
   IntColumn get venueId => integer().references(Venues, #id)();
   IntColumn get preacherId => integer().references(Preachers, #id)();
 }
+
+  // final int id;
+  // final EventCategory? category;
+  // final EventType? type;
+  // final Venue venue;
+  // final DateTime date;
+  // final Sermon? sermon;
+  // final Preacher preacher;

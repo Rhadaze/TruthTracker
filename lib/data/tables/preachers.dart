@@ -12,3 +12,10 @@ class Preachers extends Table {
   TextColumn get languages => text().nullable()();
   TextColumn get denomination => text().nullable()();
 }
+
+  // final int id;
+  // final String name;
+  // final String? email;
+  // final String? phone;
+  // final String? languages;
+  // final String? denomination;

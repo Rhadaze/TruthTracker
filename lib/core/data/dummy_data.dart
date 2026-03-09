@@ -46,65 +46,65 @@ class DummyData {
 
   static List<Sermon> populateSermons() {
     List<Sermon> slist = [];
-    slist.add(Sermon(id: 1, title: "O Anjo do Senhor"));
-    slist.add(Sermon(id: 2, title: "Ouvindo a voz de Deus"));
-    slist.add(Sermon(id: 3, title: "Verdadeira Educacao"));
-    slist.add(Sermon(id: 4, title: "A terceira mensagem angélica"));
-    slist.add(Sermon(id: 5, title: "O Santuário e sua sombra"));
+    // slist.add(Sermon(id: 1, title: "O Anjo do Senhor"));
+    // slist.add(Sermon(id: 2, title: "Ouvindo a voz de Deus"));
+    // slist.add(Sermon(id: 3, title: "Verdadeira Educacao"));
+    // slist.add(Sermon(id: 4, title: "A terceira mensagem angélica"));
+    // slist.add(Sermon(id: 5, title: "O Santuário e sua sombra"));
 
     return slist;
   }
 
   static List<Venue> populateVenues() {
     List<Venue> vlist = [];
-    vlist.add(
-      Venue(
-        id: 1,
-        name: "Central - Campo Grande",
-        bairro: "Centro",
-        cidade: "Campo Grande",
-        estado: "MS",
-        denominacao: "Adventista",
-      ),
-    );
-    vlist.add(
-      Venue(
-        id: 2,
-        name: "Sede do Bairro Amambaí",
-        bairro: "Amambaí",
-        cidade: "Campo Grande",
-        estado: "MS",
-        denominacao: "Adventista",
-      ),
-    );
-    vlist.add(
-      Venue(
-        id: 3,
-        name: "Igreja São Francisco",
-        bairro: "São Francisco",
-        cidade: "Campo Grande",
-        estado: "MS",
-        denominacao: "Adventista",
-      ),
-    );
-    vlist.add(
-      Venue(
-        id: 4,
-        name: "Central - Mogi Mirim",
-        cidade: 'Campo Grande',
-        estado: 'MS',
-        denominacao: 'Adventista',
-      ),
-    );
-    vlist.add(
-      Venue(
-        id: 5,
-        name: "Central - Cuiabá",
-        cidade: 'Campo Grande',
-        estado: 'MS',
-        denominacao: 'Adventista',
-      ),
-    );
+    // vlist.add(
+    //   Venue(
+    //     id: 1,
+    //     name: "Central - Campo Grande",
+    //     bairro: "Centro",
+    //     cidade: "Campo Grande",
+    //     estado: "MS",
+    //     denominacao: "Adventista",
+    //   ),
+    // );
+    // vlist.add(
+    //   Venue(
+    //     id: 2,
+    //     name: "Sede do Bairro Amambaí",
+    //     bairro: "Amambaí",
+    //     cidade: "Campo Grande",
+    //     estado: "MS",
+    //     denominacao: "Adventista",
+    //   ),
+    // );
+    // vlist.add(
+    //   Venue(
+    //     id: 3,
+    //     name: "Igreja São Francisco",
+    //     bairro: "São Francisco",
+    //     cidade: "Campo Grande",
+    //     estado: "MS",
+    //     denominacao: "Adventista",
+    //   ),
+    // );
+    // vlist.add(
+    //   Venue(
+    //     id: 4,
+    //     name: "Central - Mogi Mirim",
+    //     cidade: 'Campo Grande',
+    //     estado: 'MS',
+    //     denominacao: 'Adventista',
+    //   ),
+    // );
+    // vlist.add(
+    //   Venue(
+    //     id: 5,
+    //     name: "Central - Cuiabá",
+    //     cidade: 'Campo Grande',
+    //     estado: 'MS',
+    //     denominacao: 'Adventista',
+    //   ),
+    // );
     return vlist;
   }
 
