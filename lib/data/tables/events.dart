@@ -3,6 +3,7 @@ import 'package:TruthTracker/data/tables/venues.dart';
 import 'package:drift/drift.dart';
 import 'preachers.dart';
 
+@DataClassName('EventData')
 class Events extends Table {
   // @override
   // String get tableName => 'events';

@@ -17,7 +17,7 @@ class VenueDao extends DatabaseAccessor<AppDatabase> with _$VenueDaoMixin {
     return into(venues).insertOnConflictUpdate(companion);
   }
 
-  Future<bool> updateVenue(Venue venue) {
+  Future<bool> updateVenue(VenueData venue) {
     return update(venues).replace(venue);
   }
 
@@ -25,15 +25,15 @@ class VenueDao extends DatabaseAccessor<AppDatabase> with _$VenueDaoMixin {
     return (delete(venues)..where((t) => t.id.equals(id))).go();
   }
 
-  Future<Venue?> getById(int id) {
+  Future<VenueData?> getById(int id) {
     return (select(venues)..where((t) => t.id.equals(id))).getSingleOrNull();
   }
 
-  Stream<Venue?> watchById(int id) {
+  Stream<VenueData?> watchById(int id) {
     return (select(venues)..where((t) => t.id.equals(id))).watchSingleOrNull();
   }
 
-  Future<List<Venue>> getAll({bool desc = false}) {
+  Future<List<VenueData>> getAll({bool desc = false}) {
     final ordering = desc
         ? OrderingTerm.desc(venues.name)
         : OrderingTerm.asc(venues.name);
@@ -41,7 +41,7 @@ class VenueDao extends DatabaseAccessor<AppDatabase> with _$VenueDaoMixin {
     return (select(venues)..orderBy([(_) => ordering])).get();
   }
 
-  Stream<List<Venue>> watchAll({bool desc = false}) {
+  Stream<List<VenueData>> watchAll({bool desc = false}) {
     final ordering = desc
         ? OrderingTerm.desc(venues.name)
         : OrderingTerm.asc(venues.name);
@@ -49,7 +49,7 @@ class VenueDao extends DatabaseAccessor<AppDatabase> with _$VenueDaoMixin {
     return (select(venues)..orderBy([(_) => ordering])).watch();
   }
 
-  Future<List<Venue>> getAllByLocation({
+  Future<List<VenueData>> getAllByLocation({
     String? country,
     String? state,
     String? city,
@@ -90,7 +90,7 @@ class VenueDao extends DatabaseAccessor<AppDatabase> with _$VenueDaoMixin {
     return query.get();
   }
 
-  Stream<List<Venue>> watchAllByLocation({
+  Stream<List<VenueData>> watchAllByLocation({
     String? country,
     String? state,
     String? city,
@@ -170,10 +170,3 @@ class VenueDao extends DatabaseAccessor<AppDatabase> with _$VenueDaoMixin {
     }
   }
 }
-
-  // final int id;
-  // final String name;
-  // final String? neighborhood;
-  // final String city;
-  // final String state;
-  // final String denominacao;

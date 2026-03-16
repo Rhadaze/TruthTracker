@@ -1,7 +1,7 @@
 import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
 
 class Sermon {
-  final int id;
+  final int? id;
   final Preacher? author;
 
   final String title;

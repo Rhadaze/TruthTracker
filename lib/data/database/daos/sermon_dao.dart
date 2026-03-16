@@ -16,17 +16,21 @@ class SermonDao extends DatabaseAccessor<AppDatabase> with _$SermonDaoMixin {
     return into(sermons).insertOnConflictUpdate(companion);
   }
 
-  Future<bool> updateSermon(Sermon sermon) {
-    return update(sermons).replace(sermon);
+  Future<bool> replaceSermon(SermonData sermonData) {
+    return update(sermons).replace(sermonData);
   }
 
-  Future<Sermon?> getById(int sermonId) {
+  Future<int> updateSermon(int id, SermonsCompanion companion) {
+    return (update(sermons)..where((t) => t.id.equals(id))).write(companion);
+  }
+
+  Future<SermonData?> getById(int sermonId) {
     return (select(
       sermons,
     )..where((t) => t.id.equals(sermonId))).getSingleOrNull();
   }
 
-  Future<List<Sermon>> getAll({bool desc = false}) {
+  Future<List<SermonData>> getAll({bool desc = false}) {
     final ordering = desc
         ? OrderingTerm.desc(sermons.title)
         : OrderingTerm.asc(sermons.title);
@@ -34,7 +38,7 @@ class SermonDao extends DatabaseAccessor<AppDatabase> with _$SermonDaoMixin {
     return (select(sermons)..orderBy([(_) => ordering])).get();
   }
 
-  Stream<List<Sermon>> watchAll({bool desc = false}) {
+  Stream<List<SermonData>> watchAll({bool desc = false}) {
     final ordering = desc
         ? OrderingTerm.desc(sermons.title)
         : OrderingTerm.asc(sermons.title);
@@ -42,7 +46,7 @@ class SermonDao extends DatabaseAccessor<AppDatabase> with _$SermonDaoMixin {
     return (select(sermons)..orderBy([(_) => ordering])).watch();
   }
 
-  Stream<Sermon?> watchById(int sermonId) {
+  Stream<SermonData?> watchById(int sermonId) {
     return (select(
       sermons,
     )..where((t) => t.id.equals(sermonId))).watchSingleOrNull();

@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
 
-import '../tables/preachers.dart';
-import 'database.dart';
+import '../../tables/preachers.dart';
+import '../database.dart';
 
 part 'preacher_dao.g.dart';
 
@@ -18,11 +18,11 @@ class PreacherDao extends DatabaseAccessor<AppDatabase>
     return into(preachers).insertOnConflictUpdate(companion);
   }
 
-  Future<Preacher?> getById(int id) {
+  Future<PreacherData?> getById(int id) {
     return (select(preachers)..where((t) => t.id.equals(id))).getSingleOrNull();
   }
 
-  Future<List<Preacher>> getAll({bool desc = false}) {
+  Future<List<PreacherData>> getAll({bool desc = false}) {
     final ordering = desc
         ? OrderingTerm.desc(preachers.name)
         : OrderingTerm.asc(preachers.name);
@@ -30,7 +30,7 @@ class PreacherDao extends DatabaseAccessor<AppDatabase>
     return (select(preachers)..orderBy([(_) => ordering])).get();
   }
 
-  Stream<List<Preacher>> watchAll({bool desc = false}) {
+  Stream<List<PreacherData>> watchAll({bool desc = false}) {
     final ordering = desc
         ? OrderingTerm.desc(preachers.name)
         : OrderingTerm.asc(preachers.name);
@@ -38,13 +38,13 @@ class PreacherDao extends DatabaseAccessor<AppDatabase>
     return (select(preachers)..orderBy([(_) => ordering])).watch();
   }
 
-  Stream<Preacher?> watchById(int id) {
+  Stream<PreacherData?> watchById(int id) {
     return (select(
       preachers,
     )..where((t) => t.id.equals(id))).watchSingleOrNull();
   }
 
-  Future<List<Preacher>> searchByName(String query) {
+  Future<List<PreacherData>> searchByName(String query) {
     //TODO preciso normalizar essa busca
     final q = query.trim();
     if (q.isEmpty) return Future.value([]);
@@ -55,7 +55,7 @@ class PreacherDao extends DatabaseAccessor<AppDatabase>
         .get();
   }
 
-  Future<bool> updatePreacher(Preacher preacher) {
+  Future<bool> updatePreacher(PreacherData preacher) {
     return update(preachers).replace(preacher);
   }
 

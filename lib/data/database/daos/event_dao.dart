@@ -17,7 +17,7 @@ class EventDao extends DatabaseAccessor<AppDatabase> with _$EventDaoMixin {
     return into(events).insertOnConflictUpdate(companion);
   }
 
-  Future<List<Event>> getAll({bool desc = true}) {
+  Future<List<EventData>> getAll({bool desc = true}) {
     final ordering = desc
         ? OrderingTerm.desc(events.date)
         : OrderingTerm.asc(events.date);
@@ -25,7 +25,7 @@ class EventDao extends DatabaseAccessor<AppDatabase> with _$EventDaoMixin {
     return (select(events)..orderBy([(_) => ordering])).get();
   }
 
-  Future<List<Event>> getAllByVenue(int venueId, {bool desc = true}) {
+  Future<List<EventData>> getAllByVenue(int venueId, {bool desc = true}) {
     final ordering = desc
         ? OrderingTerm.desc(events.date)
         : OrderingTerm.asc(events.date);
@@ -36,7 +36,7 @@ class EventDao extends DatabaseAccessor<AppDatabase> with _$EventDaoMixin {
         .get();
   }
 
-  Future<Event?> getById(int id) {
+  Future<EventData?> getById(int id) {
     return (select(events)..where((t) => t.id.equals(id))).getSingleOrNull();
   }
 
@@ -51,7 +51,7 @@ class EventDao extends DatabaseAccessor<AppDatabase> with _$EventDaoMixin {
   //       .get();
   // }
 
-  Future<bool> updateEvent(Event event) {
+  Future<bool> updateEvent(EventData event) {
     return update(events).replace(event);
   }
 
@@ -59,13 +59,13 @@ class EventDao extends DatabaseAccessor<AppDatabase> with _$EventDaoMixin {
     return (update(events)..where((t) => t.id.equals(eventId))).write(
       EventsCompanion(venueId: Value(venueId)),
     );
-  }
+  } // TODO ta certo isso? Ele identifique o objeto a ser updated, mas não entrega informação nova.
 
   Future<int> deleteById(int id) {
     return (delete(events)..where((t) => t.id.equals(id))).go();
   }
 
-  Stream<List<Event>> watchByDate(DateTime selectedDate) {
+  Stream<List<EventData>> watchByDate(DateTime selectedDate) {
     // TODO arrumar date para não considerar hora e segundo
     return (select(events)
           ..where((t) => t.date.equals(selectedDate))
@@ -73,7 +73,7 @@ class EventDao extends DatabaseAccessor<AppDatabase> with _$EventDaoMixin {
         .watch();
   }
 
-  Stream<List<Event>> watchByDateAndPreacher(
+  Stream<List<EventData>> watchByDateAndPreacher(
     // TODO arrumar date para não considerar hora e segundo
     DateTime selectedDate,
     int preacherId,
@@ -92,7 +92,7 @@ class EventDao extends DatabaseAccessor<AppDatabase> with _$EventDaoMixin {
         .watch();
   }
 
-  Stream<Event?> watchById(int id) {
+  Stream<EventData?> watchById(int id) {
     return (select(events)..where((t) => t.id.equals(id))).watchSingleOrNull();
   }
 }

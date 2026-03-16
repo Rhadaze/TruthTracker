@@ -1,6 +1,7 @@
 import 'package:TruthTracker/data/tables/preachers.dart';
 import 'package:drift/drift.dart';
 
+@DataClassName('SermonData')
 class Sermons extends Table {
   IntColumn get id => integer().autoIncrement()();
 

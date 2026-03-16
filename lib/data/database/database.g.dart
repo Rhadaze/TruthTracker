@@ -4,7 +4,7 @@ part of 'database.dart';
 
 // ignore_for_file: type=lint
 class $PreachersTable extends Preachers
-    with TableInfo<$PreachersTable, Preacher> {
+    with TableInfo<$PreachersTable, PreacherData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -87,7 +87,7 @@ class $PreachersTable extends Preachers
   static const String $name = 'preachers';
   @override
   VerificationContext validateIntegrity(
-    Insertable<Preacher> instance, {
+    Insertable<PreacherData> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -136,9 +136,9 @@ class $PreachersTable extends Preachers
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Preacher map(Map<String, dynamic> data, {String? tablePrefix}) {
+  PreacherData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Preacher(
+    return PreacherData(
       id: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}id'],
@@ -172,14 +172,14 @@ class $PreachersTable extends Preachers
   }
 }
 
-class Preacher extends DataClass implements Insertable<Preacher> {
+class PreacherData extends DataClass implements Insertable<PreacherData> {
   final int id;
   final String name;
   final String? email;
   final String? phone;
   final String? languages;
   final String? denomination;
-  const Preacher({
+  const PreacherData({
     required this.id,
     required this.name,
     this.email,
@@ -226,12 +226,12 @@ class Preacher extends DataClass implements Insertable<Preacher> {
     );
   }
 
-  factory Preacher.fromJson(
+  factory PreacherData.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Preacher(
+    return PreacherData(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       email: serializer.fromJson<String?>(json['email']),
@@ -253,14 +253,14 @@ class Preacher extends DataClass implements Insertable<Preacher> {
     };
   }
 
-  Preacher copyWith({
+  PreacherData copyWith({
     int? id,
     String? name,
     Value<String?> email = const Value.absent(),
     Value<String?> phone = const Value.absent(),
     Value<String?> languages = const Value.absent(),
     Value<String?> denomination = const Value.absent(),
-  }) => Preacher(
+  }) => PreacherData(
     id: id ?? this.id,
     name: name ?? this.name,
     email: email.present ? email.value : this.email,
@@ -268,8 +268,8 @@ class Preacher extends DataClass implements Insertable<Preacher> {
     languages: languages.present ? languages.value : this.languages,
     denomination: denomination.present ? denomination.value : this.denomination,
   );
-  Preacher copyWithCompanion(PreachersCompanion data) {
-    return Preacher(
+  PreacherData copyWithCompanion(PreachersCompanion data) {
+    return PreacherData(
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
       email: data.email.present ? data.email.value : this.email,
@@ -283,7 +283,7 @@ class Preacher extends DataClass implements Insertable<Preacher> {
 
   @override
   String toString() {
-    return (StringBuffer('Preacher(')
+    return (StringBuffer('PreacherData(')
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('email: $email, ')
@@ -300,7 +300,7 @@ class Preacher extends DataClass implements Insertable<Preacher> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Preacher &&
+      (other is PreacherData &&
           other.id == this.id &&
           other.name == this.name &&
           other.email == this.email &&
@@ -309,7 +309,7 @@ class Preacher extends DataClass implements Insertable<Preacher> {
           other.denomination == this.denomination);
 }
 
-class PreachersCompanion extends UpdateCompanion<Preacher> {
+class PreachersCompanion extends UpdateCompanion<PreacherData> {
   final Value<int> id;
   final Value<String> name;
   final Value<String?> email;
@@ -332,7 +332,7 @@ class PreachersCompanion extends UpdateCompanion<Preacher> {
     this.languages = const Value.absent(),
     this.denomination = const Value.absent(),
   }) : name = Value(name);
-  static Insertable<Preacher> custom({
+  static Insertable<PreacherData> custom({
     Expression<int>? id,
     Expression<String>? name,
     Expression<String>? email,
@@ -406,7 +406,7 @@ class PreachersCompanion extends UpdateCompanion<Preacher> {
   }
 }
 
-class $SermonsTable extends Sermons with TableInfo<$SermonsTable, Sermon> {
+class $SermonsTable extends Sermons with TableInfo<$SermonsTable, SermonData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -533,7 +533,7 @@ class $SermonsTable extends Sermons with TableInfo<$SermonsTable, Sermon> {
   static const String $name = 'sermons';
   @override
   VerificationContext validateIntegrity(
-    Insertable<Sermon> instance, {
+    Insertable<SermonData> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -600,9 +600,9 @@ class $SermonsTable extends Sermons with TableInfo<$SermonsTable, Sermon> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Sermon map(Map<String, dynamic> data, {String? tablePrefix}) {
+  SermonData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Sermon(
+    return SermonData(
       id: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}id'],
@@ -648,7 +648,7 @@ class $SermonsTable extends Sermons with TableInfo<$SermonsTable, Sermon> {
   }
 }
 
-class Sermon extends DataClass implements Insertable<Sermon> {
+class SermonData extends DataClass implements Insertable<SermonData> {
   final int id;
   final String title;
   final String? theme;
@@ -658,7 +658,7 @@ class Sermon extends DataClass implements Insertable<Sermon> {
   final DateTime? updatedAt;
   final bool isPublished;
   final int? authorId;
-  const Sermon({
+  const SermonData({
     required this.id,
     required this.title,
     this.theme,
@@ -718,12 +718,12 @@ class Sermon extends DataClass implements Insertable<Sermon> {
     );
   }
 
-  factory Sermon.fromJson(
+  factory SermonData.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Sermon(
+    return SermonData(
       id: serializer.fromJson<int>(json['id']),
       title: serializer.fromJson<String>(json['title']),
       theme: serializer.fromJson<String?>(json['theme']),
@@ -751,7 +751,7 @@ class Sermon extends DataClass implements Insertable<Sermon> {
     };
   }
 
-  Sermon copyWith({
+  SermonData copyWith({
     int? id,
     String? title,
     Value<String?> theme = const Value.absent(),
@@ -761,7 +761,7 @@ class Sermon extends DataClass implements Insertable<Sermon> {
     Value<DateTime?> updatedAt = const Value.absent(),
     bool? isPublished,
     Value<int?> authorId = const Value.absent(),
-  }) => Sermon(
+  }) => SermonData(
     id: id ?? this.id,
     title: title ?? this.title,
     theme: theme.present ? theme.value : this.theme,
@@ -772,8 +772,8 @@ class Sermon extends DataClass implements Insertable<Sermon> {
     isPublished: isPublished ?? this.isPublished,
     authorId: authorId.present ? authorId.value : this.authorId,
   );
-  Sermon copyWithCompanion(SermonsCompanion data) {
-    return Sermon(
+  SermonData copyWithCompanion(SermonsCompanion data) {
+    return SermonData(
       id: data.id.present ? data.id.value : this.id,
       title: data.title.present ? data.title.value : this.title,
       theme: data.theme.present ? data.theme.value : this.theme,
@@ -790,7 +790,7 @@ class Sermon extends DataClass implements Insertable<Sermon> {
 
   @override
   String toString() {
-    return (StringBuffer('Sermon(')
+    return (StringBuffer('SermonData(')
           ..write('id: $id, ')
           ..write('title: $title, ')
           ..write('theme: $theme, ')
@@ -819,7 +819,7 @@ class Sermon extends DataClass implements Insertable<Sermon> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Sermon &&
+      (other is SermonData &&
           other.id == this.id &&
           other.title == this.title &&
           other.theme == this.theme &&
@@ -831,7 +831,7 @@ class Sermon extends DataClass implements Insertable<Sermon> {
           other.authorId == this.authorId);
 }
 
-class SermonsCompanion extends UpdateCompanion<Sermon> {
+class SermonsCompanion extends UpdateCompanion<SermonData> {
   final Value<int> id;
   final Value<String> title;
   final Value<String?> theme;
@@ -863,7 +863,7 @@ class SermonsCompanion extends UpdateCompanion<Sermon> {
     this.isPublished = const Value.absent(),
     this.authorId = const Value.absent(),
   }) : title = Value(title);
-  static Insertable<Sermon> custom({
+  static Insertable<SermonData> custom({
     Expression<int>? id,
     Expression<String>? title,
     Expression<String>? theme,
@@ -961,7 +961,7 @@ class SermonsCompanion extends UpdateCompanion<Sermon> {
   }
 }
 
-class $VenuesTable extends Venues with TableInfo<$VenuesTable, Venue> {
+class $VenuesTable extends Venues with TableInfo<$VenuesTable, VenueData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -1056,7 +1056,7 @@ class $VenuesTable extends Venues with TableInfo<$VenuesTable, Venue> {
   static const String $name = 'venues';
   @override
   VerificationContext validateIntegrity(
-    Insertable<Venue> instance, {
+    Insertable<VenueData> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -1122,9 +1122,9 @@ class $VenuesTable extends Venues with TableInfo<$VenuesTable, Venue> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Venue map(Map<String, dynamic> data, {String? tablePrefix}) {
+  VenueData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Venue(
+    return VenueData(
       id: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}id'],
@@ -1162,7 +1162,7 @@ class $VenuesTable extends Venues with TableInfo<$VenuesTable, Venue> {
   }
 }
 
-class Venue extends DataClass implements Insertable<Venue> {
+class VenueData extends DataClass implements Insertable<VenueData> {
   final int id;
   final String name;
   final String? neighborhood;
@@ -1170,7 +1170,7 @@ class Venue extends DataClass implements Insertable<Venue> {
   final String state;
   final String country;
   final String denominacao;
-  const Venue({
+  const VenueData({
     required this.id,
     required this.name,
     this.neighborhood,
@@ -1208,12 +1208,12 @@ class Venue extends DataClass implements Insertable<Venue> {
     );
   }
 
-  factory Venue.fromJson(
+  factory VenueData.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Venue(
+    return VenueData(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       neighborhood: serializer.fromJson<String?>(json['neighborhood']),
@@ -1237,7 +1237,7 @@ class Venue extends DataClass implements Insertable<Venue> {
     };
   }
 
-  Venue copyWith({
+  VenueData copyWith({
     int? id,
     String? name,
     Value<String?> neighborhood = const Value.absent(),
@@ -1245,7 +1245,7 @@ class Venue extends DataClass implements Insertable<Venue> {
     String? state,
     String? country,
     String? denominacao,
-  }) => Venue(
+  }) => VenueData(
     id: id ?? this.id,
     name: name ?? this.name,
     neighborhood: neighborhood.present ? neighborhood.value : this.neighborhood,
@@ -1254,8 +1254,8 @@ class Venue extends DataClass implements Insertable<Venue> {
     country: country ?? this.country,
     denominacao: denominacao ?? this.denominacao,
   );
-  Venue copyWithCompanion(VenuesCompanion data) {
-    return Venue(
+  VenueData copyWithCompanion(VenuesCompanion data) {
+    return VenueData(
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
       neighborhood: data.neighborhood.present
@@ -1272,7 +1272,7 @@ class Venue extends DataClass implements Insertable<Venue> {
 
   @override
   String toString() {
-    return (StringBuffer('Venue(')
+    return (StringBuffer('VenueData(')
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('neighborhood: $neighborhood, ')
@@ -1290,7 +1290,7 @@ class Venue extends DataClass implements Insertable<Venue> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Venue &&
+      (other is VenueData &&
           other.id == this.id &&
           other.name == this.name &&
           other.neighborhood == this.neighborhood &&
@@ -1300,7 +1300,7 @@ class Venue extends DataClass implements Insertable<Venue> {
           other.denominacao == this.denominacao);
 }
 
-class VenuesCompanion extends UpdateCompanion<Venue> {
+class VenuesCompanion extends UpdateCompanion<VenueData> {
   final Value<int> id;
   final Value<String> name;
   final Value<String?> neighborhood;
@@ -1330,7 +1330,7 @@ class VenuesCompanion extends UpdateCompanion<Venue> {
        state = Value(state),
        country = Value(country),
        denominacao = Value(denominacao);
-  static Insertable<Venue> custom({
+  static Insertable<VenueData> custom({
     Expression<int>? id,
     Expression<String>? name,
     Expression<String>? neighborhood,
@@ -1412,7 +1412,7 @@ class VenuesCompanion extends UpdateCompanion<Venue> {
   }
 }
 
-class $EventsTable extends Events with TableInfo<$EventsTable, Event> {
+class $EventsTable extends Events with TableInfo<$EventsTable, EventData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -1518,7 +1518,7 @@ class $EventsTable extends Events with TableInfo<$EventsTable, Event> {
   static const String $name = 'events';
   @override
   VerificationContext validateIntegrity(
-    Insertable<Event> instance, {
+    Insertable<EventData> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -1576,9 +1576,9 @@ class $EventsTable extends Events with TableInfo<$EventsTable, Event> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Event map(Map<String, dynamic> data, {String? tablePrefix}) {
+  EventData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Event(
+    return EventData(
       id: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}id'],
@@ -1616,7 +1616,7 @@ class $EventsTable extends Events with TableInfo<$EventsTable, Event> {
   }
 }
 
-class Event extends DataClass implements Insertable<Event> {
+class EventData extends DataClass implements Insertable<EventData> {
   final int id;
   final DateTime date;
   final String? category;
@@ -1624,7 +1624,7 @@ class Event extends DataClass implements Insertable<Event> {
   final int sermonId;
   final int venueId;
   final int preacherId;
-  const Event({
+  const EventData({
     required this.id,
     required this.date,
     this.category,
@@ -1664,12 +1664,12 @@ class Event extends DataClass implements Insertable<Event> {
     );
   }
 
-  factory Event.fromJson(
+  factory EventData.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Event(
+    return EventData(
       id: serializer.fromJson<int>(json['id']),
       date: serializer.fromJson<DateTime>(json['date']),
       category: serializer.fromJson<String?>(json['category']),
@@ -1693,7 +1693,7 @@ class Event extends DataClass implements Insertable<Event> {
     };
   }
 
-  Event copyWith({
+  EventData copyWith({
     int? id,
     DateTime? date,
     Value<String?> category = const Value.absent(),
@@ -1701,7 +1701,7 @@ class Event extends DataClass implements Insertable<Event> {
     int? sermonId,
     int? venueId,
     int? preacherId,
-  }) => Event(
+  }) => EventData(
     id: id ?? this.id,
     date: date ?? this.date,
     category: category.present ? category.value : this.category,
@@ -1710,8 +1710,8 @@ class Event extends DataClass implements Insertable<Event> {
     venueId: venueId ?? this.venueId,
     preacherId: preacherId ?? this.preacherId,
   );
-  Event copyWithCompanion(EventsCompanion data) {
-    return Event(
+  EventData copyWithCompanion(EventsCompanion data) {
+    return EventData(
       id: data.id.present ? data.id.value : this.id,
       date: data.date.present ? data.date.value : this.date,
       category: data.category.present ? data.category.value : this.category,
@@ -1726,7 +1726,7 @@ class Event extends DataClass implements Insertable<Event> {
 
   @override
   String toString() {
-    return (StringBuffer('Event(')
+    return (StringBuffer('EventData(')
           ..write('id: $id, ')
           ..write('date: $date, ')
           ..write('category: $category, ')
@@ -1744,7 +1744,7 @@ class Event extends DataClass implements Insertable<Event> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Event &&
+      (other is EventData &&
           other.id == this.id &&
           other.date == this.date &&
           other.category == this.category &&
@@ -1754,7 +1754,7 @@ class Event extends DataClass implements Insertable<Event> {
           other.preacherId == this.preacherId);
 }
 
-class EventsCompanion extends UpdateCompanion<Event> {
+class EventsCompanion extends UpdateCompanion<EventData> {
   final Value<int> id;
   final Value<DateTime> date;
   final Value<String?> category;
@@ -1783,7 +1783,7 @@ class EventsCompanion extends UpdateCompanion<Event> {
        sermonId = Value(sermonId),
        venueId = Value(venueId),
        preacherId = Value(preacherId);
-  static Insertable<Event> custom({
+  static Insertable<EventData> custom({
     Expression<int>? id,
     Expression<DateTime>? date,
     Expression<String>? category,
@@ -1908,10 +1908,10 @@ typedef $$PreachersTableUpdateCompanionBuilder =
     });
 
 final class $$PreachersTableReferences
-    extends BaseReferences<_$AppDatabase, $PreachersTable, Preacher> {
+    extends BaseReferences<_$AppDatabase, $PreachersTable, PreacherData> {
   $$PreachersTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static MultiTypedResultKey<$SermonsTable, List<Sermon>> _sermonsRefsTable(
+  static MultiTypedResultKey<$SermonsTable, List<SermonData>> _sermonsRefsTable(
     _$AppDatabase db,
   ) => MultiTypedResultKey.fromTable(
     db.sermons,
@@ -1930,7 +1930,7 @@ final class $$PreachersTableReferences
     );
   }
 
-  static MultiTypedResultKey<$EventsTable, List<Event>> _eventsRefsTable(
+  static MultiTypedResultKey<$EventsTable, List<EventData>> _eventsRefsTable(
     _$AppDatabase db,
   ) => MultiTypedResultKey.fromTable(
     db.events,
@@ -2165,14 +2165,14 @@ class $$PreachersTableTableManager
         RootTableManager<
           _$AppDatabase,
           $PreachersTable,
-          Preacher,
+          PreacherData,
           $$PreachersTableFilterComposer,
           $$PreachersTableOrderingComposer,
           $$PreachersTableAnnotationComposer,
           $$PreachersTableCreateCompanionBuilder,
           $$PreachersTableUpdateCompanionBuilder,
-          (Preacher, $$PreachersTableReferences),
-          Preacher,
+          (PreacherData, $$PreachersTableReferences),
+          PreacherData,
           PrefetchHooks Function({bool sermonsRefs, bool eventsRefs})
         > {
   $$PreachersTableTableManager(_$AppDatabase db, $PreachersTable table)
@@ -2238,9 +2238,9 @@ class $$PreachersTableTableManager
                 return [
                   if (sermonsRefs)
                     await $_getPrefetchedData<
-                      Preacher,
+                      PreacherData,
                       $PreachersTable,
-                      Sermon
+                      SermonData
                     >(
                       currentTable: table,
                       referencedTable: $$PreachersTableReferences
@@ -2252,7 +2252,11 @@ class $$PreachersTableTableManager
                       typedResults: items,
                     ),
                   if (eventsRefs)
-                    await $_getPrefetchedData<Preacher, $PreachersTable, Event>(
+                    await $_getPrefetchedData<
+                      PreacherData,
+                      $PreachersTable,
+                      EventData
+                    >(
                       currentTable: table,
                       referencedTable: $$PreachersTableReferences
                           ._eventsRefsTable(db),
@@ -2274,14 +2278,14 @@ typedef $$PreachersTableProcessedTableManager =
     ProcessedTableManager<
       _$AppDatabase,
       $PreachersTable,
-      Preacher,
+      PreacherData,
       $$PreachersTableFilterComposer,
       $$PreachersTableOrderingComposer,
       $$PreachersTableAnnotationComposer,
       $$PreachersTableCreateCompanionBuilder,
       $$PreachersTableUpdateCompanionBuilder,
-      (Preacher, $$PreachersTableReferences),
-      Preacher,
+      (PreacherData, $$PreachersTableReferences),
+      PreacherData,
       PrefetchHooks Function({bool sermonsRefs, bool eventsRefs})
     >;
 typedef $$SermonsTableCreateCompanionBuilder =
@@ -2310,7 +2314,7 @@ typedef $$SermonsTableUpdateCompanionBuilder =
     });
 
 final class $$SermonsTableReferences
-    extends BaseReferences<_$AppDatabase, $SermonsTable, Sermon> {
+    extends BaseReferences<_$AppDatabase, $SermonsTable, SermonData> {
   $$SermonsTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
   static $PreachersTable _authorIdTable(_$AppDatabase db) => db.preachers
@@ -2330,7 +2334,7 @@ final class $$SermonsTableReferences
     );
   }
 
-  static MultiTypedResultKey<$EventsTable, List<Event>> _eventsRefsTable(
+  static MultiTypedResultKey<$EventsTable, List<EventData>> _eventsRefsTable(
     _$AppDatabase db,
   ) => MultiTypedResultKey.fromTable(
     db.events,
@@ -2610,14 +2614,14 @@ class $$SermonsTableTableManager
         RootTableManager<
           _$AppDatabase,
           $SermonsTable,
-          Sermon,
+          SermonData,
           $$SermonsTableFilterComposer,
           $$SermonsTableOrderingComposer,
           $$SermonsTableAnnotationComposer,
           $$SermonsTableCreateCompanionBuilder,
           $$SermonsTableUpdateCompanionBuilder,
-          (Sermon, $$SermonsTableReferences),
-          Sermon,
+          (SermonData, $$SermonsTableReferences),
+          SermonData,
           PrefetchHooks Function({bool authorId, bool eventsRefs})
         > {
   $$SermonsTableTableManager(_$AppDatabase db, $SermonsTable table)
@@ -2722,7 +2726,11 @@ class $$SermonsTableTableManager
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (eventsRefs)
-                    await $_getPrefetchedData<Sermon, $SermonsTable, Event>(
+                    await $_getPrefetchedData<
+                      SermonData,
+                      $SermonsTable,
+                      EventData
+                    >(
                       currentTable: table,
                       referencedTable: $$SermonsTableReferences
                           ._eventsRefsTable(db),
@@ -2744,14 +2752,14 @@ typedef $$SermonsTableProcessedTableManager =
     ProcessedTableManager<
       _$AppDatabase,
       $SermonsTable,
-      Sermon,
+      SermonData,
       $$SermonsTableFilterComposer,
       $$SermonsTableOrderingComposer,
       $$SermonsTableAnnotationComposer,
       $$SermonsTableCreateCompanionBuilder,
       $$SermonsTableUpdateCompanionBuilder,
-      (Sermon, $$SermonsTableReferences),
-      Sermon,
+      (SermonData, $$SermonsTableReferences),
+      SermonData,
       PrefetchHooks Function({bool authorId, bool eventsRefs})
     >;
 typedef $$VenuesTableCreateCompanionBuilder =
@@ -2776,10 +2784,10 @@ typedef $$VenuesTableUpdateCompanionBuilder =
     });
 
 final class $$VenuesTableReferences
-    extends BaseReferences<_$AppDatabase, $VenuesTable, Venue> {
+    extends BaseReferences<_$AppDatabase, $VenuesTable, VenueData> {
   $$VenuesTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static MultiTypedResultKey<$EventsTable, List<Event>> _eventsRefsTable(
+  static MultiTypedResultKey<$EventsTable, List<EventData>> _eventsRefsTable(
     _$AppDatabase db,
   ) => MultiTypedResultKey.fromTable(
     db.events,
@@ -2979,14 +2987,14 @@ class $$VenuesTableTableManager
         RootTableManager<
           _$AppDatabase,
           $VenuesTable,
-          Venue,
+          VenueData,
           $$VenuesTableFilterComposer,
           $$VenuesTableOrderingComposer,
           $$VenuesTableAnnotationComposer,
           $$VenuesTableCreateCompanionBuilder,
           $$VenuesTableUpdateCompanionBuilder,
-          (Venue, $$VenuesTableReferences),
-          Venue,
+          (VenueData, $$VenuesTableReferences),
+          VenueData,
           PrefetchHooks Function({bool eventsRefs})
         > {
   $$VenuesTableTableManager(_$AppDatabase db, $VenuesTable table)
@@ -3050,7 +3058,11 @@ class $$VenuesTableTableManager
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (eventsRefs)
-                    await $_getPrefetchedData<Venue, $VenuesTable, Event>(
+                    await $_getPrefetchedData<
+                      VenueData,
+                      $VenuesTable,
+                      EventData
+                    >(
                       currentTable: table,
                       referencedTable: $$VenuesTableReferences._eventsRefsTable(
                         db,
@@ -3073,14 +3085,14 @@ typedef $$VenuesTableProcessedTableManager =
     ProcessedTableManager<
       _$AppDatabase,
       $VenuesTable,
-      Venue,
+      VenueData,
       $$VenuesTableFilterComposer,
       $$VenuesTableOrderingComposer,
       $$VenuesTableAnnotationComposer,
       $$VenuesTableCreateCompanionBuilder,
       $$VenuesTableUpdateCompanionBuilder,
-      (Venue, $$VenuesTableReferences),
-      Venue,
+      (VenueData, $$VenuesTableReferences),
+      VenueData,
       PrefetchHooks Function({bool eventsRefs})
     >;
 typedef $$EventsTableCreateCompanionBuilder =
@@ -3105,7 +3117,7 @@ typedef $$EventsTableUpdateCompanionBuilder =
     });
 
 final class $$EventsTableReferences
-    extends BaseReferences<_$AppDatabase, $EventsTable, Event> {
+    extends BaseReferences<_$AppDatabase, $EventsTable, EventData> {
   $$EventsTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
   static $SermonsTable _sermonIdTable(_$AppDatabase db) => db.sermons
@@ -3455,14 +3467,14 @@ class $$EventsTableTableManager
         RootTableManager<
           _$AppDatabase,
           $EventsTable,
-          Event,
+          EventData,
           $$EventsTableFilterComposer,
           $$EventsTableOrderingComposer,
           $$EventsTableAnnotationComposer,
           $$EventsTableCreateCompanionBuilder,
           $$EventsTableUpdateCompanionBuilder,
-          (Event, $$EventsTableReferences),
-          Event,
+          (EventData, $$EventsTableReferences),
+          EventData,
           PrefetchHooks Function({bool sermonId, bool venueId, bool preacherId})
         > {
   $$EventsTableTableManager(_$AppDatabase db, $EventsTable table)
@@ -3594,14 +3606,14 @@ typedef $$EventsTableProcessedTableManager =
     ProcessedTableManager<
       _$AppDatabase,
       $EventsTable,
-      Event,
+      EventData,
       $$EventsTableFilterComposer,
       $$EventsTableOrderingComposer,
       $$EventsTableAnnotationComposer,
       $$EventsTableCreateCompanionBuilder,
       $$EventsTableUpdateCompanionBuilder,
-      (Event, $$EventsTableReferences),
-      Event,
+      (EventData, $$EventsTableReferences),
+      EventData,
       PrefetchHooks Function({bool sermonId, bool venueId, bool preacherId})
     >;
 
