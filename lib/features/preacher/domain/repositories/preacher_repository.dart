@@ -1,4 +1,5 @@
 import 'package:TruthTracker/data/database/database.dart';
+import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
 
 abstract class PreacherRepository {
   Future<int> insertPreacher(PreachersCompanion companion);

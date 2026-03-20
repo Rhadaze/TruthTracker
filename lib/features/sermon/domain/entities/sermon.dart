@@ -18,7 +18,7 @@ class Sermon {
   final List<String> tags;
 
   const Sermon({
-    required this.id,
+    this.id,
     this.author,
     required this.title,
     this.theme,

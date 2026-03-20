@@ -1,5 +1,7 @@
 import 'package:TruthTracker/data/database/database.dart';
+import 'package:TruthTracker/features/preacher/data/mappers/preacher_mapper.dart';
 import 'package:TruthTracker/features/preacher/domain/entities/preacher.dart';
+import 'package:TruthTracker/features/sermon/data/rows/sermon_with_author_row.dart';
 import 'package:TruthTracker/features/sermon/domain/entities/sermon.dart';
 import 'package:drift/drift.dart';
 
@@ -18,7 +20,21 @@ class SermonMapper {
     );
   }
 
+  static Sermon fromJoinedRow(SermonWithAuthorRow row) {
+    final author = row.authorData == null
+        ? null
+        : PreacherMapper.toDomain(row.authorData!);
+
+    return toDomain(row.sermonData, author: author);
+  }
+
   static SermonsCompanion toCompanion(Sermon sermon) {
+    final authorId = sermon.author?.id;
+
+    if (sermon.author != null && authorId == null) {
+      throw ArgumentError('Cannot convert: Author exists but has no id.');
+    }
+
     return SermonsCompanion(
       id: sermon.id == null ? const Value.absent() : Value(sermon.id!),
       title: Value(sermon.title),
@@ -28,15 +44,16 @@ class SermonMapper {
       createdAt: Value(sermon.createdAt),
       updatedAt: Value(sermon.updatedAt),
       isPublished: Value(sermon.isPublished),
-      authorId: sermon.author == null
-          ? const Value.absent()
-          : Value(sermon.author!.id),
+      authorId: Value(authorId),
     );
   }
 
   static SermonData toData(Sermon sermon) {
+    if (sermon.id == null) {
+      throw ArgumentError('Cannot convert Sermon to SermonData without id.');
+    }
     return SermonData(
-      id: sermon.id ?? 0,
+      id: sermon.id!,
       title: sermon.title,
       theme: sermon.theme,
       mainText: sermon.mainText,
