@@ -8,7 +8,8 @@ class Venues extends Table {
   TextColumn get city => text()();
   TextColumn get state => text()();
   TextColumn get country => text()();
-  TextColumn get denominacao => text()();
+  TextColumn get denomination => text()();
+  TextColumn get type => text()();
 }
 
   // final int id;

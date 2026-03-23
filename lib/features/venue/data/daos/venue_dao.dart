@@ -1,6 +1,6 @@
 import 'package:TruthTracker/data/database/database.dart';
 import 'package:TruthTracker/data/tables/venues.dart';
-import 'package:TruthTracker/features/venue/domain/enums/localidade.dart';
+import 'package:TruthTracker/features/venue/domain/enums/location_level.dart';
 import 'package:drift/drift.dart';
 
 part 'venue_dao.g.dart';
@@ -9,22 +9,31 @@ part 'venue_dao.g.dart';
 class VenueDao extends DatabaseAccessor<AppDatabase> with _$VenueDaoMixin {
   VenueDao(super.db);
 
-  Future<int> insertVenue(VenuesCompanion companion) {
+  //========================
+  //  Inserts and Updates
+  //========================
+  Future<int> insert(VenuesCompanion companion) {
     return into(venues).insert(companion);
   }
 
-  Future<int> upsertVenue(VenuesCompanion companion) {
+  Future<int> upsert(VenuesCompanion companion) {
     return into(venues).insertOnConflictUpdate(companion);
   }
 
-  Future<bool> updateVenue(VenueData venue) {
+  Future<bool> replace(VenueData venue) {
     return update(venues).replace(venue);
   }
 
+  //========================
+  //       Deletes
+  //========================
   Future<int> deleteById(int id) {
     return (delete(venues)..where((t) => t.id.equals(id))).go();
   }
 
+  //========================
+  //  Getters and watchers
+  //========================
   Future<VenueData?> getById(int id) {
     return (select(venues)..where((t) => t.id.equals(id))).getSingleOrNull();
   }
@@ -34,19 +43,11 @@ class VenueDao extends DatabaseAccessor<AppDatabase> with _$VenueDaoMixin {
   }
 
   Future<List<VenueData>> getAll({bool desc = false}) {
-    final ordering = desc
-        ? OrderingTerm.desc(venues.name)
-        : OrderingTerm.asc(venues.name);
-
-    return (select(venues)..orderBy([(_) => ordering])).get();
+    return (select(venues)..orderBy([(_) => _nameOrdering(desc)])).get();
   }
 
   Stream<List<VenueData>> watchAll({bool desc = false}) {
-    final ordering = desc
-        ? OrderingTerm.desc(venues.name)
-        : OrderingTerm.asc(venues.name);
-
-    return (select(venues)..orderBy([(_) => ordering])).watch();
+    return (select(venues)..orderBy([(_) => _nameOrdering(desc)])).watch();
   }
 
   Future<List<VenueData>> getAllByLocation({
@@ -56,35 +57,17 @@ class VenueDao extends DatabaseAccessor<AppDatabase> with _$VenueDaoMixin {
     String? neighborhood,
     LocationLevel orderBy = LocationLevel.city,
   }) {
-    Expression<bool>? filter;
-
-    if (country != null && country.isNotEmpty) {
-      filter = venues.country.equals(country);
-    }
-
-    if (state != null && state.isNotEmpty) {
-      final stateFilter = venues.state.equals(state);
-      filter = filter == null ? stateFilter : filter & stateFilter;
-    }
-
-    if (city != null && city.isNotEmpty) {
-      final cityFilter = venues.city.equals(city);
-      filter = filter == null ? cityFilter : filter & cityFilter;
-    }
-
-    if (neighborhood != null && neighborhood.isNotEmpty) {
-      final neighborhoodFilter = venues.neighborhood.equals(neighborhood);
-      filter = filter == null
-          ? neighborhoodFilter
-          : filter & neighborhoodFilter;
-    }
-
     final query = select(venues);
+    final filter = _buildLocationFilter(
+      country: country,
+      state: state,
+      city: city,
+      neighborhood: neighborhood,
+    );
 
     if (filter != null) {
-      query.where((_) => filter!);
+      query.where((_) => filter);
     }
-
     query.orderBy(_buildOrdering(orderBy));
 
     return query.get();
@@ -97,43 +80,36 @@ class VenueDao extends DatabaseAccessor<AppDatabase> with _$VenueDaoMixin {
     String? neighborhood,
     LocationLevel orderBy = LocationLevel.city,
   }) {
-    Expression<bool>? filter;
-
-    if (country != null && country.isNotEmpty) {
-      filter = venues.country.equals(country);
-    }
-
-    if (state != null && state.isNotEmpty) {
-      final stateFilter = venues.state.equals(state);
-      filter = filter == null ? stateFilter : filter & stateFilter;
-    }
-
-    if (city != null && city.isNotEmpty) {
-      final cityFilter = venues.city.equals(city);
-      filter = filter == null ? cityFilter : filter & cityFilter;
-    }
-
-    if (neighborhood != null && neighborhood.isNotEmpty) {
-      final neighborhoodFilter = venues.neighborhood.equals(neighborhood);
-      filter = filter == null
-          ? neighborhoodFilter
-          : filter & neighborhoodFilter;
-    }
-
     final query = select(venues);
+    final filter = _buildLocationFilter(
+      country: country,
+      state: state,
+      city: city,
+      neighborhood: neighborhood,
+    );
 
     if (filter != null) {
-      query.where((_) => filter!);
+      query.where((_) => filter);
     }
 
     query.orderBy(_buildOrdering(orderBy));
-
     return query.watch();
+  }
+
+  //========================
+  //        Helpers
+  //========================
+  OrderingTerm _nameOrdering(bool desc) {
+    return desc
+        ? OrderingTerm.desc(venues.name)
+        : OrderingTerm.asc(venues.name);
   }
 
   List<OrderClauseGenerator<$VenuesTable>> _buildOrdering(
     LocationLevel orderBy,
   ) {
+    //  TODO tenho que tratar o fato de neighborhood ser nullable
+    //  e causar comportamento estranho, ordenando venus sem bairro
     switch (orderBy) {
       case LocationLevel.country:
         return [
@@ -169,4 +145,37 @@ class VenueDao extends DatabaseAccessor<AppDatabase> with _$VenueDaoMixin {
         ];
     }
   }
+
+  Expression<bool>? _buildLocationFilter({
+    String? country,
+    String? state,
+    String? city,
+    String? neighborhood,
+  }) {
+    final filters = <Expression<bool>>[];
+
+    if (country != null && country.trim().isNotEmpty) {
+      filters.add(venues.country.equals(country.trim()));
+    }
+
+    if (state != null && state.trim().isNotEmpty) {
+      filters.add(venues.state.equals(state.trim()));
+    }
+
+    if (city != null && city.trim().isNotEmpty) {
+      filters.add(venues.city.equals(city.trim()));
+    }
+
+    if (neighborhood != null && neighborhood.trim().isNotEmpty) {
+      filters.add(venues.neighborhood.equals(neighborhood.trim()));
+    }
+
+    if (filters.isEmpty) return null;
+
+    return filters.reduce((acc, item) => acc & item);
+  }
+
+  // if (_hasText(country)) {
+  //   filters.add(venues.country.equals(country.trim()));
+  // }
 }

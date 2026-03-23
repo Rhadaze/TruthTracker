@@ -1,7 +1,7 @@
 import 'package:TruthTracker/data/database/daos/event_dao.dart';
 import 'package:TruthTracker/data/database/daos/preacher_dao.dart';
 import 'package:TruthTracker/features/sermon/data/daos/sermon_dao.dart';
-import 'package:TruthTracker/data/database/daos/venue_dao.dart';
+import 'package:TruthTracker/features/venue/data/daos/venue_dao.dart';
 import 'package:TruthTracker/data/tables/events.dart';
 import 'package:TruthTracker/data/tables/preachers.dart';
 import 'package:TruthTracker/data/tables/sermons.dart';
