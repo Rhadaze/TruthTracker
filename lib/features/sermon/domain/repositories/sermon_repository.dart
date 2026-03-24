@@ -12,10 +12,10 @@ abstract class SermonRepository {
   Future<Sermon?> getById(int id);
   Stream<Sermon?> watchById(int id);
 
-  Future<List<SermonListItem>> getListItems();
-
   Future<List<Sermon>> getAll({bool desc = false});
   Stream<List<Sermon>> watchAll({bool desc = false});
+
+  Future<List<SermonListItem>> getListItems();
 
   Future<Sermon?> getByIdWithAuthor(int sermonId);
   Stream<Sermon?> watchByIdWithAuthor(int sermonId);

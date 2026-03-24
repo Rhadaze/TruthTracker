@@ -133,6 +133,9 @@ class SermonDao extends DatabaseAccessor<AppDatabase> with _$SermonDaoMixin {
     });
   }
 
+  //========================
+  //        Helpers
+  //========================
   OrderingTerm _titleOrdering(bool desc) {
     return desc
         ? OrderingTerm.desc(sermons.title)
