@@ -3,6 +3,7 @@ import 'package:TruthTracker/features/venue/data/mappers/venue_mapper.dart';
 import 'package:TruthTracker/features/venue/domain/entities/venue.dart';
 import 'package:TruthTracker/features/venue/domain/enums/location_level.dart';
 import 'package:TruthTracker/features/venue/domain/repositories/venue_repository.dart';
+import 'package:TruthTracker/features/venue/models/venue_list_item.dart';
 
 class VenueRepositoryImpl implements VenueRepository {
   final VenueDao _venueDao;
@@ -106,5 +107,15 @@ class VenueRepositoryImpl implements VenueRepository {
     return venuesDataStream.map((lista) {
       return lista.map(VenueMapper.toDomain).toList();
     });
+  }
+
+  @override
+  Future<List<VenueListItem>> getListItems({bool desc = false}) {
+    return _venueDao.getListItems(desc);
+  }
+
+  @override
+  Future<List<VenueListItem>> searchListItems({required String search, bool desc = false}) {
+    return _venueDao.searchListItems(search: search, desc: desc);
   }
 }

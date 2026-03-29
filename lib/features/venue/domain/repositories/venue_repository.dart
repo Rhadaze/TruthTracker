@@ -1,5 +1,6 @@
 import 'package:TruthTracker/features/venue/domain/entities/venue.dart';
 import 'package:TruthTracker/features/venue/domain/enums/location_level.dart';
+import 'package:TruthTracker/features/venue/models/venue_list_item.dart';
 
 abstract class VenueRepository {
   Future<int> insert(Venue venue);
@@ -23,5 +24,11 @@ abstract class VenueRepository {
     String? city,
     String? neighborhood,
     LocationLevel orderBy = LocationLevel.city,
+  });
+
+  Future<List<VenueListItem>> getListItems({bool desc = false});
+  Future<List<VenueListItem>> searchListItems({
+    required String search,
+    bool desc = false,
   });
 }

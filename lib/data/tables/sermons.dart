@@ -17,19 +17,3 @@ class Sermons extends Table {
 
   IntColumn get authorId => integer().nullable().references(Preachers, #id)();
 }
-
-  // final int id;
-  // final Preacher? author;
-
-  // final String title;
-  // final String? theme;
-  // final String? mainText;
-  // final String? notes;
-
-  // //TODO colocar nonnullable e required depois de implementar a persistência
-  // final DateTime createdAt;
-  // final DateTime? updatedAt;
-
-  // final bool isPublished;
-
-  // final List<String> tags;

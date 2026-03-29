@@ -3,15 +3,19 @@ class Preacher {
   final String name;
   final String? email;
   final String? phone;
-  final String? languages;
+  final List<String> languages;
   final String? denomination;
+  final String? notes;
+  final int? homeVenueId;
 
-  Preacher({
-    required this.id,
+  const Preacher({
+    this.id,
     required this.name,
     this.email,
     this.phone,
-    this.languages,
+    this.languages = const [],
     this.denomination,
+    this.notes,
+    this.homeVenueId,
   });
 }

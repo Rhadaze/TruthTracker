@@ -11,11 +11,3 @@ class Venues extends Table {
   TextColumn get denomination => text()();
   TextColumn get type => text()();
 }
-
-  // final int id;
-  // final String name;
-  // final String country;
-  // final String state;
-  // final String city;
-  // final String? neighborhood;
-  // final String denomination;

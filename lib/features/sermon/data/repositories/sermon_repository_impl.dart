@@ -79,8 +79,16 @@ class SermonRepositoryImpl implements SermonRepository {
   }
 
   @override
-  Future<List<SermonListItem>> getListItems() {
-    return _sermonDao.getListItems();
+  Future<List<SermonListItem>> getListItems({bool desc = false}) {
+    return _sermonDao.getListItems(desc);
+  }
+
+  @override
+  Future<List<SermonListItem>> searchListItems({
+    required String search,
+    bool desc = false,
+  }) {
+    return _sermonDao.searchListItems(search: search, desc: desc);
   }
 
   //=====================================

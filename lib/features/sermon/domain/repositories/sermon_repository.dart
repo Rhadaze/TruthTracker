@@ -15,11 +15,16 @@ abstract class SermonRepository {
   Future<List<Sermon>> getAll({bool desc = false});
   Stream<List<Sermon>> watchAll({bool desc = false});
 
-  Future<List<SermonListItem>> getListItems();
+  Future<List<SermonListItem>> getListItems({bool desc = false});
+  Future<List<SermonListItem>> searchListItems({
+    required String search,
+    bool desc = false,
+  });
 
   Future<Sermon?> getByIdWithAuthor(int sermonId);
   Stream<Sermon?> watchByIdWithAuthor(int sermonId);
 
   Future<List<Sermon>> getAllWithAuthor({bool desc = false});
   Stream<List<Sermon>> watchAllWithAuthor({bool desc = false});
+  
 }

@@ -22,8 +22,8 @@ class SermonDao extends DatabaseAccessor<AppDatabase> with _$SermonDaoMixin {
     return into(sermons).insertOnConflictUpdate(companion);
   }
 
-  Future<bool> replace(SermonData sermonData) {
-    return update(sermons).replace(sermonData);
+  Future<bool> replace(SermonData data) {
+    return update(sermons).replace(data);
   }
 
   Future<int> updateFields(int sermonId, SermonsCompanion companion) {
@@ -54,10 +54,18 @@ class SermonDao extends DatabaseAccessor<AppDatabase> with _$SermonDaoMixin {
     )..where((t) => t.id.equals(sermonId))).watchSingleOrNull();
   }
 
-  Future<List<SermonListItem>> getListItems() async {
+  Future<List<SermonData>> getAll({bool desc = false}) {
+    return (select(sermons)..orderBy([(_) => _titleOrdering(desc)])).get();
+  }
+
+  Stream<List<SermonData>> watchAll({bool desc = false}) {
+    return (select(sermons)..orderBy([(_) => _titleOrdering(desc)])).watch();
+  }
+
+  Future<List<SermonListItem>> getListItems(bool desc) async {
     final query = selectOnly(sermons)
       ..addColumns([sermons.id, sermons.title])
-      ..orderBy([_titleOrdering(false)]);
+      ..orderBy([_titleOrdering(desc)]);
 
     final rows = await query.get();
 
@@ -69,12 +77,28 @@ class SermonDao extends DatabaseAccessor<AppDatabase> with _$SermonDaoMixin {
     }).toList();
   }
 
-  Future<List<SermonData>> getAll({bool desc = false}) {
-    return (select(sermons)..orderBy([(_) => _titleOrdering(desc)])).get();
-  }
+  Future<List<SermonListItem>> searchListItems({
+    required String search,
+    bool desc = false,
+  }) async {
+    final s = search.trim();
+    if (s.isEmpty) {
+      return [];
+    }
+    
+    final query = selectOnly(sermons)
+      ..addColumns([sermons.id, sermons.title])
+      ..where(sermons.title.like('%$s%'))
+      ..orderBy([_titleOrdering(desc)]);
 
-  Stream<List<SermonData>> watchAll({bool desc = false}) {
-    return (select(sermons)..orderBy([(_) => _titleOrdering(desc)])).watch();
+    final rows = await query.get();
+
+    return rows.map((row) {
+      return SermonListItem(
+        row.read(sermons.id)!,
+        row.read(sermons.title)!,
+      );
+    }).toList();
   }
 
   //=====================================
@@ -136,7 +160,7 @@ class SermonDao extends DatabaseAccessor<AppDatabase> with _$SermonDaoMixin {
   //========================
   //        Helpers
   //========================
-  OrderingTerm _titleOrdering(bool desc) {
+  OrderingTerm _titleOrdering([bool desc = false]) {
     return desc
         ? OrderingTerm.desc(sermons.title)
         : OrderingTerm.asc(sermons.title);

@@ -3,6 +3,510 @@
 part of 'database.dart';
 
 // ignore_for_file: type=lint
+class $VenuesTable extends Venues with TableInfo<$VenuesTable, VenueData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $VenuesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _neighborhoodMeta = const VerificationMeta(
+    'neighborhood',
+  );
+  @override
+  late final GeneratedColumn<String> neighborhood = GeneratedColumn<String>(
+    'neighborhood',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _cityMeta = const VerificationMeta('city');
+  @override
+  late final GeneratedColumn<String> city = GeneratedColumn<String>(
+    'city',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _stateMeta = const VerificationMeta('state');
+  @override
+  late final GeneratedColumn<String> state = GeneratedColumn<String>(
+    'state',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _countryMeta = const VerificationMeta(
+    'country',
+  );
+  @override
+  late final GeneratedColumn<String> country = GeneratedColumn<String>(
+    'country',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _denominationMeta = const VerificationMeta(
+    'denomination',
+  );
+  @override
+  late final GeneratedColumn<String> denomination = GeneratedColumn<String>(
+    'denomination',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _typeMeta = const VerificationMeta('type');
+  @override
+  late final GeneratedColumn<String> type = GeneratedColumn<String>(
+    'type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    name,
+    neighborhood,
+    city,
+    state,
+    country,
+    denomination,
+    type,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'venues';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<VenueData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('neighborhood')) {
+      context.handle(
+        _neighborhoodMeta,
+        neighborhood.isAcceptableOrUnknown(
+          data['neighborhood']!,
+          _neighborhoodMeta,
+        ),
+      );
+    }
+    if (data.containsKey('city')) {
+      context.handle(
+        _cityMeta,
+        city.isAcceptableOrUnknown(data['city']!, _cityMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_cityMeta);
+    }
+    if (data.containsKey('state')) {
+      context.handle(
+        _stateMeta,
+        state.isAcceptableOrUnknown(data['state']!, _stateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_stateMeta);
+    }
+    if (data.containsKey('country')) {
+      context.handle(
+        _countryMeta,
+        country.isAcceptableOrUnknown(data['country']!, _countryMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_countryMeta);
+    }
+    if (data.containsKey('denomination')) {
+      context.handle(
+        _denominationMeta,
+        denomination.isAcceptableOrUnknown(
+          data['denomination']!,
+          _denominationMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_denominationMeta);
+    }
+    if (data.containsKey('type')) {
+      context.handle(
+        _typeMeta,
+        type.isAcceptableOrUnknown(data['type']!, _typeMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_typeMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  VenueData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return VenueData(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      neighborhood: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}neighborhood'],
+      ),
+      city: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}city'],
+      )!,
+      state: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}state'],
+      )!,
+      country: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}country'],
+      )!,
+      denomination: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}denomination'],
+      )!,
+      type: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}type'],
+      )!,
+    );
+  }
+
+  @override
+  $VenuesTable createAlias(String alias) {
+    return $VenuesTable(attachedDatabase, alias);
+  }
+}
+
+class VenueData extends DataClass implements Insertable<VenueData> {
+  final int id;
+  final String name;
+  final String? neighborhood;
+  final String city;
+  final String state;
+  final String country;
+  final String denomination;
+  final String type;
+  const VenueData({
+    required this.id,
+    required this.name,
+    this.neighborhood,
+    required this.city,
+    required this.state,
+    required this.country,
+    required this.denomination,
+    required this.type,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    if (!nullToAbsent || neighborhood != null) {
+      map['neighborhood'] = Variable<String>(neighborhood);
+    }
+    map['city'] = Variable<String>(city);
+    map['state'] = Variable<String>(state);
+    map['country'] = Variable<String>(country);
+    map['denomination'] = Variable<String>(denomination);
+    map['type'] = Variable<String>(type);
+    return map;
+  }
+
+  VenuesCompanion toCompanion(bool nullToAbsent) {
+    return VenuesCompanion(
+      id: Value(id),
+      name: Value(name),
+      neighborhood: neighborhood == null && nullToAbsent
+          ? const Value.absent()
+          : Value(neighborhood),
+      city: Value(city),
+      state: Value(state),
+      country: Value(country),
+      denomination: Value(denomination),
+      type: Value(type),
+    );
+  }
+
+  factory VenueData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return VenueData(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      neighborhood: serializer.fromJson<String?>(json['neighborhood']),
+      city: serializer.fromJson<String>(json['city']),
+      state: serializer.fromJson<String>(json['state']),
+      country: serializer.fromJson<String>(json['country']),
+      denomination: serializer.fromJson<String>(json['denomination']),
+      type: serializer.fromJson<String>(json['type']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+      'neighborhood': serializer.toJson<String?>(neighborhood),
+      'city': serializer.toJson<String>(city),
+      'state': serializer.toJson<String>(state),
+      'country': serializer.toJson<String>(country),
+      'denomination': serializer.toJson<String>(denomination),
+      'type': serializer.toJson<String>(type),
+    };
+  }
+
+  VenueData copyWith({
+    int? id,
+    String? name,
+    Value<String?> neighborhood = const Value.absent(),
+    String? city,
+    String? state,
+    String? country,
+    String? denomination,
+    String? type,
+  }) => VenueData(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    neighborhood: neighborhood.present ? neighborhood.value : this.neighborhood,
+    city: city ?? this.city,
+    state: state ?? this.state,
+    country: country ?? this.country,
+    denomination: denomination ?? this.denomination,
+    type: type ?? this.type,
+  );
+  VenueData copyWithCompanion(VenuesCompanion data) {
+    return VenueData(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      neighborhood: data.neighborhood.present
+          ? data.neighborhood.value
+          : this.neighborhood,
+      city: data.city.present ? data.city.value : this.city,
+      state: data.state.present ? data.state.value : this.state,
+      country: data.country.present ? data.country.value : this.country,
+      denomination: data.denomination.present
+          ? data.denomination.value
+          : this.denomination,
+      type: data.type.present ? data.type.value : this.type,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('VenueData(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('neighborhood: $neighborhood, ')
+          ..write('city: $city, ')
+          ..write('state: $state, ')
+          ..write('country: $country, ')
+          ..write('denomination: $denomination, ')
+          ..write('type: $type')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    name,
+    neighborhood,
+    city,
+    state,
+    country,
+    denomination,
+    type,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is VenueData &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.neighborhood == this.neighborhood &&
+          other.city == this.city &&
+          other.state == this.state &&
+          other.country == this.country &&
+          other.denomination == this.denomination &&
+          other.type == this.type);
+}
+
+class VenuesCompanion extends UpdateCompanion<VenueData> {
+  final Value<int> id;
+  final Value<String> name;
+  final Value<String?> neighborhood;
+  final Value<String> city;
+  final Value<String> state;
+  final Value<String> country;
+  final Value<String> denomination;
+  final Value<String> type;
+  const VenuesCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.neighborhood = const Value.absent(),
+    this.city = const Value.absent(),
+    this.state = const Value.absent(),
+    this.country = const Value.absent(),
+    this.denomination = const Value.absent(),
+    this.type = const Value.absent(),
+  });
+  VenuesCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+    this.neighborhood = const Value.absent(),
+    required String city,
+    required String state,
+    required String country,
+    required String denomination,
+    required String type,
+  }) : name = Value(name),
+       city = Value(city),
+       state = Value(state),
+       country = Value(country),
+       denomination = Value(denomination),
+       type = Value(type);
+  static Insertable<VenueData> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<String>? neighborhood,
+    Expression<String>? city,
+    Expression<String>? state,
+    Expression<String>? country,
+    Expression<String>? denomination,
+    Expression<String>? type,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (neighborhood != null) 'neighborhood': neighborhood,
+      if (city != null) 'city': city,
+      if (state != null) 'state': state,
+      if (country != null) 'country': country,
+      if (denomination != null) 'denomination': denomination,
+      if (type != null) 'type': type,
+    });
+  }
+
+  VenuesCompanion copyWith({
+    Value<int>? id,
+    Value<String>? name,
+    Value<String?>? neighborhood,
+    Value<String>? city,
+    Value<String>? state,
+    Value<String>? country,
+    Value<String>? denomination,
+    Value<String>? type,
+  }) {
+    return VenuesCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      neighborhood: neighborhood ?? this.neighborhood,
+      city: city ?? this.city,
+      state: state ?? this.state,
+      country: country ?? this.country,
+      denomination: denomination ?? this.denomination,
+      type: type ?? this.type,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (neighborhood.present) {
+      map['neighborhood'] = Variable<String>(neighborhood.value);
+    }
+    if (city.present) {
+      map['city'] = Variable<String>(city.value);
+    }
+    if (state.present) {
+      map['state'] = Variable<String>(state.value);
+    }
+    if (country.present) {
+      map['country'] = Variable<String>(country.value);
+    }
+    if (denomination.present) {
+      map['denomination'] = Variable<String>(denomination.value);
+    }
+    if (type.present) {
+      map['type'] = Variable<String>(type.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('VenuesCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('neighborhood: $neighborhood, ')
+          ..write('city: $city, ')
+          ..write('state: $state, ')
+          ..write('country: $country, ')
+          ..write('denomination: $denomination, ')
+          ..write('type: $type')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $PreachersTable extends Preachers
     with TableInfo<$PreachersTable, PreacherData> {
   @override
@@ -71,6 +575,29 @@ class $PreachersTable extends Preachers
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _notesMeta = const VerificationMeta('notes');
+  @override
+  late final GeneratedColumn<String> notes = GeneratedColumn<String>(
+    'notes',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _homeVenueIdMeta = const VerificationMeta(
+    'homeVenueId',
+  );
+  @override
+  late final GeneratedColumn<int> homeVenueId = GeneratedColumn<int>(
+    'home_venue_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES venues (id)',
+    ),
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -79,6 +606,8 @@ class $PreachersTable extends Preachers
     phone,
     languages,
     denomination,
+    notes,
+    homeVenueId,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -130,6 +659,21 @@ class $PreachersTable extends Preachers
         ),
       );
     }
+    if (data.containsKey('notes')) {
+      context.handle(
+        _notesMeta,
+        notes.isAcceptableOrUnknown(data['notes']!, _notesMeta),
+      );
+    }
+    if (data.containsKey('home_venue_id')) {
+      context.handle(
+        _homeVenueIdMeta,
+        homeVenueId.isAcceptableOrUnknown(
+          data['home_venue_id']!,
+          _homeVenueIdMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -163,6 +707,14 @@ class $PreachersTable extends Preachers
         DriftSqlType.string,
         data['${effectivePrefix}denomination'],
       ),
+      notes: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}notes'],
+      ),
+      homeVenueId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}home_venue_id'],
+      ),
     );
   }
 
@@ -179,6 +731,8 @@ class PreacherData extends DataClass implements Insertable<PreacherData> {
   final String? phone;
   final String? languages;
   final String? denomination;
+  final String? notes;
+  final int? homeVenueId;
   const PreacherData({
     required this.id,
     required this.name,
@@ -186,6 +740,8 @@ class PreacherData extends DataClass implements Insertable<PreacherData> {
     this.phone,
     this.languages,
     this.denomination,
+    this.notes,
+    this.homeVenueId,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -203,6 +759,12 @@ class PreacherData extends DataClass implements Insertable<PreacherData> {
     }
     if (!nullToAbsent || denomination != null) {
       map['denomination'] = Variable<String>(denomination);
+    }
+    if (!nullToAbsent || notes != null) {
+      map['notes'] = Variable<String>(notes);
+    }
+    if (!nullToAbsent || homeVenueId != null) {
+      map['home_venue_id'] = Variable<int>(homeVenueId);
     }
     return map;
   }
@@ -223,6 +785,12 @@ class PreacherData extends DataClass implements Insertable<PreacherData> {
       denomination: denomination == null && nullToAbsent
           ? const Value.absent()
           : Value(denomination),
+      notes: notes == null && nullToAbsent
+          ? const Value.absent()
+          : Value(notes),
+      homeVenueId: homeVenueId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(homeVenueId),
     );
   }
 
@@ -238,6 +806,8 @@ class PreacherData extends DataClass implements Insertable<PreacherData> {
       phone: serializer.fromJson<String?>(json['phone']),
       languages: serializer.fromJson<String?>(json['languages']),
       denomination: serializer.fromJson<String?>(json['denomination']),
+      notes: serializer.fromJson<String?>(json['notes']),
+      homeVenueId: serializer.fromJson<int?>(json['homeVenueId']),
     );
   }
   @override
@@ -250,6 +820,8 @@ class PreacherData extends DataClass implements Insertable<PreacherData> {
       'phone': serializer.toJson<String?>(phone),
       'languages': serializer.toJson<String?>(languages),
       'denomination': serializer.toJson<String?>(denomination),
+      'notes': serializer.toJson<String?>(notes),
+      'homeVenueId': serializer.toJson<int?>(homeVenueId),
     };
   }
 
@@ -260,6 +832,8 @@ class PreacherData extends DataClass implements Insertable<PreacherData> {
     Value<String?> phone = const Value.absent(),
     Value<String?> languages = const Value.absent(),
     Value<String?> denomination = const Value.absent(),
+    Value<String?> notes = const Value.absent(),
+    Value<int?> homeVenueId = const Value.absent(),
   }) => PreacherData(
     id: id ?? this.id,
     name: name ?? this.name,
@@ -267,6 +841,8 @@ class PreacherData extends DataClass implements Insertable<PreacherData> {
     phone: phone.present ? phone.value : this.phone,
     languages: languages.present ? languages.value : this.languages,
     denomination: denomination.present ? denomination.value : this.denomination,
+    notes: notes.present ? notes.value : this.notes,
+    homeVenueId: homeVenueId.present ? homeVenueId.value : this.homeVenueId,
   );
   PreacherData copyWithCompanion(PreachersCompanion data) {
     return PreacherData(
@@ -278,6 +854,10 @@ class PreacherData extends DataClass implements Insertable<PreacherData> {
       denomination: data.denomination.present
           ? data.denomination.value
           : this.denomination,
+      notes: data.notes.present ? data.notes.value : this.notes,
+      homeVenueId: data.homeVenueId.present
+          ? data.homeVenueId.value
+          : this.homeVenueId,
     );
   }
 
@@ -289,14 +869,24 @@ class PreacherData extends DataClass implements Insertable<PreacherData> {
           ..write('email: $email, ')
           ..write('phone: $phone, ')
           ..write('languages: $languages, ')
-          ..write('denomination: $denomination')
+          ..write('denomination: $denomination, ')
+          ..write('notes: $notes, ')
+          ..write('homeVenueId: $homeVenueId')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, name, email, phone, languages, denomination);
+  int get hashCode => Object.hash(
+    id,
+    name,
+    email,
+    phone,
+    languages,
+    denomination,
+    notes,
+    homeVenueId,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -306,7 +896,9 @@ class PreacherData extends DataClass implements Insertable<PreacherData> {
           other.email == this.email &&
           other.phone == this.phone &&
           other.languages == this.languages &&
-          other.denomination == this.denomination);
+          other.denomination == this.denomination &&
+          other.notes == this.notes &&
+          other.homeVenueId == this.homeVenueId);
 }
 
 class PreachersCompanion extends UpdateCompanion<PreacherData> {
@@ -316,6 +908,8 @@ class PreachersCompanion extends UpdateCompanion<PreacherData> {
   final Value<String?> phone;
   final Value<String?> languages;
   final Value<String?> denomination;
+  final Value<String?> notes;
+  final Value<int?> homeVenueId;
   const PreachersCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -323,6 +917,8 @@ class PreachersCompanion extends UpdateCompanion<PreacherData> {
     this.phone = const Value.absent(),
     this.languages = const Value.absent(),
     this.denomination = const Value.absent(),
+    this.notes = const Value.absent(),
+    this.homeVenueId = const Value.absent(),
   });
   PreachersCompanion.insert({
     this.id = const Value.absent(),
@@ -331,6 +927,8 @@ class PreachersCompanion extends UpdateCompanion<PreacherData> {
     this.phone = const Value.absent(),
     this.languages = const Value.absent(),
     this.denomination = const Value.absent(),
+    this.notes = const Value.absent(),
+    this.homeVenueId = const Value.absent(),
   }) : name = Value(name);
   static Insertable<PreacherData> custom({
     Expression<int>? id,
@@ -339,6 +937,8 @@ class PreachersCompanion extends UpdateCompanion<PreacherData> {
     Expression<String>? phone,
     Expression<String>? languages,
     Expression<String>? denomination,
+    Expression<String>? notes,
+    Expression<int>? homeVenueId,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -347,6 +947,8 @@ class PreachersCompanion extends UpdateCompanion<PreacherData> {
       if (phone != null) 'phone': phone,
       if (languages != null) 'languages': languages,
       if (denomination != null) 'denomination': denomination,
+      if (notes != null) 'notes': notes,
+      if (homeVenueId != null) 'home_venue_id': homeVenueId,
     });
   }
 
@@ -357,6 +959,8 @@ class PreachersCompanion extends UpdateCompanion<PreacherData> {
     Value<String?>? phone,
     Value<String?>? languages,
     Value<String?>? denomination,
+    Value<String?>? notes,
+    Value<int?>? homeVenueId,
   }) {
     return PreachersCompanion(
       id: id ?? this.id,
@@ -365,6 +969,8 @@ class PreachersCompanion extends UpdateCompanion<PreacherData> {
       phone: phone ?? this.phone,
       languages: languages ?? this.languages,
       denomination: denomination ?? this.denomination,
+      notes: notes ?? this.notes,
+      homeVenueId: homeVenueId ?? this.homeVenueId,
     );
   }
 
@@ -389,6 +995,12 @@ class PreachersCompanion extends UpdateCompanion<PreacherData> {
     if (denomination.present) {
       map['denomination'] = Variable<String>(denomination.value);
     }
+    if (notes.present) {
+      map['notes'] = Variable<String>(notes.value);
+    }
+    if (homeVenueId.present) {
+      map['home_venue_id'] = Variable<int>(homeVenueId.value);
+    }
     return map;
   }
 
@@ -400,7 +1012,9 @@ class PreachersCompanion extends UpdateCompanion<PreacherData> {
           ..write('email: $email, ')
           ..write('phone: $phone, ')
           ..write('languages: $languages, ')
-          ..write('denomination: $denomination')
+          ..write('denomination: $denomination, ')
+          ..write('notes: $notes, ')
+          ..write('homeVenueId: $homeVenueId')
           ..write(')'))
         .toString();
   }
@@ -961,510 +1575,6 @@ class SermonsCompanion extends UpdateCompanion<SermonData> {
   }
 }
 
-class $VenuesTable extends Venues with TableInfo<$VenuesTable, VenueData> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $VenuesTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-    'id',
-    aliasedName,
-    false,
-    hasAutoIncrement: true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'PRIMARY KEY AUTOINCREMENT',
-    ),
-  );
-  static const VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedColumn<String> name = GeneratedColumn<String>(
-    'name',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _neighborhoodMeta = const VerificationMeta(
-    'neighborhood',
-  );
-  @override
-  late final GeneratedColumn<String> neighborhood = GeneratedColumn<String>(
-    'neighborhood',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _cityMeta = const VerificationMeta('city');
-  @override
-  late final GeneratedColumn<String> city = GeneratedColumn<String>(
-    'city',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _stateMeta = const VerificationMeta('state');
-  @override
-  late final GeneratedColumn<String> state = GeneratedColumn<String>(
-    'state',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _countryMeta = const VerificationMeta(
-    'country',
-  );
-  @override
-  late final GeneratedColumn<String> country = GeneratedColumn<String>(
-    'country',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _denominationMeta = const VerificationMeta(
-    'denomination',
-  );
-  @override
-  late final GeneratedColumn<String> denomination = GeneratedColumn<String>(
-    'denomination',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _typeMeta = const VerificationMeta('type');
-  @override
-  late final GeneratedColumn<String> type = GeneratedColumn<String>(
-    'type',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  @override
-  List<GeneratedColumn> get $columns => [
-    id,
-    name,
-    neighborhood,
-    city,
-    state,
-    country,
-    denomination,
-    type,
-  ];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'venues';
-  @override
-  VerificationContext validateIntegrity(
-    Insertable<VenueData> instance, {
-    bool isInserting = false,
-  }) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('name')) {
-      context.handle(
-        _nameMeta,
-        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_nameMeta);
-    }
-    if (data.containsKey('neighborhood')) {
-      context.handle(
-        _neighborhoodMeta,
-        neighborhood.isAcceptableOrUnknown(
-          data['neighborhood']!,
-          _neighborhoodMeta,
-        ),
-      );
-    }
-    if (data.containsKey('city')) {
-      context.handle(
-        _cityMeta,
-        city.isAcceptableOrUnknown(data['city']!, _cityMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_cityMeta);
-    }
-    if (data.containsKey('state')) {
-      context.handle(
-        _stateMeta,
-        state.isAcceptableOrUnknown(data['state']!, _stateMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_stateMeta);
-    }
-    if (data.containsKey('country')) {
-      context.handle(
-        _countryMeta,
-        country.isAcceptableOrUnknown(data['country']!, _countryMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_countryMeta);
-    }
-    if (data.containsKey('denomination')) {
-      context.handle(
-        _denominationMeta,
-        denomination.isAcceptableOrUnknown(
-          data['denomination']!,
-          _denominationMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_denominationMeta);
-    }
-    if (data.containsKey('type')) {
-      context.handle(
-        _typeMeta,
-        type.isAcceptableOrUnknown(data['type']!, _typeMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_typeMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  VenueData map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return VenueData(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}id'],
-      )!,
-      name: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}name'],
-      )!,
-      neighborhood: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}neighborhood'],
-      ),
-      city: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}city'],
-      )!,
-      state: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}state'],
-      )!,
-      country: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}country'],
-      )!,
-      denomination: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}denomination'],
-      )!,
-      type: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}type'],
-      )!,
-    );
-  }
-
-  @override
-  $VenuesTable createAlias(String alias) {
-    return $VenuesTable(attachedDatabase, alias);
-  }
-}
-
-class VenueData extends DataClass implements Insertable<VenueData> {
-  final int id;
-  final String name;
-  final String? neighborhood;
-  final String city;
-  final String state;
-  final String country;
-  final String denomination;
-  final String type;
-  const VenueData({
-    required this.id,
-    required this.name,
-    this.neighborhood,
-    required this.city,
-    required this.state,
-    required this.country,
-    required this.denomination,
-    required this.type,
-  });
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['name'] = Variable<String>(name);
-    if (!nullToAbsent || neighborhood != null) {
-      map['neighborhood'] = Variable<String>(neighborhood);
-    }
-    map['city'] = Variable<String>(city);
-    map['state'] = Variable<String>(state);
-    map['country'] = Variable<String>(country);
-    map['denomination'] = Variable<String>(denomination);
-    map['type'] = Variable<String>(type);
-    return map;
-  }
-
-  VenuesCompanion toCompanion(bool nullToAbsent) {
-    return VenuesCompanion(
-      id: Value(id),
-      name: Value(name),
-      neighborhood: neighborhood == null && nullToAbsent
-          ? const Value.absent()
-          : Value(neighborhood),
-      city: Value(city),
-      state: Value(state),
-      country: Value(country),
-      denomination: Value(denomination),
-      type: Value(type),
-    );
-  }
-
-  factory VenueData.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return VenueData(
-      id: serializer.fromJson<int>(json['id']),
-      name: serializer.fromJson<String>(json['name']),
-      neighborhood: serializer.fromJson<String?>(json['neighborhood']),
-      city: serializer.fromJson<String>(json['city']),
-      state: serializer.fromJson<String>(json['state']),
-      country: serializer.fromJson<String>(json['country']),
-      denomination: serializer.fromJson<String>(json['denomination']),
-      type: serializer.fromJson<String>(json['type']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'name': serializer.toJson<String>(name),
-      'neighborhood': serializer.toJson<String?>(neighborhood),
-      'city': serializer.toJson<String>(city),
-      'state': serializer.toJson<String>(state),
-      'country': serializer.toJson<String>(country),
-      'denomination': serializer.toJson<String>(denomination),
-      'type': serializer.toJson<String>(type),
-    };
-  }
-
-  VenueData copyWith({
-    int? id,
-    String? name,
-    Value<String?> neighborhood = const Value.absent(),
-    String? city,
-    String? state,
-    String? country,
-    String? denomination,
-    String? type,
-  }) => VenueData(
-    id: id ?? this.id,
-    name: name ?? this.name,
-    neighborhood: neighborhood.present ? neighborhood.value : this.neighborhood,
-    city: city ?? this.city,
-    state: state ?? this.state,
-    country: country ?? this.country,
-    denomination: denomination ?? this.denomination,
-    type: type ?? this.type,
-  );
-  VenueData copyWithCompanion(VenuesCompanion data) {
-    return VenueData(
-      id: data.id.present ? data.id.value : this.id,
-      name: data.name.present ? data.name.value : this.name,
-      neighborhood: data.neighborhood.present
-          ? data.neighborhood.value
-          : this.neighborhood,
-      city: data.city.present ? data.city.value : this.city,
-      state: data.state.present ? data.state.value : this.state,
-      country: data.country.present ? data.country.value : this.country,
-      denomination: data.denomination.present
-          ? data.denomination.value
-          : this.denomination,
-      type: data.type.present ? data.type.value : this.type,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('VenueData(')
-          ..write('id: $id, ')
-          ..write('name: $name, ')
-          ..write('neighborhood: $neighborhood, ')
-          ..write('city: $city, ')
-          ..write('state: $state, ')
-          ..write('country: $country, ')
-          ..write('denomination: $denomination, ')
-          ..write('type: $type')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(
-    id,
-    name,
-    neighborhood,
-    city,
-    state,
-    country,
-    denomination,
-    type,
-  );
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is VenueData &&
-          other.id == this.id &&
-          other.name == this.name &&
-          other.neighborhood == this.neighborhood &&
-          other.city == this.city &&
-          other.state == this.state &&
-          other.country == this.country &&
-          other.denomination == this.denomination &&
-          other.type == this.type);
-}
-
-class VenuesCompanion extends UpdateCompanion<VenueData> {
-  final Value<int> id;
-  final Value<String> name;
-  final Value<String?> neighborhood;
-  final Value<String> city;
-  final Value<String> state;
-  final Value<String> country;
-  final Value<String> denomination;
-  final Value<String> type;
-  const VenuesCompanion({
-    this.id = const Value.absent(),
-    this.name = const Value.absent(),
-    this.neighborhood = const Value.absent(),
-    this.city = const Value.absent(),
-    this.state = const Value.absent(),
-    this.country = const Value.absent(),
-    this.denomination = const Value.absent(),
-    this.type = const Value.absent(),
-  });
-  VenuesCompanion.insert({
-    this.id = const Value.absent(),
-    required String name,
-    this.neighborhood = const Value.absent(),
-    required String city,
-    required String state,
-    required String country,
-    required String denomination,
-    required String type,
-  }) : name = Value(name),
-       city = Value(city),
-       state = Value(state),
-       country = Value(country),
-       denomination = Value(denomination),
-       type = Value(type);
-  static Insertable<VenueData> custom({
-    Expression<int>? id,
-    Expression<String>? name,
-    Expression<String>? neighborhood,
-    Expression<String>? city,
-    Expression<String>? state,
-    Expression<String>? country,
-    Expression<String>? denomination,
-    Expression<String>? type,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (name != null) 'name': name,
-      if (neighborhood != null) 'neighborhood': neighborhood,
-      if (city != null) 'city': city,
-      if (state != null) 'state': state,
-      if (country != null) 'country': country,
-      if (denomination != null) 'denomination': denomination,
-      if (type != null) 'type': type,
-    });
-  }
-
-  VenuesCompanion copyWith({
-    Value<int>? id,
-    Value<String>? name,
-    Value<String?>? neighborhood,
-    Value<String>? city,
-    Value<String>? state,
-    Value<String>? country,
-    Value<String>? denomination,
-    Value<String>? type,
-  }) {
-    return VenuesCompanion(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      neighborhood: neighborhood ?? this.neighborhood,
-      city: city ?? this.city,
-      state: state ?? this.state,
-      country: country ?? this.country,
-      denomination: denomination ?? this.denomination,
-      type: type ?? this.type,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
-    if (name.present) {
-      map['name'] = Variable<String>(name.value);
-    }
-    if (neighborhood.present) {
-      map['neighborhood'] = Variable<String>(neighborhood.value);
-    }
-    if (city.present) {
-      map['city'] = Variable<String>(city.value);
-    }
-    if (state.present) {
-      map['state'] = Variable<String>(state.value);
-    }
-    if (country.present) {
-      map['country'] = Variable<String>(country.value);
-    }
-    if (denomination.present) {
-      map['denomination'] = Variable<String>(denomination.value);
-    }
-    if (type.present) {
-      map['type'] = Variable<String>(type.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('VenuesCompanion(')
-          ..write('id: $id, ')
-          ..write('name: $name, ')
-          ..write('neighborhood: $neighborhood, ')
-          ..write('city: $city, ')
-          ..write('state: $state, ')
-          ..write('country: $country, ')
-          ..write('denomination: $denomination, ')
-          ..write('type: $type')
-          ..write(')'))
-        .toString();
-  }
-}
-
 class $EventsTable extends Events with TableInfo<$EventsTable, EventData> {
   @override
   final GeneratedDatabase attachedDatabase;
@@ -1921,9 +2031,9 @@ class EventsCompanion extends UpdateCompanion<EventData> {
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
+  late final $VenuesTable venues = $VenuesTable(this);
   late final $PreachersTable preachers = $PreachersTable(this);
   late final $SermonsTable sermons = $SermonsTable(this);
-  late final $VenuesTable venues = $VenuesTable(this);
   late final $EventsTable events = $EventsTable(this);
   late final PreacherDao preacherDao = PreacherDao(this as AppDatabase);
   late final EventDao eventDao = EventDao(this as AppDatabase);
@@ -1934,13 +2044,453 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
+    venues,
     preachers,
     sermons,
-    venues,
     events,
   ];
 }
 
+typedef $$VenuesTableCreateCompanionBuilder =
+    VenuesCompanion Function({
+      Value<int> id,
+      required String name,
+      Value<String?> neighborhood,
+      required String city,
+      required String state,
+      required String country,
+      required String denomination,
+      required String type,
+    });
+typedef $$VenuesTableUpdateCompanionBuilder =
+    VenuesCompanion Function({
+      Value<int> id,
+      Value<String> name,
+      Value<String?> neighborhood,
+      Value<String> city,
+      Value<String> state,
+      Value<String> country,
+      Value<String> denomination,
+      Value<String> type,
+    });
+
+final class $$VenuesTableReferences
+    extends BaseReferences<_$AppDatabase, $VenuesTable, VenueData> {
+  $$VenuesTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$PreachersTable, List<PreacherData>>
+  _preachersRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.preachers,
+    aliasName: $_aliasNameGenerator(db.venues.id, db.preachers.homeVenueId),
+  );
+
+  $$PreachersTableProcessedTableManager get preachersRefs {
+    final manager = $$PreachersTableTableManager(
+      $_db,
+      $_db.preachers,
+    ).filter((f) => f.homeVenueId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_preachersRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$EventsTable, List<EventData>> _eventsRefsTable(
+    _$AppDatabase db,
+  ) => MultiTypedResultKey.fromTable(
+    db.events,
+    aliasName: $_aliasNameGenerator(db.venues.id, db.events.venueId),
+  );
+
+  $$EventsTableProcessedTableManager get eventsRefs {
+    final manager = $$EventsTableTableManager(
+      $_db,
+      $_db.events,
+    ).filter((f) => f.venueId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_eventsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+}
+
+class $$VenuesTableFilterComposer
+    extends Composer<_$AppDatabase, $VenuesTable> {
+  $$VenuesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get neighborhood => $composableBuilder(
+    column: $table.neighborhood,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get city => $composableBuilder(
+    column: $table.city,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get state => $composableBuilder(
+    column: $table.state,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get country => $composableBuilder(
+    column: $table.country,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get denomination => $composableBuilder(
+    column: $table.denomination,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get type => $composableBuilder(
+    column: $table.type,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  Expression<bool> preachersRefs(
+    Expression<bool> Function($$PreachersTableFilterComposer f) f,
+  ) {
+    final $$PreachersTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.preachers,
+      getReferencedColumn: (t) => t.homeVenueId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PreachersTableFilterComposer(
+            $db: $db,
+            $table: $db.preachers,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> eventsRefs(
+    Expression<bool> Function($$EventsTableFilterComposer f) f,
+  ) {
+    final $$EventsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.events,
+      getReferencedColumn: (t) => t.venueId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$EventsTableFilterComposer(
+            $db: $db,
+            $table: $db.events,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$VenuesTableOrderingComposer
+    extends Composer<_$AppDatabase, $VenuesTable> {
+  $$VenuesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get neighborhood => $composableBuilder(
+    column: $table.neighborhood,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get city => $composableBuilder(
+    column: $table.city,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get state => $composableBuilder(
+    column: $table.state,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get country => $composableBuilder(
+    column: $table.country,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get denomination => $composableBuilder(
+    column: $table.denomination,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get type => $composableBuilder(
+    column: $table.type,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$VenuesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $VenuesTable> {
+  $$VenuesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get neighborhood => $composableBuilder(
+    column: $table.neighborhood,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get city =>
+      $composableBuilder(column: $table.city, builder: (column) => column);
+
+  GeneratedColumn<String> get state =>
+      $composableBuilder(column: $table.state, builder: (column) => column);
+
+  GeneratedColumn<String> get country =>
+      $composableBuilder(column: $table.country, builder: (column) => column);
+
+  GeneratedColumn<String> get denomination => $composableBuilder(
+    column: $table.denomination,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get type =>
+      $composableBuilder(column: $table.type, builder: (column) => column);
+
+  Expression<T> preachersRefs<T extends Object>(
+    Expression<T> Function($$PreachersTableAnnotationComposer a) f,
+  ) {
+    final $$PreachersTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.preachers,
+      getReferencedColumn: (t) => t.homeVenueId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PreachersTableAnnotationComposer(
+            $db: $db,
+            $table: $db.preachers,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<T> eventsRefs<T extends Object>(
+    Expression<T> Function($$EventsTableAnnotationComposer a) f,
+  ) {
+    final $$EventsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.events,
+      getReferencedColumn: (t) => t.venueId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$EventsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.events,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$VenuesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $VenuesTable,
+          VenueData,
+          $$VenuesTableFilterComposer,
+          $$VenuesTableOrderingComposer,
+          $$VenuesTableAnnotationComposer,
+          $$VenuesTableCreateCompanionBuilder,
+          $$VenuesTableUpdateCompanionBuilder,
+          (VenueData, $$VenuesTableReferences),
+          VenueData,
+          PrefetchHooks Function({bool preachersRefs, bool eventsRefs})
+        > {
+  $$VenuesTableTableManager(_$AppDatabase db, $VenuesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$VenuesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$VenuesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$VenuesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<String?> neighborhood = const Value.absent(),
+                Value<String> city = const Value.absent(),
+                Value<String> state = const Value.absent(),
+                Value<String> country = const Value.absent(),
+                Value<String> denomination = const Value.absent(),
+                Value<String> type = const Value.absent(),
+              }) => VenuesCompanion(
+                id: id,
+                name: name,
+                neighborhood: neighborhood,
+                city: city,
+                state: state,
+                country: country,
+                denomination: denomination,
+                type: type,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String name,
+                Value<String?> neighborhood = const Value.absent(),
+                required String city,
+                required String state,
+                required String country,
+                required String denomination,
+                required String type,
+              }) => VenuesCompanion.insert(
+                id: id,
+                name: name,
+                neighborhood: neighborhood,
+                city: city,
+                state: state,
+                country: country,
+                denomination: denomination,
+                type: type,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) =>
+                    (e.readTable(table), $$VenuesTableReferences(db, table, e)),
+              )
+              .toList(),
+          prefetchHooksCallback: ({preachersRefs = false, eventsRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (preachersRefs) db.preachers,
+                if (eventsRefs) db.events,
+              ],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (preachersRefs)
+                    await $_getPrefetchedData<
+                      VenueData,
+                      $VenuesTable,
+                      PreacherData
+                    >(
+                      currentTable: table,
+                      referencedTable: $$VenuesTableReferences
+                          ._preachersRefsTable(db),
+                      managerFromTypedResult: (p0) =>
+                          $$VenuesTableReferences(db, table, p0).preachersRefs,
+                      referencedItemsForCurrentItem: (item, referencedItems) =>
+                          referencedItems.where(
+                            (e) => e.homeVenueId == item.id,
+                          ),
+                      typedResults: items,
+                    ),
+                  if (eventsRefs)
+                    await $_getPrefetchedData<
+                      VenueData,
+                      $VenuesTable,
+                      EventData
+                    >(
+                      currentTable: table,
+                      referencedTable: $$VenuesTableReferences._eventsRefsTable(
+                        db,
+                      ),
+                      managerFromTypedResult: (p0) =>
+                          $$VenuesTableReferences(db, table, p0).eventsRefs,
+                      referencedItemsForCurrentItem: (item, referencedItems) =>
+                          referencedItems.where((e) => e.venueId == item.id),
+                      typedResults: items,
+                    ),
+                ];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$VenuesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $VenuesTable,
+      VenueData,
+      $$VenuesTableFilterComposer,
+      $$VenuesTableOrderingComposer,
+      $$VenuesTableAnnotationComposer,
+      $$VenuesTableCreateCompanionBuilder,
+      $$VenuesTableUpdateCompanionBuilder,
+      (VenueData, $$VenuesTableReferences),
+      VenueData,
+      PrefetchHooks Function({bool preachersRefs, bool eventsRefs})
+    >;
 typedef $$PreachersTableCreateCompanionBuilder =
     PreachersCompanion Function({
       Value<int> id,
@@ -1949,6 +2499,8 @@ typedef $$PreachersTableCreateCompanionBuilder =
       Value<String?> phone,
       Value<String?> languages,
       Value<String?> denomination,
+      Value<String?> notes,
+      Value<int?> homeVenueId,
     });
 typedef $$PreachersTableUpdateCompanionBuilder =
     PreachersCompanion Function({
@@ -1958,11 +2510,32 @@ typedef $$PreachersTableUpdateCompanionBuilder =
       Value<String?> phone,
       Value<String?> languages,
       Value<String?> denomination,
+      Value<String?> notes,
+      Value<int?> homeVenueId,
     });
 
 final class $$PreachersTableReferences
     extends BaseReferences<_$AppDatabase, $PreachersTable, PreacherData> {
   $$PreachersTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $VenuesTable _homeVenueIdTable(_$AppDatabase db) =>
+      db.venues.createAlias(
+        $_aliasNameGenerator(db.preachers.homeVenueId, db.venues.id),
+      );
+
+  $$VenuesTableProcessedTableManager? get homeVenueId {
+    final $_column = $_itemColumn<int>('home_venue_id');
+    if ($_column == null) return null;
+    final manager = $$VenuesTableTableManager(
+      $_db,
+      $_db.venues,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_homeVenueIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
 
   static MultiTypedResultKey<$SermonsTable, List<SermonData>> _sermonsRefsTable(
     _$AppDatabase db,
@@ -2041,6 +2614,34 @@ class $$PreachersTableFilterComposer
     column: $table.denomination,
     builder: (column) => ColumnFilters(column),
   );
+
+  ColumnFilters<String> get notes => $composableBuilder(
+    column: $table.notes,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$VenuesTableFilterComposer get homeVenueId {
+    final $$VenuesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.homeVenueId,
+      referencedTable: $db.venues,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$VenuesTableFilterComposer(
+            $db: $db,
+            $table: $db.venues,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
 
   Expression<bool> sermonsRefs(
     Expression<bool> Function($$SermonsTableFilterComposer f) f,
@@ -2131,6 +2732,34 @@ class $$PreachersTableOrderingComposer
     column: $table.denomination,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get notes => $composableBuilder(
+    column: $table.notes,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$VenuesTableOrderingComposer get homeVenueId {
+    final $$VenuesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.homeVenueId,
+      referencedTable: $db.venues,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$VenuesTableOrderingComposer(
+            $db: $db,
+            $table: $db.venues,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
 }
 
 class $$PreachersTableAnnotationComposer
@@ -2161,6 +2790,32 @@ class $$PreachersTableAnnotationComposer
     column: $table.denomination,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get notes =>
+      $composableBuilder(column: $table.notes, builder: (column) => column);
+
+  $$VenuesTableAnnotationComposer get homeVenueId {
+    final $$VenuesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.homeVenueId,
+      referencedTable: $db.venues,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$VenuesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.venues,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
 
   Expression<T> sermonsRefs<T extends Object>(
     Expression<T> Function($$SermonsTableAnnotationComposer a) f,
@@ -2226,7 +2881,11 @@ class $$PreachersTableTableManager
           $$PreachersTableUpdateCompanionBuilder,
           (PreacherData, $$PreachersTableReferences),
           PreacherData,
-          PrefetchHooks Function({bool sermonsRefs, bool eventsRefs})
+          PrefetchHooks Function({
+            bool homeVenueId,
+            bool sermonsRefs,
+            bool eventsRefs,
+          })
         > {
   $$PreachersTableTableManager(_$AppDatabase db, $PreachersTable table)
     : super(
@@ -2247,6 +2906,8 @@ class $$PreachersTableTableManager
                 Value<String?> phone = const Value.absent(),
                 Value<String?> languages = const Value.absent(),
                 Value<String?> denomination = const Value.absent(),
+                Value<String?> notes = const Value.absent(),
+                Value<int?> homeVenueId = const Value.absent(),
               }) => PreachersCompanion(
                 id: id,
                 name: name,
@@ -2254,6 +2915,8 @@ class $$PreachersTableTableManager
                 phone: phone,
                 languages: languages,
                 denomination: denomination,
+                notes: notes,
+                homeVenueId: homeVenueId,
               ),
           createCompanionCallback:
               ({
@@ -2263,6 +2926,8 @@ class $$PreachersTableTableManager
                 Value<String?> phone = const Value.absent(),
                 Value<String?> languages = const Value.absent(),
                 Value<String?> denomination = const Value.absent(),
+                Value<String?> notes = const Value.absent(),
+                Value<int?> homeVenueId = const Value.absent(),
               }) => PreachersCompanion.insert(
                 id: id,
                 name: name,
@@ -2270,6 +2935,8 @@ class $$PreachersTableTableManager
                 phone: phone,
                 languages: languages,
                 denomination: denomination,
+                notes: notes,
+                homeVenueId: homeVenueId,
               ),
           withReferenceMapper: (p0) => p0
               .map(
@@ -2279,50 +2946,94 @@ class $$PreachersTableTableManager
                 ),
               )
               .toList(),
-          prefetchHooksCallback: ({sermonsRefs = false, eventsRefs = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [
-                if (sermonsRefs) db.sermons,
-                if (eventsRefs) db.events,
-              ],
-              addJoins: null,
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (sermonsRefs)
-                    await $_getPrefetchedData<
-                      PreacherData,
-                      $PreachersTable,
-                      SermonData
-                    >(
-                      currentTable: table,
-                      referencedTable: $$PreachersTableReferences
-                          ._sermonsRefsTable(db),
-                      managerFromTypedResult: (p0) =>
-                          $$PreachersTableReferences(db, table, p0).sermonsRefs,
-                      referencedItemsForCurrentItem: (item, referencedItems) =>
-                          referencedItems.where((e) => e.authorId == item.id),
-                      typedResults: items,
-                    ),
-                  if (eventsRefs)
-                    await $_getPrefetchedData<
-                      PreacherData,
-                      $PreachersTable,
-                      EventData
-                    >(
-                      currentTable: table,
-                      referencedTable: $$PreachersTableReferences
-                          ._eventsRefsTable(db),
-                      managerFromTypedResult: (p0) =>
-                          $$PreachersTableReferences(db, table, p0).eventsRefs,
-                      referencedItemsForCurrentItem: (item, referencedItems) =>
-                          referencedItems.where((e) => e.preacherId == item.id),
-                      typedResults: items,
-                    ),
-                ];
+          prefetchHooksCallback:
+              ({homeVenueId = false, sermonsRefs = false, eventsRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (sermonsRefs) db.sermons,
+                    if (eventsRefs) db.events,
+                  ],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (homeVenueId) {
+                          state =
+                              state.withJoin(
+                                    currentTable: table,
+                                    currentColumn: table.homeVenueId,
+                                    referencedTable: $$PreachersTableReferences
+                                        ._homeVenueIdTable(db),
+                                    referencedColumn: $$PreachersTableReferences
+                                        ._homeVenueIdTable(db)
+                                        .id,
+                                  )
+                                  as T;
+                        }
+
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (sermonsRefs)
+                        await $_getPrefetchedData<
+                          PreacherData,
+                          $PreachersTable,
+                          SermonData
+                        >(
+                          currentTable: table,
+                          referencedTable: $$PreachersTableReferences
+                              ._sermonsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$PreachersTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).sermonsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.authorId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (eventsRefs)
+                        await $_getPrefetchedData<
+                          PreacherData,
+                          $PreachersTable,
+                          EventData
+                        >(
+                          currentTable: table,
+                          referencedTable: $$PreachersTableReferences
+                              ._eventsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$PreachersTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).eventsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.preacherId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -2339,7 +3050,11 @@ typedef $$PreachersTableProcessedTableManager =
       $$PreachersTableUpdateCompanionBuilder,
       (PreacherData, $$PreachersTableReferences),
       PreacherData,
-      PrefetchHooks Function({bool sermonsRefs, bool eventsRefs})
+      PrefetchHooks Function({
+        bool homeVenueId,
+        bool sermonsRefs,
+        bool eventsRefs,
+      })
     >;
 typedef $$SermonsTableCreateCompanionBuilder =
     SermonsCompanion Function({
@@ -2814,358 +3529,6 @@ typedef $$SermonsTableProcessedTableManager =
       (SermonData, $$SermonsTableReferences),
       SermonData,
       PrefetchHooks Function({bool authorId, bool eventsRefs})
-    >;
-typedef $$VenuesTableCreateCompanionBuilder =
-    VenuesCompanion Function({
-      Value<int> id,
-      required String name,
-      Value<String?> neighborhood,
-      required String city,
-      required String state,
-      required String country,
-      required String denomination,
-      required String type,
-    });
-typedef $$VenuesTableUpdateCompanionBuilder =
-    VenuesCompanion Function({
-      Value<int> id,
-      Value<String> name,
-      Value<String?> neighborhood,
-      Value<String> city,
-      Value<String> state,
-      Value<String> country,
-      Value<String> denomination,
-      Value<String> type,
-    });
-
-final class $$VenuesTableReferences
-    extends BaseReferences<_$AppDatabase, $VenuesTable, VenueData> {
-  $$VenuesTableReferences(super.$_db, super.$_table, super.$_typedResult);
-
-  static MultiTypedResultKey<$EventsTable, List<EventData>> _eventsRefsTable(
-    _$AppDatabase db,
-  ) => MultiTypedResultKey.fromTable(
-    db.events,
-    aliasName: $_aliasNameGenerator(db.venues.id, db.events.venueId),
-  );
-
-  $$EventsTableProcessedTableManager get eventsRefs {
-    final manager = $$EventsTableTableManager(
-      $_db,
-      $_db.events,
-    ).filter((f) => f.venueId.id.sqlEquals($_itemColumn<int>('id')!));
-
-    final cache = $_typedResult.readTableOrNull(_eventsRefsTable($_db));
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
-  }
-}
-
-class $$VenuesTableFilterComposer
-    extends Composer<_$AppDatabase, $VenuesTable> {
-  $$VenuesTableFilterComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnFilters<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get name => $composableBuilder(
-    column: $table.name,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get neighborhood => $composableBuilder(
-    column: $table.neighborhood,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get city => $composableBuilder(
-    column: $table.city,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get state => $composableBuilder(
-    column: $table.state,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get country => $composableBuilder(
-    column: $table.country,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get denomination => $composableBuilder(
-    column: $table.denomination,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get type => $composableBuilder(
-    column: $table.type,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  Expression<bool> eventsRefs(
-    Expression<bool> Function($$EventsTableFilterComposer f) f,
-  ) {
-    final $$EventsTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.events,
-      getReferencedColumn: (t) => t.venueId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$EventsTableFilterComposer(
-            $db: $db,
-            $table: $db.events,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return f(composer);
-  }
-}
-
-class $$VenuesTableOrderingComposer
-    extends Composer<_$AppDatabase, $VenuesTable> {
-  $$VenuesTableOrderingComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnOrderings<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get name => $composableBuilder(
-    column: $table.name,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get neighborhood => $composableBuilder(
-    column: $table.neighborhood,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get city => $composableBuilder(
-    column: $table.city,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get state => $composableBuilder(
-    column: $table.state,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get country => $composableBuilder(
-    column: $table.country,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get denomination => $composableBuilder(
-    column: $table.denomination,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get type => $composableBuilder(
-    column: $table.type,
-    builder: (column) => ColumnOrderings(column),
-  );
-}
-
-class $$VenuesTableAnnotationComposer
-    extends Composer<_$AppDatabase, $VenuesTable> {
-  $$VenuesTableAnnotationComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  GeneratedColumn<int> get id =>
-      $composableBuilder(column: $table.id, builder: (column) => column);
-
-  GeneratedColumn<String> get name =>
-      $composableBuilder(column: $table.name, builder: (column) => column);
-
-  GeneratedColumn<String> get neighborhood => $composableBuilder(
-    column: $table.neighborhood,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<String> get city =>
-      $composableBuilder(column: $table.city, builder: (column) => column);
-
-  GeneratedColumn<String> get state =>
-      $composableBuilder(column: $table.state, builder: (column) => column);
-
-  GeneratedColumn<String> get country =>
-      $composableBuilder(column: $table.country, builder: (column) => column);
-
-  GeneratedColumn<String> get denomination => $composableBuilder(
-    column: $table.denomination,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<String> get type =>
-      $composableBuilder(column: $table.type, builder: (column) => column);
-
-  Expression<T> eventsRefs<T extends Object>(
-    Expression<T> Function($$EventsTableAnnotationComposer a) f,
-  ) {
-    final $$EventsTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.events,
-      getReferencedColumn: (t) => t.venueId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$EventsTableAnnotationComposer(
-            $db: $db,
-            $table: $db.events,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return f(composer);
-  }
-}
-
-class $$VenuesTableTableManager
-    extends
-        RootTableManager<
-          _$AppDatabase,
-          $VenuesTable,
-          VenueData,
-          $$VenuesTableFilterComposer,
-          $$VenuesTableOrderingComposer,
-          $$VenuesTableAnnotationComposer,
-          $$VenuesTableCreateCompanionBuilder,
-          $$VenuesTableUpdateCompanionBuilder,
-          (VenueData, $$VenuesTableReferences),
-          VenueData,
-          PrefetchHooks Function({bool eventsRefs})
-        > {
-  $$VenuesTableTableManager(_$AppDatabase db, $VenuesTable table)
-    : super(
-        TableManagerState(
-          db: db,
-          table: table,
-          createFilteringComposer: () =>
-              $$VenuesTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $$VenuesTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$VenuesTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                Value<String> name = const Value.absent(),
-                Value<String?> neighborhood = const Value.absent(),
-                Value<String> city = const Value.absent(),
-                Value<String> state = const Value.absent(),
-                Value<String> country = const Value.absent(),
-                Value<String> denomination = const Value.absent(),
-                Value<String> type = const Value.absent(),
-              }) => VenuesCompanion(
-                id: id,
-                name: name,
-                neighborhood: neighborhood,
-                city: city,
-                state: state,
-                country: country,
-                denomination: denomination,
-                type: type,
-              ),
-          createCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                required String name,
-                Value<String?> neighborhood = const Value.absent(),
-                required String city,
-                required String state,
-                required String country,
-                required String denomination,
-                required String type,
-              }) => VenuesCompanion.insert(
-                id: id,
-                name: name,
-                neighborhood: neighborhood,
-                city: city,
-                state: state,
-                country: country,
-                denomination: denomination,
-                type: type,
-              ),
-          withReferenceMapper: (p0) => p0
-              .map(
-                (e) =>
-                    (e.readTable(table), $$VenuesTableReferences(db, table, e)),
-              )
-              .toList(),
-          prefetchHooksCallback: ({eventsRefs = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [if (eventsRefs) db.events],
-              addJoins: null,
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (eventsRefs)
-                    await $_getPrefetchedData<
-                      VenueData,
-                      $VenuesTable,
-                      EventData
-                    >(
-                      currentTable: table,
-                      referencedTable: $$VenuesTableReferences._eventsRefsTable(
-                        db,
-                      ),
-                      managerFromTypedResult: (p0) =>
-                          $$VenuesTableReferences(db, table, p0).eventsRefs,
-                      referencedItemsForCurrentItem: (item, referencedItems) =>
-                          referencedItems.where((e) => e.venueId == item.id),
-                      typedResults: items,
-                    ),
-                ];
-              },
-            );
-          },
-        ),
-      );
-}
-
-typedef $$VenuesTableProcessedTableManager =
-    ProcessedTableManager<
-      _$AppDatabase,
-      $VenuesTable,
-      VenueData,
-      $$VenuesTableFilterComposer,
-      $$VenuesTableOrderingComposer,
-      $$VenuesTableAnnotationComposer,
-      $$VenuesTableCreateCompanionBuilder,
-      $$VenuesTableUpdateCompanionBuilder,
-      (VenueData, $$VenuesTableReferences),
-      VenueData,
-      PrefetchHooks Function({bool eventsRefs})
     >;
 typedef $$EventsTableCreateCompanionBuilder =
     EventsCompanion Function({
@@ -3692,12 +4055,12 @@ typedef $$EventsTableProcessedTableManager =
 class $AppDatabaseManager {
   final _$AppDatabase _db;
   $AppDatabaseManager(this._db);
+  $$VenuesTableTableManager get venues =>
+      $$VenuesTableTableManager(_db, _db.venues);
   $$PreachersTableTableManager get preachers =>
       $$PreachersTableTableManager(_db, _db.preachers);
   $$SermonsTableTableManager get sermons =>
       $$SermonsTableTableManager(_db, _db.sermons);
-  $$VenuesTableTableManager get venues =>
-      $$VenuesTableTableManager(_db, _db.venues);
   $$EventsTableTableManager get events =>
       $$EventsTableTableManager(_db, _db.events);
 }

@@ -1,8 +1,8 @@
+import 'package:TruthTracker/data/tables/venues.dart';
 import 'package:drift/drift.dart';
 
 @DataClassName('PreacherData')
 class Preachers extends Table {
-
   IntColumn get id => integer().autoIncrement()();
 
   TextColumn get name => text()();
@@ -10,4 +10,6 @@ class Preachers extends Table {
   TextColumn get phone => text().nullable()();
   TextColumn get languages => text().nullable()();
   TextColumn get denomination => text().nullable()();
+  TextColumn get notes => text().nullable()();
+  IntColumn get homeVenueId => integer().nullable().references(Venues, #id)();
 }

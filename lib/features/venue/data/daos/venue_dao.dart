@@ -1,6 +1,7 @@
 import 'package:TruthTracker/data/database/database.dart';
 import 'package:TruthTracker/data/tables/venues.dart';
 import 'package:TruthTracker/features/venue/domain/enums/location_level.dart';
+import 'package:TruthTracker/features/venue/models/venue_list_item.dart';
 import 'package:drift/drift.dart';
 
 part 'venue_dao.g.dart';
@@ -20,8 +21,8 @@ class VenueDao extends DatabaseAccessor<AppDatabase> with _$VenueDaoMixin {
     return into(venues).insertOnConflictUpdate(companion);
   }
 
-  Future<bool> replace(VenueData venue) {
-    return update(venues).replace(venue);
+  Future<bool> replace(VenueData data) {
+    return update(venues).replace(data);
   }
 
   //========================
@@ -96,10 +97,49 @@ class VenueDao extends DatabaseAccessor<AppDatabase> with _$VenueDaoMixin {
     return query.watch();
   }
 
+  Future<List<VenueListItem>> getListItems([bool desc = false]) async {
+    final query = selectOnly(venues)
+      ..addColumns([venues.id, venues.name])
+      ..orderBy([_nameOrdering(desc)]);
+
+    final rows = await query.get();
+
+    return rows.map((row) {
+      return VenueListItem(
+        row.read(venues.id)!, // eu não preciso de um nullcheck aqui não?
+        row.read(venues.name)!,
+      );
+    }).toList();
+  }
+
+  Future<List<VenueListItem>> searchListItems({
+    required String search,
+    bool desc = false,
+  }) async {
+    final s = search.trim();
+    if (s.isEmpty) {
+      return [];
+    }
+
+    final query = selectOnly(venues)
+      ..addColumns([venues.id, venues.name])
+      ..where(venues.name.like('%$s%'))
+      ..orderBy([_nameOrdering(desc)]);
+
+    final rows = await query.get();
+
+    return rows.map((row) {
+      return VenueListItem(
+        row.read(venues.id)!, // eu não preciso de um nullcheck aqui não?
+        row.read(venues.name)!,
+      );
+    }).toList();
+  }
+
   //========================
   //        Helpers
   //========================
-  OrderingTerm _nameOrdering(bool desc) {
+  OrderingTerm _nameOrdering([bool desc = false]) {
     return desc
         ? OrderingTerm.desc(venues.name)
         : OrderingTerm.asc(venues.name);

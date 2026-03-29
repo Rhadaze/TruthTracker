@@ -1,5 +1,5 @@
-import 'package:TruthTracker/data/database/daos/event_dao.dart';
-import 'package:TruthTracker/data/database/daos/preacher_dao.dart';
+import 'package:TruthTracker/features/event/data/daos/event_dao.dart';
+import 'package:TruthTracker/features/preacher/data/daos/preacher_dao.dart';
 import 'package:TruthTracker/features/sermon/data/daos/sermon_dao.dart';
 import 'package:TruthTracker/features/venue/data/daos/venue_dao.dart';
 import 'package:TruthTracker/data/tables/events.dart';

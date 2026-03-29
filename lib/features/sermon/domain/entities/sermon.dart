@@ -9,13 +9,12 @@ class Sermon {
   final String? mainText;
   final String? notes;
 
-  //TODO colocar nonnullable e required depois de implementar a persistência
   final DateTime createdAt;
   final DateTime? updatedAt;
 
   final bool isPublished;
 
-  final List<String> tags;
+  final List<String> tags; //Ainda não implementado.
 
   const Sermon({
     this.id,
