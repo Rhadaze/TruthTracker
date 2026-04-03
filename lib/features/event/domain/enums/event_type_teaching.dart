@@ -5,6 +5,7 @@ enum EventTypeTeaching implements EventType {
   bibleStudy,
   university;
 
+  @override
   String get label => switch (this) {
     EventTypeTeaching.bibleStudy => "Estudo bíblico",
     EventTypeTeaching.churchClass => "Classe bíblica",

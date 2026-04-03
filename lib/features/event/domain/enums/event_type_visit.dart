@@ -7,6 +7,7 @@ enum EventTypeVisit implements EventType {
   counseling,
   mourning;
 
+  @override
   String get label => switch (this) {
     EventTypeVisit.routine => "Rotina",
     EventTypeVisit.counseling => "Aconselhamento",
