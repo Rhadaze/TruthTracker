@@ -1629,9 +1629,9 @@ class $EventsTable extends Events with TableInfo<$EventsTable, EventData> {
   late final GeneratedColumn<int> sermonId = GeneratedColumn<int>(
     'sermon_id',
     aliasedName,
-    false,
+    true,
     type: DriftSqlType.int,
-    requiredDuringInsert: true,
+    requiredDuringInsert: false,
     defaultConstraints: GeneratedColumn.constraintIsAlways(
       'REFERENCES sermons (id)',
     ),
@@ -1714,8 +1714,6 @@ class $EventsTable extends Events with TableInfo<$EventsTable, EventData> {
         _sermonIdMeta,
         sermonId.isAcceptableOrUnknown(data['sermon_id']!, _sermonIdMeta),
       );
-    } else if (isInserting) {
-      context.missing(_sermonIdMeta);
     }
     if (data.containsKey('venue_id')) {
       context.handle(
@@ -1761,7 +1759,7 @@ class $EventsTable extends Events with TableInfo<$EventsTable, EventData> {
       sermonId: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}sermon_id'],
-      )!,
+      ),
       venueId: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}venue_id'],
@@ -1784,7 +1782,7 @@ class EventData extends DataClass implements Insertable<EventData> {
   final DateTime date;
   final String? category;
   final String? type;
-  final int sermonId;
+  final int? sermonId;
   final int venueId;
   final int preacherId;
   const EventData({
@@ -1792,7 +1790,7 @@ class EventData extends DataClass implements Insertable<EventData> {
     required this.date,
     this.category,
     this.type,
-    required this.sermonId,
+    this.sermonId,
     required this.venueId,
     required this.preacherId,
   });
@@ -1807,7 +1805,9 @@ class EventData extends DataClass implements Insertable<EventData> {
     if (!nullToAbsent || type != null) {
       map['type'] = Variable<String>(type);
     }
-    map['sermon_id'] = Variable<int>(sermonId);
+    if (!nullToAbsent || sermonId != null) {
+      map['sermon_id'] = Variable<int>(sermonId);
+    }
     map['venue_id'] = Variable<int>(venueId);
     map['preacher_id'] = Variable<int>(preacherId);
     return map;
@@ -1821,7 +1821,9 @@ class EventData extends DataClass implements Insertable<EventData> {
           ? const Value.absent()
           : Value(category),
       type: type == null && nullToAbsent ? const Value.absent() : Value(type),
-      sermonId: Value(sermonId),
+      sermonId: sermonId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(sermonId),
       venueId: Value(venueId),
       preacherId: Value(preacherId),
     );
@@ -1837,7 +1839,7 @@ class EventData extends DataClass implements Insertable<EventData> {
       date: serializer.fromJson<DateTime>(json['date']),
       category: serializer.fromJson<String?>(json['category']),
       type: serializer.fromJson<String?>(json['type']),
-      sermonId: serializer.fromJson<int>(json['sermonId']),
+      sermonId: serializer.fromJson<int?>(json['sermonId']),
       venueId: serializer.fromJson<int>(json['venueId']),
       preacherId: serializer.fromJson<int>(json['preacherId']),
     );
@@ -1850,7 +1852,7 @@ class EventData extends DataClass implements Insertable<EventData> {
       'date': serializer.toJson<DateTime>(date),
       'category': serializer.toJson<String?>(category),
       'type': serializer.toJson<String?>(type),
-      'sermonId': serializer.toJson<int>(sermonId),
+      'sermonId': serializer.toJson<int?>(sermonId),
       'venueId': serializer.toJson<int>(venueId),
       'preacherId': serializer.toJson<int>(preacherId),
     };
@@ -1861,7 +1863,7 @@ class EventData extends DataClass implements Insertable<EventData> {
     DateTime? date,
     Value<String?> category = const Value.absent(),
     Value<String?> type = const Value.absent(),
-    int? sermonId,
+    Value<int?> sermonId = const Value.absent(),
     int? venueId,
     int? preacherId,
   }) => EventData(
@@ -1869,7 +1871,7 @@ class EventData extends DataClass implements Insertable<EventData> {
     date: date ?? this.date,
     category: category.present ? category.value : this.category,
     type: type.present ? type.value : this.type,
-    sermonId: sermonId ?? this.sermonId,
+    sermonId: sermonId.present ? sermonId.value : this.sermonId,
     venueId: venueId ?? this.venueId,
     preacherId: preacherId ?? this.preacherId,
   );
@@ -1922,7 +1924,7 @@ class EventsCompanion extends UpdateCompanion<EventData> {
   final Value<DateTime> date;
   final Value<String?> category;
   final Value<String?> type;
-  final Value<int> sermonId;
+  final Value<int?> sermonId;
   final Value<int> venueId;
   final Value<int> preacherId;
   const EventsCompanion({
@@ -1939,11 +1941,10 @@ class EventsCompanion extends UpdateCompanion<EventData> {
     required DateTime date,
     this.category = const Value.absent(),
     this.type = const Value.absent(),
-    required int sermonId,
+    this.sermonId = const Value.absent(),
     required int venueId,
     required int preacherId,
   }) : date = Value(date),
-       sermonId = Value(sermonId),
        venueId = Value(venueId),
        preacherId = Value(preacherId);
   static Insertable<EventData> custom({
@@ -1971,7 +1972,7 @@ class EventsCompanion extends UpdateCompanion<EventData> {
     Value<DateTime>? date,
     Value<String?>? category,
     Value<String?>? type,
-    Value<int>? sermonId,
+    Value<int?>? sermonId,
     Value<int>? venueId,
     Value<int>? preacherId,
   }) {
@@ -3536,7 +3537,7 @@ typedef $$EventsTableCreateCompanionBuilder =
       required DateTime date,
       Value<String?> category,
       Value<String?> type,
-      required int sermonId,
+      Value<int?> sermonId,
       required int venueId,
       required int preacherId,
     });
@@ -3546,7 +3547,7 @@ typedef $$EventsTableUpdateCompanionBuilder =
       Value<DateTime> date,
       Value<String?> category,
       Value<String?> type,
-      Value<int> sermonId,
+      Value<int?> sermonId,
       Value<int> venueId,
       Value<int> preacherId,
     });
@@ -3558,9 +3559,9 @@ final class $$EventsTableReferences
   static $SermonsTable _sermonIdTable(_$AppDatabase db) => db.sermons
       .createAlias($_aliasNameGenerator(db.events.sermonId, db.sermons.id));
 
-  $$SermonsTableProcessedTableManager get sermonId {
-    final $_column = $_itemColumn<int>('sermon_id')!;
-
+  $$SermonsTableProcessedTableManager? get sermonId {
+    final $_column = $_itemColumn<int>('sermon_id');
+    if ($_column == null) return null;
     final manager = $$SermonsTableTableManager(
       $_db,
       $_db.sermons,
@@ -3929,7 +3930,7 @@ class $$EventsTableTableManager
                 Value<DateTime> date = const Value.absent(),
                 Value<String?> category = const Value.absent(),
                 Value<String?> type = const Value.absent(),
-                Value<int> sermonId = const Value.absent(),
+                Value<int?> sermonId = const Value.absent(),
                 Value<int> venueId = const Value.absent(),
                 Value<int> preacherId = const Value.absent(),
               }) => EventsCompanion(
@@ -3947,7 +3948,7 @@ class $$EventsTableTableManager
                 required DateTime date,
                 Value<String?> category = const Value.absent(),
                 Value<String?> type = const Value.absent(),
-                required int sermonId,
+                Value<int?> sermonId = const Value.absent(),
                 required int venueId,
                 required int preacherId,
               }) => EventsCompanion.insert(

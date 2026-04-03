@@ -1,32 +1,27 @@
-import 'package:TruthTracker/data/database/database.dart';
 import 'package:TruthTracker/features/event/domain/entities/event.dart';
+import 'package:TruthTracker/features/event/models/event_list_item.dart';
 
 abstract class EventRepository {
-  Future<int> insertEvent(EventsCompanion companion);
-
-  Future<int> upsertEvent(EventsCompanion companion);
-
-  Future<List<Event>> getAll({bool desc = true});
-
-  Future<List<Event>> getAllByVenue(int venueId, {bool desc = true});
-
-  Future<Event?> getById(int id);
-
-  Future<List<Event>> searchByName(String query);
-
-  Future<bool> updateEvent(Event event);
-
-  Future<int> updateEventVenue({required int eventId, required int venueId});
-
+  Future<int> insert(Event event);
+  Future<int> upsert(Event event);
+  Future<bool> replace(Event event);
   Future<int> deleteById(int id);
 
-  Stream<List<Event>> watchByDate(DateTime selectedDate);
-
-  Stream<List<Event>> watchByDateAndPreacher(
-    // TODO arrumar date para não considerar hora e segundo
-    DateTime selectedDate,
-    int preacherId,
-  );
-
+  Future<Event?> getById(int id);
   Stream<Event?> watchById(int id);
+
+  Future<List<EventListItem>> getListItems({
+    DateTime? date,
+    int? venueId,
+    int? preacherId,
+    int? sermonId,
+    bool desc = true,
+  });
+  Stream<List<EventListItem>> watchListItems({
+    DateTime? date,
+    int? venueId,
+    int? preacherId,
+    int? sermonId,
+    bool desc = true,
+  });
 }

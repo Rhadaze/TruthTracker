@@ -5,8 +5,6 @@ import 'preachers.dart';
 
 @DataClassName('EventData')
 class Events extends Table {
-  // @override
-  // String get tableName => 'events';
 
   IntColumn get id => integer().autoIncrement()();
   DateTimeColumn get date => dateTime()();
@@ -15,16 +13,8 @@ class Events extends Table {
   TextColumn get category => text().nullable()();
   TextColumn get type => text().nullable()();
 
-  //Relacionamentos
-  IntColumn get sermonId => integer().references(Sermons, #id)();
+  //Relacionamentos 
+  IntColumn get sermonId => integer().nullable().references(Sermons, #id)();
   IntColumn get venueId => integer().references(Venues, #id)();
   IntColumn get preacherId => integer().references(Preachers, #id)();
 }
-
-  // final int id;
-  // final EventCategory? category;
-  // final EventType? type;
-  // final Venue venue;
-  // final DateTime date;
-  // final Sermon? sermon;
-  // final Preacher preacher;
